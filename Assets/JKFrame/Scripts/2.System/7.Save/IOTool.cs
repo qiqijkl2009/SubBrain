@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace JKFrame
@@ -29,7 +30,8 @@ namespace JKFrame
             {
                 return null;
             }
-            return JsonUtility.FromJson<T>(File.ReadAllText(path));
+
+            return JsonConvert.DeserializeObject<T>(File.ReadAllText(path));
         }
 
         /// <summary>
@@ -56,6 +58,7 @@ namespace JKFrame
             {
                 return null;
             }
+
             FileStream file = new FileStream(path, FileMode.Open);
             // 将内容解码成对象
             T obj = (T)binaryFormatter.Deserialize(file);
@@ -64,4 +67,3 @@ namespace JKFrame
         }
     }
 }
-

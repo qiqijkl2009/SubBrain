@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 using UnityEngine;
 namespace JKFrame
 {
@@ -633,7 +634,7 @@ namespace JKFrame
                     }
                     break;
                 case SaveSystemType.Json:
-                    string jsonData = JsonUtility.ToJson(saveObject);
+                    string jsonData = JsonConvert.SerializeObject(saveObject,Formatting.Indented);
                     IOTool.SaveJson(jsonData, path);
                     break;
             }
