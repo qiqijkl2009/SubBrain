@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 
 public class ManagerRoot : MonoBehaviour
@@ -29,5 +28,6 @@ public class ManagerRoot : MonoBehaviour
     {
         GameManager.Init();
         GameEventManager.Init();
+        PropManager.Init();
     }
 }
