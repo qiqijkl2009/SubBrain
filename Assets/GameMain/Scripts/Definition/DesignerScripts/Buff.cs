@@ -7,7 +7,7 @@ namespace DesignerScripts
     {
         public static readonly Dictionary<string, BuffOnOccur> OnOccurFunc = new()
         {
-            { "Test", buff => { Debug.Log("buff添加方法测试"); } },
+            { "Test", (buff, ssd) => { Debug.Log("buff添加方法测试"); } },
         };
 
         public static readonly Dictionary<string, BuffOnRemove> OnRemoveFunc = new()

@@ -12,7 +12,7 @@ public class PropCreator
     public PropModel Model;
 
     /// <summary>
-    /// 是否是一个消耗品，非消耗品的ConsumeTimes不会增加，即使=true，当使用次数达到上限后仍会被移除
+    /// 是否是一个消耗品，非消耗品的ConsumeTimes不会增加，即使=false，当使用次数达到上限后仍会被移除
     /// </summary>
     public bool IsConsumable;
 
@@ -53,6 +53,11 @@ public struct PropModel
     /// 道具的UI表现信息
     /// </summary>
     public PropUIInfo UIInfo;
+    
+    /// <summary>
+    /// 道具在被选中时获得的buff，取消选择时移除buff，作为使用效果的buff不应该在这里
+    /// </summary>
+    public AddBuffInfo[] Buffs;
 
     /// <summary>
     /// 道具在被添加时触发的事件
@@ -76,7 +81,7 @@ public struct PropModel
     public object[] OnConsumeArgs;
 
     /// <summary>
-    /// 道具以非主动的方式被移除时触发的事件
+    /// 道具在正常流程以外被移除时触发的事件
     /// </summary>
     public PropOnDestroy OnDestroy;
 
@@ -102,6 +107,14 @@ public struct PropUIInfo
     /// 道具的描述
     /// </summary>
     public string Content;
+
+    
+    public PropUIInfo(string textureId, string title, string content)
+    {
+        TextureId = textureId;
+        Title = title;
+        Content = content;
+    }
 }
 
 public delegate void PropOnCreate(GameObject prop);

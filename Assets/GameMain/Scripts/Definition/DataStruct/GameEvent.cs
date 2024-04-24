@@ -4,12 +4,17 @@ using UnityEngine;
 public struct AddGameEventInfo
 {
     public GameEventModel Model;
-    public GameObject Source;
+    public int WaitRounds;
+    public bool IsRepeat;
+    public bool IsOnly;
 }
 
 public class GameEvent
 {
     public GameEventModel Model;
+    public int RestWaitRounds;
+    public bool IsRepeat;
+    public bool IsOnly;
 }
 
 public struct GameEventModel
@@ -17,9 +22,9 @@ public struct GameEventModel
     public string Id;
     public string Name;
     public string[] Tags;
-    
+
     public GameEventUIInfo UIInfo;
-    
+
     public GameEventOnCreate OnCreate;
     public object[] OnCreateArgs;
     public GameEventOnEnter OnEnter;
@@ -36,7 +41,7 @@ public struct GameEventModel
         Name = name;
         Tags = tags;
         UIInfo = uiInfo;
-        
+
         OnCreate = onCreate == "" ? null : DesignerScripts.GameEvent.OnCreateFunc[onCreate];
         OnCreateArgs = onCreateArgs ?? Array.Empty<object>();
         OnEnter = onEnter == "" ? null : DesignerScripts.GameEvent.OnEnterFunc[onEnter];
@@ -46,11 +51,33 @@ public struct GameEventModel
     }
 }
 
+/// <summary>
+/// 事件的UI表现信息
+/// </summary>
 public struct GameEventUIInfo
 {
+    /// <summary>
+    /// 事件的卡面材质资源ID
+    /// </summary>
     public string TextureId;
+
+    /// <summary>
+    /// 事件的名称
+    /// </summary>
     public string Title;
+
+    /// <summary>
+    /// 事件的内容
+    /// </summary>
     public string Content;
+
+
+    public GameEventUIInfo(string textureId, string title, string content)
+    {
+        TextureId = textureId;
+        Title = title;
+        Content = content;
+    }
 }
 
 public delegate void GameEventOnCreate(GameEvent gameEvent);

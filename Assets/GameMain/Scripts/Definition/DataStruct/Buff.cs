@@ -43,7 +43,7 @@ public struct AddBuffInfo
     /// </summary>
     public Dictionary<string, object> BuffArgs;
 
-    
+
     public AddBuffInfo(BuffModel model, GameObject source, int addStack, int duration,
         bool durationSetTo = true,
         bool permanent = false,
@@ -56,6 +56,13 @@ public struct AddBuffInfo
         DurationSetTo = durationSetTo;
         Permanent = permanent;
         BuffArgs = buffArgs;
+    }
+
+    public AddBuffInfo Opposite()
+    {
+        var opposite = this;
+        opposite.AddStack = -AddStack;
+        return opposite;
     }
 }
 
@@ -104,7 +111,7 @@ public class BuffObject
     /// </summary>
     public Dictionary<string, object> BuffArgs = new();
 
-    
+
     public BuffObject(BuffModel model, GameObject source, int duration, int stack,
         bool permanent = false,
         Dictionary<string, object> buffParam = null)
@@ -213,7 +220,7 @@ public struct BuffModel
     }
 }
 
-public delegate void BuffOnOccur(BuffObject buff);
+public delegate void BuffOnOccur(BuffObject buff, int modStack);
 
 public delegate void BuffOnRemove(BuffObject buff);
 

@@ -24,6 +24,18 @@ public class GameEventManager : MonoBehaviour
 
 
     /// <summary>
+    /// 添加一个GameEvent
+    /// </summary>
+    /// <param name="ageInfo">添加的事件信息</param>
+    public static void CreateGameEvent(AddGameEventInfo ageInfo)
+    {
+        var geObject = new GameEvent();
+
+        _instance._gameEventObjects.Add(geObject);
+        geObject.Model.OnCreate?.Invoke(geObject);
+    }
+    
+    /// <summary>
     /// 进入处理GameEventObject的流程
     /// </summary>
     /// <param name="gEvent">游戏事件对象</param>
@@ -44,17 +56,5 @@ public class GameEventManager : MonoBehaviour
         _instance._gameEventObjects[0].Model.OnLeave?.Invoke(_instance._gameEventObjects[0]);
         _instance._gameEventObjects.RemoveAt(0);
         _instance._isRoundNotEnd = false;
-    }
-
-    /// <summary>
-    /// 添加一个GameEvent
-    /// </summary>
-    /// <param name="ageInfo">添加的事件信息</param>
-    public static void CreateGameEvent(AddGameEventInfo ageInfo)
-    {
-        var geObject = new GameEvent();
-
-        _instance._gameEventObjects.Add(geObject);
-        geObject.Model.OnCreate?.Invoke(geObject);
     }
 }

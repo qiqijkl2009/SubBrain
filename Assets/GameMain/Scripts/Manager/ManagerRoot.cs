@@ -29,5 +29,6 @@ public class ManagerRoot : MonoBehaviour
         GameManager.Init();
         GameEventManager.Init();
         PropManager.Init();
+        BuffManager.Init();
     }
 }

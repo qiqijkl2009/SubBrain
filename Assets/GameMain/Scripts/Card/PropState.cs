@@ -11,7 +11,7 @@ public class PropState : MonoBehaviour
     public PropModel Model;
 
     /// <summary>
-    /// 是否是一个消耗品，非消耗品的ConsumeTimes不会增加，即使=true，当使用次数达到上限后仍会被移除
+    /// 是否是一个消耗品，非消耗品的ConsumeTimes不会增加，即使=false，当使用次数达到上限后仍会被移除
     /// </summary>
     public bool IsConsumable;
 
