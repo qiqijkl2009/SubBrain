@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameEventManager : MonoBehaviour
@@ -10,15 +11,28 @@ public class GameEventManager : MonoBehaviour
         _instance = ManagerRoot.RootTransform.GetComponentInChildren<GameEventManager>();
     }
 
-    private readonly List<GameEvent> _gameEventObjects = new();
+    private readonly List<GameEventObject> _gameEvents = new();
+    private GameEventObject _currentGameEvent = null;
+    private readonly GameObject[] _gameActions = new GameObject[2];
+
+    public static List<GameEventObject> GameEvents => _instance._gameEvents;
+
+    public static GameEventObject CurrentGameEvent
+    {
+        get => _instance._currentGameEvent;
+        private set => _instance._currentGameEvent = value;
+    }
+
+    public static GameObject[] GameActions => _instance._gameActions;
+
     private bool _isRoundNotEnd = false;
 
     private void FixedUpdate()
     {
-        while (_gameEventObjects.Count > 0)
+        while (_gameEvents.Count > 0)
         {
             if (_isRoundNotEnd) return;
-            EnterGameEvent(_gameEventObjects[0]);
+            EnterGameEvent(_gameEvents[0]);
         }
     }
 
@@ -26,26 +40,38 @@ public class GameEventManager : MonoBehaviour
     /// <summary>
     /// 添加一个GameEvent
     /// </summary>
-    /// <param name="ageInfo">添加的事件信息</param>
-    public static void CreateGameEvent(AddGameEventInfo ageInfo)
+    /// <param name="model">游戏事件模板</param>
+    /// <param name="waitRounds">等待回合数</param>
+    /// <param name="isRepeat">是否循环</param>
+    /// <param name="isOnly">是否唯一</param>
+    public static void CreateGameEvent(GameEventModel model, int waitRounds = 0, bool isRepeat = false, bool isOnly = false)
     {
-        var geObject = new GameEvent();
-
-        _instance._gameEventObjects.Add(geObject);
-        geObject.Model.OnCreate?.Invoke(geObject);
+        var gameEvent = new GameEventObject();
+        CreateGameEvent(gameEvent);
     }
-    
+
+    /// <summary>
+    /// 添加一个GameEvent
+    /// </summary>
+    /// <param name="gameEvent">游戏事件实例</param>
+    public static void CreateGameEvent(GameEventObject gameEvent)
+    {
+        GameEvents.Add(gameEvent);
+        gameEvent.Model.OnCreate?.Invoke(gameEvent);
+    }
+
     /// <summary>
     /// 进入处理GameEventObject的流程
     /// </summary>
-    /// <param name="gEvent">游戏事件对象</param>
-    private static void EnterGameEvent(GameEvent gEvent)
+    /// <param name="gameEvent">游戏事件对象</param>
+    private static void EnterGameEvent(GameEventObject gameEvent)
     {
+        CurrentGameEvent = gameEvent;
         _instance._isRoundNotEnd = true;
         //需要UI那边给接口，这里是伪代码
-        //EventPanel.ShowEvent(gEvent);
+        //EventPanel.ShowEvent(gameEvent.Model.UIInfo);
 
-        gEvent.Model.OnEnter?.Invoke(gEvent);
+        gameEvent.Model.OnEnter?.Invoke(gameEvent);
     }
 
     /// <summary>
@@ -53,8 +79,21 @@ public class GameEventManager : MonoBehaviour
     /// </summary>
     private static void LeaveGameEvent()
     {
-        _instance._gameEventObjects[0].Model.OnLeave?.Invoke(_instance._gameEventObjects[0]);
-        _instance._gameEventObjects.RemoveAt(0);
-        _instance._isRoundNotEnd = false;
+        CurrentGameEvent.Model.OnLeave?.Invoke(CurrentGameEvent);
+
+        GameEvents.Remove(CurrentGameEvent);
+        if (CurrentGameEvent.IsRepeat)
+        {
+            CreateGameEvent(CurrentGameEvent.Model);
+        }
+
+        CurrentGameEvent = null;
+        Array.Clear(GameActions, 0, GameActions.Length);
+    }
+
+    private static void CreateGameAction(GameActionCreator gameActionCreator)
+    {
+        // GameObject gameActionObject = Instantiate();
+        // gameActionObject.GetComponent<ActionState>().InitByGameActionCreator(gameActionCreator);
     }
 }

@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using TMPro;
 using DG.Tweening;
 
 public class TalkOption : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
@@ -15,8 +11,8 @@ public class TalkOption : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     private void Awake()
     {
-        Records.showTalk += ShowTalk;
-        Records.hideTalk += HideTalk;
+        Records.ShowTalk += ShowTalk;
+        Records.HideTalk += HideTalk;
     }
 
     // Start is called before the first frame update

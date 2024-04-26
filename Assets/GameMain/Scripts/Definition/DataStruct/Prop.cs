@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// <para>道具的创建信息，专门有个系统会处理这个创建信息，然后创建出道具的GameObject</para>
@@ -17,7 +18,7 @@ public class PropCreator
     public bool IsConsumable;
 
 
-    public PropCreator(PropModel model, bool isConsumable)
+    public PropCreator(PropModel model, bool isConsumable = true)
     {
         Model = model;
         IsConsumable = isConsumable;
@@ -53,7 +54,7 @@ public struct PropModel
     /// 道具的UI表现信息
     /// </summary>
     public PropUIInfo UIInfo;
-    
+
     /// <summary>
     /// 道具在被选中时获得的buff，取消选择时移除buff，作为使用效果的buff不应该在这里
     /// </summary>
@@ -86,6 +87,30 @@ public struct PropModel
     public PropOnDestroy OnDestroy;
 
     public object[] OnDestroyArgs;
+
+    public PropModel(string id, string name, string[] tags, int maxConsumeTimes,
+        PropUIInfo uiInfo, AddBuffInfo[] buffs,
+        string onCreate, object[] onCreateArgs,
+        string onRemove, object[] onRemoveArgs,
+        string onConsume, object[] onConsumeArgs,
+        string onDestroy, object[] onDestroyArgs)
+    {
+        Id = id;
+        Name = name;
+        Tags = tags;
+        MaxConsumeTimes = maxConsumeTimes;
+        UIInfo = uiInfo;
+        Buffs = buffs;
+
+        OnCreate = onCreate == "" ? null : DesignerScripts.Prop.OnCreateFunc[onCreate];
+        OnCreateArgs = onCreateArgs ?? Array.Empty<object>();
+        OnRemove = onRemove == "" ? null : DesignerScripts.Prop.OnRemoveFunc[onRemove];
+        OnRemoveArgs = onRemoveArgs ?? Array.Empty<object>();
+        OnConsume = onConsume == "" ? null : DesignerScripts.Prop.OnConsumeFunc[onConsume];
+        OnConsumeArgs = onConsumeArgs ?? Array.Empty<object>();
+        OnDestroy = onDestroy == "" ? null : DesignerScripts.Prop.OnDestroyFunc[onDestroy];
+        OnDestroyArgs = onDestroyArgs ?? Array.Empty<object>();
+    }
 }
 
 /// <summary>
@@ -108,7 +133,7 @@ public struct PropUIInfo
     /// </summary>
     public string Content;
 
-    
+
     public PropUIInfo(string textureId, string title, string content)
     {
         TextureId = textureId;

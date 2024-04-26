@@ -1,36 +1,21 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using TMPro;
-using DG.Tweening;
 
 public class TestGetProp : MonoBehaviour
 {
-    public Button TestBtn;
-    public Transform PropCardsParent;
-    public List<Transform> propGroup;
+    [SerializeField] private Button TestButton;
+    [SerializeField] private Transform PropCardsParent;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        PropCardsParent = GameObject.Find("PropCards").transform;
-        for (int i = 0; i < PropCardsParent.childCount; i++)
-        {
-            propGroup.Add(PropCardsParent.GetChild(i));
-        }
-
-        TestBtn = GetComponent<Button>();
-        TestBtn.onClick.AddListener(delegate()
-        {
-            PropManager.Instance.GetProp(propGroup);
-        }) ;
+        TestButton.onClick.AddListener(OnTestButtonClicked);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTestButtonClicked()
     {
-
+        var prop = ManagerVariant.CreateProp(new PropCreator(DataTable.Prop.Data["Test"]));
+        prop.transform.SetParent(PropCardsParent, false);
     }
 }

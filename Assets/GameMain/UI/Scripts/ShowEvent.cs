@@ -3,27 +3,16 @@ using TMPro;
 
 public class ShowEvent : MonoBehaviour
 {
-    private TextMeshProUGUI EventText;
+    [SerializeField] private TMP_Text EventText;
 
-    private void Awake()
+    private void Start()
     {
         Records.Refresh += RefreshEvent;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        EventText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void RefreshEvent()
     {
-        EventText.text = "Event " + Records.EventCount;
+        EventText.text = "事件 " + Records.EventCount;
     }
 }

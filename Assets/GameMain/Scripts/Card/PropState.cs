@@ -20,10 +20,50 @@ public class PropState : MonoBehaviour
     /// </summary>
     public int ConsumeTimes = 0;
 
+    /// <summary>
+    /// 当前是否为待使用状态
+    /// </summary>
+    public bool IsSelected = false;
+
 
     public void InitByPropCreator(PropCreator prop)
     {
         Model = prop.Model;
         IsConsumable = prop.IsConsumable;
+    }
+
+
+    /// <summary>
+    /// 使用这个道具卡
+    /// </summary>
+    public void ConsumeProp()
+    {
+        Model.OnConsume?.Invoke(gameObject);
+        if (IsConsumable) ConsumeTimes++;
+    }
+
+    /// <summary>
+    /// 选择这个道具卡
+    /// </summary>
+    public void SelectProp()
+    {
+        if (!IsSelected)
+        {
+            foreach (var buff in Model.Buffs)
+            {
+                ManagerVariant.AddBuff(buff);
+            }
+
+            IsSelected = true;
+        }
+        else
+        {
+            foreach (var buff in Model.Buffs)
+            {
+                ManagerVariant.AddBuff(buff.Opposite());
+            }
+
+            IsSelected = false;
+        }
     }
 }

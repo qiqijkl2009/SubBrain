@@ -3,9 +3,8 @@ using TMPro;
 
 public class ShowRecords : MonoBehaviour
 {
-   [SerializeField] private TMP_Text RoundCount;
-   [SerializeField] private TMP_Text RecordText;
-
+    [SerializeField] private TMP_Text RoundCount;
+    [SerializeField] private TMP_Text RecordText;
 
     private void Awake()
     {

@@ -3,12 +3,53 @@ using UnityEngine;
 
 public class ManagerVariant
 {
-    public static void CreateGameEvent(AddGameEventInfo ageInfo)
+    /// <summary>
+    /// 获得事件列表
+    /// </summary>
+    public static List<GameEventObject> GameEvents()
     {
-        GameEventManager.CreateGameEvent(ageInfo);
+        return GameEventManager.GameEvents;
     }
 
+    /// <summary>
+    /// 获得当前进行的事件
+    /// </summary>
+    public static GameEventObject CurrentGameEvent()
+    {
+        return GameEventManager.CurrentGameEvent;
+    }
+
+    /// <summary>
+    /// 添加一个GameEvent
+    /// </summary>
+    /// <param name="model">游戏事件模板</param>
+    /// <param name="waitRounds">等待回合数</param>
+    /// <param name="isRepeat">是否循环</param>
+    /// <param name="isOnly">是否唯一</param>
+    public static void CreateGameEvent(GameEventModel model, int waitRounds = 0, bool isRepeat = false, bool isOnly = false)
+    {
+        GameEventManager.CreateGameEvent(model, waitRounds, isRepeat, isOnly);
+    }
+
+    /// <summary>
+    /// 添加一个GameEvent
+    /// </summary>
+    /// <param name="gameEvent">游戏事件实例</param>
+    public static void CreateGameEvent(GameEventObject gameEvent)
+    {
+        GameEventManager.CreateGameEvent(gameEvent);
+    }
+
+
     #region Buff相关
+
+    /// <summary>
+    /// 获得当前的Buff列表
+    /// </summary>
+    public static List<BuffObject> Buffs()
+    {
+        return BuffManager.Buffs;
+    }
 
     /// <summary>
     /// 为角色添加buff，删除buff也是走这个的，只不过删除的流程不在这里处理
@@ -38,9 +79,10 @@ public class ManagerVariant
     /// 创建一张道具卡
     /// </summary>
     /// <param name="prop">要创建的道具卡信息</param>
-    public static void CreateProp(PropCreator prop)
+    /// <returns>创建出的道具卡实例</returns>
+    public static GameObject CreateProp(PropCreator prop)
     {
-        PropManager.CreateProp(prop);
+        return PropManager.CreateProp(prop);
     }
 
     /// <summary>
@@ -53,32 +95,14 @@ public class ManagerVariant
         PropManager.RemoveProp(prop, isDestroy);
     }
 
-    /// <summary>
-    /// 使用一张道具卡
-    /// </summary>
-    /// <param name="prop">被使用的道具卡</param>
-    public static void ConsumeProp(GameObject prop)
-    {
-        PropManager.ConsumeProp(prop);
-    }
-
-    /// <summary>
-    /// 选择一张道具卡
-    /// </summary>
-    /// <param name="prop">被选择的道具卡</param>
-    public static void SelectProp(GameObject prop)
-    {
-        PropManager.SelectProp(prop);
-    }
-
-    /// <summary>
-    /// 取消一张道具卡的选择
-    /// </summary>
-    /// <param name="prop">被取消选择的道具卡</param>
-    public static void UnselectProp(GameObject prop)
-    {
-        PropManager.UnselectProp(prop);
-    }
-
     #endregion
+
+    /// <summary>
+    /// 回合结束流程
+    /// </summary>
+    /// <param name="roundCount">经过的回合数</param>
+    public static void RoundOver(int roundCount = 1)
+    {
+        RoundManager.RoundOver();
+    }
 }

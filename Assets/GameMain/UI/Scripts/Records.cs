@@ -1,20 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
-
-/// <summary>
-/// 孩子不懂事乱写的
-/// </summary>
-public delegate void Refresh();
-public delegate void ShowTalk();
-public delegate void HideTalk();
 
 public static class Records
 {
-    public static Refresh refresh;
-    public static ShowTalk showTalk;
-    public static HideTalk hideTalk;
+    public static Action Refresh;
+    public static Action ShowTalk;
+    public static Action HideTalk;
     public static string RecordContents;
     public static int RoundCount = 1;
     public static int EventCount = 1;
@@ -25,16 +15,16 @@ public static class Records
         RoundCount++;
         RecordContents += actionName + "\n" + "Event " + EventCount + " End" + "\n";
         EventCount++;
-        refresh();
+        Refresh?.Invoke();
 
         EventType = EventCount % 2;
         if (EventType == 0)
         {
-            showTalk();
+            ShowTalk?.Invoke();
         }
         else
         {
-            hideTalk();
+            HideTalk?.Invoke();
         }
     }
 

@@ -1,18 +1,10 @@
 using System;
 using UnityEngine;
 
-public struct AddGameEventInfo
+public class GameEventObject
 {
     public GameEventModel Model;
     public int WaitRounds;
-    public bool IsRepeat;
-    public bool IsOnly;
-}
-
-public class GameEvent
-{
-    public GameEventModel Model;
-    public int RestWaitRounds;
     public bool IsRepeat;
     public bool IsOnly;
 }
@@ -22,6 +14,7 @@ public struct GameEventModel
     public string Id;
     public string Name;
     public string[] Tags;
+    public GameActionModel[] GameActions;
 
     public GameEventUIInfo UIInfo;
 
@@ -32,7 +25,7 @@ public struct GameEventModel
     public GameEventOnLeave OnLeave;
     public object[] OnLeaveArgs;
 
-    public GameEventModel(string id, string name, string[] tags, GameEventUIInfo uiInfo,
+    public GameEventModel(string id, string name, string[] tags, GameActionModel[] gameActions, GameEventUIInfo uiInfo,
         string onCreate, object[] onCreateArgs,
         string onEnter, object[] onEnterArgs,
         string onLeave, object[] onLeaveArgs)
@@ -40,7 +33,16 @@ public struct GameEventModel
         Id = id;
         Name = name;
         Tags = tags;
+        GameActions = gameActions;
         UIInfo = uiInfo;
+        GameActions = new GameActionModel[2];
+        if (gameActions != null)
+        {
+            for (int i = 0; i < Mathf.Min(2, gameActions.Length); i++)
+            {
+                GameActions[i] = gameActions[i];
+            }
+        }
 
         OnCreate = onCreate == "" ? null : DesignerScripts.GameEvent.OnCreateFunc[onCreate];
         OnCreateArgs = onCreateArgs ?? Array.Empty<object>();
@@ -80,8 +82,8 @@ public struct GameEventUIInfo
     }
 }
 
-public delegate void GameEventOnCreate(GameEvent gameEvent);
+public delegate void GameEventOnCreate(GameEventObject gameEventObject);
 
-public delegate void GameEventOnEnter(GameEvent gameEvent);
+public delegate void GameEventOnEnter(GameEventObject gameEventObject);
 
-public delegate void GameEventOnLeave(GameEvent gameEvent);
+public delegate void GameEventOnLeave(GameEventObject gameEventObject);

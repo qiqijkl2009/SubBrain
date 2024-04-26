@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -12,48 +11,9 @@ public class BuffManager : MonoBehaviour
         _instance = ManagerRoot.RootTransform.GetComponentInChildren<BuffManager>();
     }
 
-    public readonly List<BuffObject> Buffs = new();
+    private readonly List<BuffObject> _buffs = new();
 
-
-    /// <summary>
-    /// 当回合结束时对buff进行管理，存在有某种因素使回合前进多次的可能性
-    /// </summary>
-    /// <param name="roundCount">经过的回合数</param>
-    public static void RoundOver(int roundCount = 1)
-    {
-        var toRemove = new List<BuffObject>();
-
-        foreach (var buff in _instance.Buffs)
-        {
-            if (!buff.Permanent) buff.Duration -= roundCount;
-            buff.TimeElapsed += roundCount;
-
-            if (buff.Model is { TickTime: > 0, OnTick: not null })
-            {
-                if (buff.TimeElapsed % buff.Model.TickTime == 0)
-                {
-                    buff.Model.OnTick.Invoke(buff);
-                    buff.Ticked += 1;
-                }
-            }
-
-            //只要duration <= 0，不管是否是permanent都移除掉
-            if (buff.Duration <= 0 || buff.Stack <= 0)
-            {
-                buff.Model.OnRemove?.Invoke(buff);
-                toRemove.Add(buff);
-            }
-        }
-
-        if (toRemove.Count <= 0) return;
-
-        foreach (var buff in toRemove)
-        {
-            _instance.Buffs.Remove(buff);
-        }
-
-        toRemove = null;
-    }
+    public static List<BuffObject> Buffs => _instance._buffs;
 
 
     /// <summary>
@@ -125,8 +85,8 @@ public class BuffManager : MonoBehaviour
             buff.Permanent,
             buff.BuffArgs
         );
-        _instance.Buffs.Add(newBuff);
-        _instance.Buffs.Sort((a, b) => b.Model.Priority.CompareTo(a.Model.Priority));
+        Buffs.Add(newBuff);
+        Buffs.Sort((a, b) => b.Model.Priority.CompareTo(a.Model.Priority));
 
         return newBuff;
     }
@@ -140,7 +100,7 @@ public class BuffManager : MonoBehaviour
     ///</summary>
     public static List<BuffObject> GetBuffById(string id, List<GameObject> source = null)
     {
-        return _instance.Buffs.Where(buff => IsBuffFromSource(buff, id, source)).ToList();
+        return Buffs.Where(buff => IsBuffFromSource(buff, id, source)).ToList();
     }
 
     private static bool IsBuffFromSource(BuffObject buff, string id, List<GameObject> source)
