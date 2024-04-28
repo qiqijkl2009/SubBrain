@@ -12,12 +12,10 @@ public class ShowRecords : MonoBehaviour
     private TextMeshProUGUI RoundCount;
     private TextMeshProUGUI RecordText;
 
-
     private void Awake()
     {
         Records.refresh += RefreshText;
     }
-
 
     // Start is called before the first frame update
     void Start()

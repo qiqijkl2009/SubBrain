@@ -69,14 +69,17 @@ public class ActionSelect : MonoBehaviour
 
     public void Click(GameObject actionObject)
     {
-        if (actionObject.name == "LeftAction")
-        {
-            RightAction.GetComponent<Select>().enabled = false;
-        }
-        else if (actionObject.name == "RightAction")
-        {
-            LeftAction.GetComponent<Select>().enabled = false;
-        }
+        //if (actionObject.name == "LeftAction")
+        //{
+        //    RightAction.GetComponent<Select>().enabled = false;
+        //}
+        //else if (actionObject.name == "RightAction")
+        //{
+        //    LeftAction.GetComponent<Select>().enabled = false;
+        //}
+
+        RightAction.GetComponent<Select>().enabled = false;
+        LeftAction.GetComponent<Select>().enabled = false;
 
         actionObject.transform.SetAsLastSibling();
 
