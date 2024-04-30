@@ -4,6 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/UIPlayground.unity
+    guid: 3c5100eb3e762e4429b3331c0789e481
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 2ec1180538ddc2247a497fbaedad295d, type: 2}

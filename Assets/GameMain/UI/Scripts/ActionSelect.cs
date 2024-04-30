@@ -15,13 +15,14 @@ public class ActionSelect : MonoBehaviour
     private bool IsDone1;
     private float Timer2;
     private bool IsDone2;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         LeftAction = transform.GetChild(0).GetComponent<Image>();
         RightAction = transform.GetChild(1).GetComponent<Image>();
-
+        
         LeftPosition = LeftAction.transform.position;
         RightPosition = RightAction.transform.position;
 
@@ -43,7 +44,7 @@ public class ActionSelect : MonoBehaviour
             Timer2 += Time.deltaTime;
         }
 
-        if (Timer1 >= 1f)
+        if (Timer1 >= 2f)
         {
             Timer1 = 0;
             IsDone1 = true;
@@ -86,10 +87,11 @@ public class ActionSelect : MonoBehaviour
         Records.TakeAction("Take " + actionObject.name);
         actionObject.GetComponentInChildren<TextMeshProUGUI>().text = "";
 
-        actionObject.transform.DOMove(CurrentEventCard.transform.position, 1f);
-        actionObject.transform.DORotate(new Vector3(0, 0, 0), 1f);
-        actionObject.transform.DOScaleX(1.75f, 1f);
-        actionObject.transform.DOScaleY(1.1f, 1f);
+        actionObject.transform.DOMove(CurrentEventCard.transform.position, 2f);
+        actionObject.transform.DORotate(new Vector3(0, 0, 0), 2f);
+        actionObject.transform.DOScaleX(1.75f, 2f);
+        actionObject.transform.DOScaleY(1.1f, 2f);
+        actionObject.GetComponent<Select>().OnCardFlip();
         IsDone1 = false;
 
         CurrentAction = actionObject.transform;
@@ -112,5 +114,6 @@ public class ActionSelect : MonoBehaviour
             selectedAction.DORotate(new Vector3(0, 0, -10f), 5f);
             selectedAction.GetComponentInChildren<TextMeshProUGUI>().text = "Action 2";
         }
+        selectedAction.GetComponent<Select>().FlipBack();
     }
 }

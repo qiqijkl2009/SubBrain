@@ -29,12 +29,12 @@ public class ActionCardHover : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (eventData.pointerEnter.name == "LeftAction")
+        if (eventData.pointerEnter.transform.parent.name == "LeftAction")
         {
             Vector3 MoveLeft = new Vector3(-10f, 0, 0) + ActionCardPostion;
             ActionCard.transform.DOMove(MoveLeft, 0.5f);
         }
-        else if (eventData.pointerEnter.name == "RightAction")
+        else if (eventData.pointerEnter.transform.parent.name == "RightAction")
         {
             Vector3 MoveRight = new Vector3(10f, 0, 0) + ActionCardPostion;
             ActionCard.transform.DOMove(MoveRight, 0.5f);
