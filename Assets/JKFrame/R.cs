@@ -11,12 +11,18 @@ namespace R
     public static class Texture
     {
  
-        public static Texture2D TestImage1 { get => ResSystem.LoadAsset<Texture2D>("TestImage1"); }  
-        public static Sprite TestImage1_TestImage1 { get => ResSystem.LoadAsset<Sprite>("TestImage1[TestImage1]"); } 
-        public static Texture2D TestImage2 { get => ResSystem.LoadAsset<Texture2D>("TestImage2"); }  
-        public static Sprite TestImage2_TestImage2 { get => ResSystem.LoadAsset<Sprite>("TestImage2[TestImage2]"); } 
-        public static Texture2D TestImage3 { get => ResSystem.LoadAsset<Texture2D>("TestImage3"); }  
-        public static Sprite TestImage3_TestImage3 { get => ResSystem.LoadAsset<Sprite>("TestImage3[TestImage3]"); }
+        public static Texture2D Event03 { get => ResSystem.LoadAsset<Texture2D>("Event03"); }  
+        public static Sprite Event03_Event03 { get => ResSystem.LoadAsset<Sprite>("Event03[Event03]"); } 
+        public static Texture2D Event02 { get => ResSystem.LoadAsset<Texture2D>("Event02"); }  
+        public static Sprite Event02_Event02 { get => ResSystem.LoadAsset<Sprite>("Event02[Event02]"); } 
+        public static Texture2D Event01 { get => ResSystem.LoadAsset<Texture2D>("Event01"); }  
+        public static Sprite Event01_Event01 { get => ResSystem.LoadAsset<Sprite>("Event01[Event01]"); } 
+        public static Texture2D Event04 { get => ResSystem.LoadAsset<Texture2D>("Event04"); }  
+        public static Sprite Event04_Event04 { get => ResSystem.LoadAsset<Sprite>("Event04[Event04]"); } 
+        public static Texture2D Event05 { get => ResSystem.LoadAsset<Texture2D>("Event05"); }  
+        public static Sprite Event05_Event05 { get => ResSystem.LoadAsset<Sprite>("Event05[Event05]"); } 
+        public static Texture2D Event06 { get => ResSystem.LoadAsset<Texture2D>("Event06"); }  
+        public static Sprite Event06_Event06 { get => ResSystem.LoadAsset<Sprite>("Event06[Event06]"); }
     } 
     public static class Test
     {
