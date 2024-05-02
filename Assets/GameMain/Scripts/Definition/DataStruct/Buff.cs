@@ -208,13 +208,13 @@ public struct BuffModel
         Tags = tags;
         TickTime = tickTime;
 
-        OnOccur = onOccur == "" ? null : DesignerScripts.Buff.OnOccurFunc[onOccur];
+        OnOccur = string.IsNullOrEmpty(onOccur) ? null : DesignerScripts.Buff.OnOccurFunc[onOccur];
         OnOccurArgs = onOccurArgs ?? Array.Empty<object>();
-        OnRemove = onRemove == "" ? null : DesignerScripts.Buff.OnRemoveFunc[onRemove];
+        OnRemove = string.IsNullOrEmpty(onRemove) ? null : DesignerScripts.Buff.OnRemoveFunc[onRemove];
         OnRemoveArgs = onRemoveArgs ?? Array.Empty<object>();
-        OnTick = onTick == "" ? null : DesignerScripts.Buff.OnTickFunc[onTick];
+        OnTick = string.IsNullOrEmpty(onTick) ? null : DesignerScripts.Buff.OnTickFunc[onTick];
         OnTickArgs = onTickArgs ?? Array.Empty<object>();
-        OnBeforeDead = onBeforeDead == "" ? null : DesignerScripts.Buff.OnBeforeDeadFunc[onBeforeDead];
+        OnBeforeDead = string.IsNullOrEmpty(onBeforeDead) ? null : DesignerScripts.Buff.OnBeforeDeadFunc[onBeforeDead];
         OnBeforeDeadArgs = onBeforeDeadArgs ?? Array.Empty<object>();
     }
 }

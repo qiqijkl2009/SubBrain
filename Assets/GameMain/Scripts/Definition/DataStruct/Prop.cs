@@ -102,13 +102,13 @@ public struct PropModel
         UIInfo = uiInfo;
         Buffs = buffs;
 
-        OnCreate = onCreate == "" ? null : DesignerScripts.Prop.OnCreateFunc[onCreate];
+        OnCreate = string.IsNullOrEmpty(onCreate) ? null : DesignerScripts.Prop.OnCreateFunc[onCreate];
         OnCreateArgs = onCreateArgs ?? Array.Empty<object>();
-        OnRemove = onRemove == "" ? null : DesignerScripts.Prop.OnRemoveFunc[onRemove];
+        OnRemove = string.IsNullOrEmpty(onRemove) ? null : DesignerScripts.Prop.OnRemoveFunc[onRemove];
         OnRemoveArgs = onRemoveArgs ?? Array.Empty<object>();
-        OnConsume = onConsume == "" ? null : DesignerScripts.Prop.OnConsumeFunc[onConsume];
+        OnConsume = string.IsNullOrEmpty(onConsume) ? null : DesignerScripts.Prop.OnConsumeFunc[onConsume];
         OnConsumeArgs = onConsumeArgs ?? Array.Empty<object>();
-        OnDestroy = onDestroy == "" ? null : DesignerScripts.Prop.OnDestroyFunc[onDestroy];
+        OnDestroy = string.IsNullOrEmpty(onDestroy) ? null : DesignerScripts.Prop.OnDestroyFunc[onDestroy];
         OnDestroyArgs = onDestroyArgs ?? Array.Empty<object>();
     }
 }

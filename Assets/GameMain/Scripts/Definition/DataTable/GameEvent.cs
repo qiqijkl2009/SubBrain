@@ -6,12 +6,12 @@ namespace DataTable
     {
         public static Dictionary<string, GameEventModel> Data = new()
         {
-            { "Test", new GameEventModel() },
-            { "Event1", new GameEventModel("Event1", "Event1", null, 
-                null, new GameEventUIInfo(),
-                null, null,
-                null, null,
-                null, null) }
+            {
+                "Test", new GameEventModel("Test", "测试", null, new[] { GameAction.Data["Test"] }, new GameEventUIInfo("Test", "Test", "Test"),
+                    "Test", null,
+                    "Test", null,
+                    "Test", null)
+            }
         };
     }
 }

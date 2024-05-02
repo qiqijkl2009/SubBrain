@@ -7,6 +7,14 @@ public class GameEventObject
     public int WaitRounds;
     public bool IsRepeat;
     public bool IsOnly;
+
+    public GameEventObject(GameEventModel model, int waitRounds = 0, bool isRepeat = false, bool isOnly = false)
+    {
+        Model = model;
+        WaitRounds = waitRounds;
+        IsRepeat = isRepeat;
+        IsOnly = isOnly;
+    }
 }
 
 public struct GameEventModel
@@ -44,11 +52,11 @@ public struct GameEventModel
             }
         }
 
-        OnCreate = onCreate == "" ? null : DesignerScripts.GameEvent.OnCreateFunc[onCreate];
+        OnCreate = string.IsNullOrEmpty(onCreate) ? null : DesignerScripts.GameEvent.OnCreateFunc[onCreate];
         OnCreateArgs = onCreateArgs ?? Array.Empty<object>();
-        OnEnter = onEnter == "" ? null : DesignerScripts.GameEvent.OnEnterFunc[onEnter];
+        OnEnter = string.IsNullOrEmpty(onEnter) ? null : DesignerScripts.GameEvent.OnEnterFunc[onEnter];
         OnEnterArgs = onEnterArgs ?? Array.Empty<object>();
-        OnLeave = onLeave == "" ? null : DesignerScripts.GameEvent.OnLeaveFunc[onLeave];
+        OnLeave = string.IsNullOrEmpty(onLeave) ? null : DesignerScripts.GameEvent.OnLeaveFunc[onLeave];
         OnLeaveArgs = onLeaveArgs ?? Array.Empty<object>();
     }
 }

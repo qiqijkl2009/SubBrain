@@ -56,7 +56,8 @@ public class PropManager : MonoBehaviour
 
         propState.InitByPropCreator(prop);
         propState.Model.OnCreate?.Invoke(propObject);
-
+        PropCards.Add(propObject);
+        
         return propObject;
     }
 

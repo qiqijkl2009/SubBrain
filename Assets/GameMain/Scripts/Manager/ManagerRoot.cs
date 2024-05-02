@@ -30,5 +30,6 @@ public class ManagerRoot : MonoBehaviour
         GameEventManager.Init();
         PropManager.Init();
         BuffManager.Init();
+        RoundManager.Init();
     }
 }

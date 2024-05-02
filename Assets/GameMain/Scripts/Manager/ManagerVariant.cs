@@ -20,7 +20,15 @@ public class ManagerVariant
     }
 
     /// <summary>
-    /// 添加一个GameEvent
+    /// 获得当前进行的事件
+    /// </summary>
+    public static GameObject[] GameActions()
+    {
+        return GameEventManager.GameActions;
+    }
+
+    /// <summary>
+    /// 添加一个GameEvent至列表
     /// </summary>
     /// <param name="model">游戏事件模板</param>
     /// <param name="waitRounds">等待回合数</param>
@@ -32,12 +40,21 @@ public class ManagerVariant
     }
 
     /// <summary>
-    /// 添加一个GameEvent
+    /// 添加一个GameEvent至列表
     /// </summary>
     /// <param name="gameEvent">游戏事件实例</param>
     public static void CreateGameEvent(GameEventObject gameEvent)
     {
         GameEventManager.CreateGameEvent(gameEvent);
+    }
+
+    /// <summary>
+    /// 添加一个GameAction
+    /// </summary>
+    /// <param name="gameAction">游戏行动信息</param>
+    public static GameObject CreateGameAction(GameActionCreator gameAction)
+    {
+        return GameEventManager.CreateGameAction(gameAction);
     }
 
 
@@ -97,6 +114,14 @@ public class ManagerVariant
 
     #endregion
 
+    /// <summary>
+    /// 回合开始流程
+    /// </summary>
+    public static void RoundStart()
+    {
+        RoundManager.RoundStart();
+    }
+    
     /// <summary>
     /// 回合结束流程
     /// </summary>

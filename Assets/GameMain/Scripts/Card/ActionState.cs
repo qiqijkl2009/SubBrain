@@ -4,12 +4,13 @@ public class ActionState : MonoBehaviour
 {
     public GameActionModel Model;
     public GameActionToEvent GameActionOverride;
+    public object[] GameActionOverrideArgs;
 
     public void InitByGameActionCreator(GameActionCreator gameAction)
     {
         Model = gameAction.Model;
-        GameActionOverride = gameAction.GameActionOverride;
     }
+
 
     public void TakeAction()
     {
