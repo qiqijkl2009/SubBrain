@@ -17,15 +17,16 @@ public static class Records
         EventCount++;
         Refresh?.Invoke();
 
-        EventType = EventCount % 2;
-        if (EventType == 0)
-        {
-            ShowTalk?.Invoke();
-        }
-        else
-        {
-            HideTalk?.Invoke();
-        }
+        //对话系统目前取消
+        //EventType = EventCount % 2;
+        //if (EventType == 0)
+        //{
+        //    ShowTalk?.Invoke();
+        //}
+        //else
+        //{
+        //    HideTalk?.Invoke();
+        //}
     }
 
     public static void UseProp(string propName)

@@ -53,7 +53,7 @@ public class ActionSelect : MonoBehaviour
             BackToPosition(CurrentAction);
         }
 
-        if (Timer2 >= 5f)
+        if (Timer2 >= 3f)
         {
             IsDone2 = true;
             Timer2 = 0;
@@ -67,15 +67,6 @@ public class ActionSelect : MonoBehaviour
 
     public void Click(GameObject actionObject)
     {
-        //if (actionObject.name == "LeftAction")
-        //{
-        //    RightAction.GetComponent<Select>().enabled = false;
-        //}
-        //else if (actionObject.name == "RightAction")
-        //{
-        //    LeftAction.GetComponent<Select>().enabled = false;
-        //}
-
         RightAction.GetComponent<Select>().enabled = false;
         LeftAction.GetComponent<Select>().enabled = false;
 

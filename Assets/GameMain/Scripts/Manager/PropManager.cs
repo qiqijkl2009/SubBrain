@@ -56,7 +56,7 @@ public class PropManager : MonoBehaviour
 
         propState.InitByPropCreator(prop);
         propState.Model.OnCreate?.Invoke(propObject);
-        
+
         return propObject;
     }
 
@@ -77,7 +77,7 @@ public class PropManager : MonoBehaviour
         {
             propState.Model.OnRemove?.Invoke(prop);
             propState.Model.OnDestroy?.Invoke(prop);
-            PropCards.Remove(prop);
+            //PropCards.Remove(prop);
             Destroy(prop);
         }
     }

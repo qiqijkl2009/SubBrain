@@ -10,11 +10,17 @@ public class TestGetProp : MonoBehaviour
 
     private void Start()
     {
+        TestButton = transform.GetComponent<Button>();
+        PropCardsParent = GameObject.Find("PropCards").transform;
         TestButton.onClick.AddListener(OnTestButtonClicked);
     }
 
     private void OnTestButtonClicked()
     {
+        if (PropCardsParent.childCount >= 6)
+        {
+            return;
+        }
         var prop = ManagerVariant.CreateProp(new PropCreator(DataTable.Prop.Data["Test"]));
         prop.transform.SetParent(PropCardsParent, false);
     }

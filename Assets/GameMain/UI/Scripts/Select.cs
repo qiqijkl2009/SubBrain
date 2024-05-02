@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,9 +8,20 @@ public class Select : MonoBehaviour, IPointerClickHandler
     private bool isFlipped;
     private Transform front;
     private Transform back;
+    private TMP_Text ActionText;
 
     private void Start()
     {
+        //获取需要显示在行动卡上的文字
+        if (transform.name == "LeftAction")
+        {
+            ActionText.text = ManagerVariant.CurrentGameEvent().Model.GameActions[0].Name;
+        }
+        else if (transform.name == "RightAction")
+        {
+            ActionText.text = ManagerVariant.CurrentGameEvent().Model.GameActions[1].Name;
+        }
+
         front = transform.GetChild(0);
         back = transform.GetChild(1);
     }
