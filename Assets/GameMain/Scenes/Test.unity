@@ -349,7 +349,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &209107441
 RectTransform:
   m_ObjectHideFlags: 0
@@ -744,7 +744,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.19607845, g: 0.19607845, b: 0.19607845, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -989,7 +989,6 @@ GameObject:
   - component: {fileID: 769653535}
   - component: {fileID: 769653537}
   - component: {fileID: 769653536}
-  - component: {fileID: 769653538}
   m_Layer: 5
   m_Name: Description
   m_TagString: EventCardArea
@@ -1113,20 +1112,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 769653534}
   m_CullTransparentMesh: 1
---- !u!114 &769653538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 769653534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b3c3133efce524bb031fca8810ea40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ContentText: {fileID: 769653536}
-  ClickCount: 0
 --- !u!1 &925410371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1279,7 +1264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
+  m_Color: {r: 0.34901962, g: 0.34901962, b: 0.34901962, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1877,6 +1862,7 @@ GameObject:
   - component: {fileID: 2144471453}
   - component: {fileID: 2144471452}
   - component: {fileID: 2144471451}
+  - component: {fileID: 2144471454}
   m_Layer: 5
   m_Name: CurrentEvent
   m_TagString: EventCardArea
@@ -1959,6 +1945,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144471449}
   m_CullTransparentMesh: 1
+--- !u!114 &2144471454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144471449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b3c3133efce524bb031fca8810ea40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DescriptionContent: {fileID: 0}
+  ClickCount: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
