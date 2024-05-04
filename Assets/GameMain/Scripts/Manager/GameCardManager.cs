@@ -69,6 +69,7 @@ public class GameCardManager : MonoBehaviour
 
         GameEvents.Add(gameEvent);
         gameEvent.Model.OnCreate?.Invoke(gameEvent);
+        JKFrame.EventSystem.EventTrigger("NewGameEventCreated");
     }
 
 
