@@ -2,20 +2,19 @@
 
 namespace DataTable
 {
-    public class Prop
+    public class GameScene
     {
-        public static Dictionary<string, PropModel> Data = new()
+        public static Dictionary<string, GameSceneModel> Data = new()
         {
             {
-                "Test", new PropModel("Test", "测试", null, 1, new PropUIInfo(), new AddBuffInfo[]
+                "Test", new GameSceneModel("Test", "测试", GameEvent.Data["Test"], new AddBuffInfo[]
                     {
                         new(Buff.Data["Test"], null, 1, 1)
                     },
                     "Test", null,
                     "Test", null,
-                    "Test", null,
                     "Test", null)
-            },
+            }
         };
     }
 }

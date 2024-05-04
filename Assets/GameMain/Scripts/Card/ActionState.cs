@@ -5,8 +5,16 @@ using UnityEngine;
 
 public class ActionState : MonoBehaviour
 {
+    /// <summary>
+    /// 这是个什么行动
+    /// </summary>
     public GameActionModel Model;
+
+    /// <summary>
+    /// 行动对应事件覆写，有需要触发强制事件的情况，就可以用覆写事件覆盖model自带的事件
+    /// </summary>
     public GameActionToEvent GameActionOverride;
+
     public object[] GameActionOverrideArgs;
 
     private GameObject _viewContainer;
@@ -30,6 +38,9 @@ public class ActionState : MonoBehaviour
         if (!_viewContainer) _viewContainer = GetComponentInChildren<ViewContainer>().gameObject;
     }
 
+    /// <summary>
+    /// 使用这张行动卡
+    /// </summary>
     public void TakeAction()
     {
         if (GameActionOverride is not null)
@@ -43,6 +54,7 @@ public class ActionState : MonoBehaviour
             ManagerVariant.CreateGameEvent(gameEvent);
         }
 
+        //TODO:播放动画完销毁
         ManagerVariant.RoundOver();
     }
 }

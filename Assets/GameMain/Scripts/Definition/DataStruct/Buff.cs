@@ -44,7 +44,7 @@ public struct AddBuffInfo
 
 
     public AddBuffInfo(BuffModel model, GameObject source, int addStack, int duration,
-        bool durationSetTo = true,
+        bool durationSetTo = false,
         bool permanent = false,
         Dictionary<string, object> buffArgs = null)
     {

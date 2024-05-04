@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class ManagerVariant
 {
+    #region 游戏卡牌相关
+
     /// <summary>
     /// 获得事件列表
     /// </summary>
     public static List<GameEventObject> GameEvents()
     {
-        return GameEventManager.GameEvents;
+        return GameCardManager.GameEvents;
     }
 
     /// <summary>
@@ -16,7 +18,7 @@ public class ManagerVariant
     /// </summary>
     public static GameEventObject CurrentGameEvent()
     {
-        return GameEventManager.CurrentGameEvent;
+        return GameCardManager.CurrentGameEvent;
     }
 
     /// <summary>
@@ -24,7 +26,15 @@ public class ManagerVariant
     /// </summary>
     public static GameObject[] GameActions()
     {
-        return GameEventManager.GameActions;
+        return GameCardManager.GameActions;
+    }
+    
+    /// <summary>
+    /// 获得当前生效的游戏场景卡
+    /// </summary>
+    public static GameObject GameScene()
+    {
+        return GameCardManager.GameScene;
     }
 
     /// <summary>
@@ -36,7 +46,7 @@ public class ManagerVariant
     /// <param name="isOnly">是否唯一</param>
     public static void CreateGameEvent(GameEventModel model, int waitRounds = 0, bool isRepeat = false, bool isOnly = false)
     {
-        GameEventManager.CreateGameEvent(model, waitRounds, isRepeat, isOnly);
+        GameCardManager.CreateGameEvent(model, waitRounds, isRepeat, isOnly);
     }
 
     /// <summary>
@@ -45,7 +55,7 @@ public class ManagerVariant
     /// <param name="gameEvent">游戏事件实例</param>
     public static void CreateGameEvent(GameEventObject gameEvent)
     {
-        GameEventManager.CreateGameEvent(gameEvent);
+        GameCardManager.CreateGameEvent(gameEvent);
     }
 
     /// <summary>
@@ -54,10 +64,20 @@ public class ManagerVariant
     /// <param name="gameAction">游戏行动信息</param>
     public static GameObject CreateGameAction(GameActionCreator gameAction)
     {
-        return GameEventManager.CreateGameAction(gameAction);
+        return GameCardManager.CreateGameAction(gameAction);
+    }
+    
+    /// <summary>
+    /// 改变目前的GameScene
+    /// </summary>
+    /// <param name="gameScene">游戏场景信息</param>
+    public static GameObject ChangeGameScene(GameSceneCreator gameScene)
+    {
+        return GameCardManager.ChangeGameScene(gameScene);
     }
 
-
+    #endregion
+    
     #region Buff相关
 
     /// <summary>
@@ -114,8 +134,18 @@ public class ManagerVariant
 
     #endregion
 
+    #region 回合相关
+
     /// <summary>
-    /// 回合开始流程
+    /// 初始化第一个回合
+    /// </summary>
+    public static void InitFirstRound()
+    {
+        RoundManager.InitFirstRound();
+    }
+    
+    /// <summary>
+    /// 触发回合开始流程
     /// </summary>
     public static void RoundStart()
     {
@@ -123,11 +153,13 @@ public class ManagerVariant
     }
     
     /// <summary>
-    /// 回合结束流程
+    /// 触发回合结束流程
     /// </summary>
     /// <param name="roundCount">经过的回合数</param>
     public static void RoundOver(int roundCount = 1)
     {
         RoundManager.RoundOver();
     }
+
+    #endregion
 }

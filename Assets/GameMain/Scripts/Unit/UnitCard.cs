@@ -53,7 +53,6 @@ public class UnitCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             //{
 
             //}
-            PropManager.RemoveProp(gameObject, true);
             Debug.Log("道具卡已被使用");
         }
         else

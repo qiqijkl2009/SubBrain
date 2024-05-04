@@ -27,7 +27,7 @@ public class ManagerRoot : MonoBehaviour
     private void Init()
     {
         GameManager.Init();
-        GameEventManager.Init();
+        GameCardManager.Init();
         PropManager.Init();
         BuffManager.Init();
         RoundManager.Init();

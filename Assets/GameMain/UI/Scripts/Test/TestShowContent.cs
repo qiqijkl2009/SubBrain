@@ -27,7 +27,7 @@ public class TestShowContent : MonoBehaviour, IPointerClickHandler
     {
         ClickCount = 0;
         DescriptionContent.pageToDisplay = 1;
-        DescriptionContent.text = GameEventManager.CurrentGameEvent.Model.UIInfo.Content;
+        DescriptionContent.text = GameCardManager.CurrentGameEvent.Model.UIInfo.Content;
     }
 
     public void OnPointerClick(PointerEventData eventData)

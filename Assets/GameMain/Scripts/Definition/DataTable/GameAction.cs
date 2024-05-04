@@ -7,7 +7,7 @@ namespace DataTable
         public static Dictionary<string, GameActionModel> Data = new()
         {
             {
-                "Test", new GameActionModel("Test", "测试",
+                "Test", new GameActionModel("Test", "测试", new GameEventUIInfo(),
                     "Test", null)
             }
         };

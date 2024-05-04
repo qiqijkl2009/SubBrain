@@ -50,29 +50,4 @@ public class PropState : MonoBehaviour
         Model.OnConsume?.Invoke(gameObject);
         if (IsConsumable) ConsumeTimes++;
     }
-
-    /// <summary>
-    /// 选择这个道具卡
-    /// </summary>
-    public void SelectProp()
-    {
-        if (!IsSelected)
-        {
-            foreach (var buff in Model.Buffs)
-            {
-                ManagerVariant.AddBuff(buff);
-            }
-
-            IsSelected = true;
-        }
-        else
-        {
-            foreach (var buff in Model.Buffs)
-            {
-                ManagerVariant.AddBuff(buff.Opposite());
-            }
-
-            IsSelected = false;
-        }
-    }
 }

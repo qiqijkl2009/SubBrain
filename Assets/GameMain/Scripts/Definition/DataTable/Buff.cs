@@ -13,7 +13,14 @@ namespace DataTable
                     "Test", null,
                     "Test", null,
                     "Test", null)
-            }
+            },
+            {
+                " ExplorePoint", new BuffModel("ExplorePoint", "探索点", 0, 1, null, 0,
+                    "", null,
+                    "", null,
+                    "", null,
+                    "", null)
+            },
         };
     }
 }

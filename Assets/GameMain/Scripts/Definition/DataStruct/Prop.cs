@@ -8,7 +8,7 @@ using UnityEngine;
 public class PropCreator
 {
     /// <summary>
-    /// 这是个什么道具
+    /// 道具的model
     /// </summary>
     public PropModel Model;
 
