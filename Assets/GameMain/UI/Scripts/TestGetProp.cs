@@ -10,8 +10,6 @@ public class TestGetProp : MonoBehaviour
 
     private void Start()
     {
-        TestButton = transform.GetComponent<Button>();
-        PropCardsParent = GameObject.Find("PropCards").transform;
         TestButton.onClick.AddListener(OnTestButtonClicked);
     }
 

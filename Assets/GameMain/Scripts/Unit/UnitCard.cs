@@ -4,9 +4,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
-/// 单位拖拽控件，所有需要拖拽功能的单位都应该添加这个来控制它的拖拽
+/// 单位卡片控件，所有拥有交互操作的卡片都应该添加这个来控制它
 /// </summary>
-public class UnitDrag : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class UnitCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private Vector3 _originalPos;
     private Vector3 _offset;
@@ -53,15 +53,14 @@ public class UnitDrag : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             //{
 
             //}
-            PropManager.RemoveProp(this.gameObject, true);
+            PropManager.RemoveProp(gameObject, true);
             Debug.Log("道具卡已被使用");
         }
         else
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
         }
+
         transform.GetComponent<Image>().raycastTarget = true;
     }
-
-
 }

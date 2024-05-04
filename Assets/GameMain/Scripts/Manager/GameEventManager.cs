@@ -55,8 +55,7 @@ public class GameEventManager : MonoBehaviour
 
     public static GameObject CreateGameAction(GameActionCreator action)
     {
-        //TODO:换预制体
-        var actionObject = R.Test.TestPropCard_GameObject();
+        var actionObject = R.Card.ActionCard_GameObject();
         var actionState = actionObject.GetComponent<ActionState>();
 
         actionState.InitByGameActionCreator(action);
@@ -64,10 +63,12 @@ public class GameEventManager : MonoBehaviour
         if (GameActions[0] is null)
         {
             GameActions[0] = actionObject;
+            actionObject.name = "LeftAction";
         }
         else
         {
             GameActions[1] = actionObject;
+            actionObject.name = "RightAction";
         }
 
         return actionObject;

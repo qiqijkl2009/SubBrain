@@ -43,6 +43,7 @@ public class RoundManager : MonoBehaviour
         foreach (var action in currentGameEvent.Model.GameActions)
         {
             var actionCard = ManagerVariant.CreateGameAction(new GameActionCreator(action));
+            
             //传递给UI，事件or接口调用，把这些行动传过去
         }
     }

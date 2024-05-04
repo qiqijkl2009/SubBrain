@@ -16,12 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 050c78983f84ba54192d18f38fc29776
-  m_SerializeEntries:
-  - m_GUID: 83a455685a97610409fe98bece3f4b0e
-    m_Address: TestPropCard
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 66f6772ae792b954ea3f5d523c96fb67, type: 2}
   m_SchemaSet:

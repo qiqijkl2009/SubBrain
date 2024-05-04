@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using DG.Tweening;
+using TMPro;
+using UnityEngine;
 
 public class ActionState : MonoBehaviour
 {
@@ -6,11 +9,26 @@ public class ActionState : MonoBehaviour
     public GameActionToEvent GameActionOverride;
     public object[] GameActionOverrideArgs;
 
+    private GameObject _viewContainer;
+
+
+    private void Start()
+    {
+        SyncUnitComponents();
+    }
+
+
     public void InitByGameActionCreator(GameActionCreator gameAction)
     {
         Model = gameAction.Model;
+
+        SyncUnitComponents();
     }
 
+    private void SyncUnitComponents()
+    {
+        if (!_viewContainer) _viewContainer = GetComponentInChildren<ViewContainer>().gameObject;
+    }
 
     public void TakeAction()
     {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -9,21 +10,28 @@ public class ShowEvent : MonoBehaviour
     [SerializeField] private TMP_Text EventContent;
     [SerializeField] private Image EventImage;
 
+    private Sprite _eventImageSprite;
+
     private void Start()
     {
         Records.Refresh += RefreshEvent;
-        EventTitle = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        EventImage = transform.GetChild(1).GetComponent<Image>();
-        EventContent = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
     }
 
     public void RefreshEvent()
     {
-        EventTitle.text = ManagerVariant.CurrentGameEvent().Model.UIInfo.Title;
+        var currentGameEvent = ManagerVariant.CurrentGameEvent();
+        var uiInfo = currentGameEvent.Model.UIInfo;
+        
+        EventTitle.text = uiInfo.Title;
+        EventContent.text = uiInfo.Content;
+        
+        ResSystem.UnloadAsset(_eventImageSprite);
+        _eventImageSprite = ResSystem.LoadAsset<Sprite>(uiInfo.TextureId);
+        EventImage.sprite = _eventImageSprite;
+    }
 
-        string ImageID = ManagerVariant.CurrentGameEvent().Model.UIInfo.TextureId;
-        EventImage.sprite = ResSystem.LoadAsset<Sprite>(ImageID);
-
-        EventContent.text = ManagerVariant.CurrentGameEvent().Model.UIInfo.Content;
+    private void OnDestroy()
+    {
+        ResSystem.UnloadAsset(_eventImageSprite);
     }
 }

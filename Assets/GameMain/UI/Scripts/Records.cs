@@ -17,7 +17,7 @@ public static class Records
         EventCount++;
         Refresh?.Invoke();
 
-        //对话系统目前取消
+        //瀵硅瘽绯荤粺鐩墠鍙栨秷
         //EventType = EventCount % 2;
         //if (EventType == 0)
         //{

@@ -50,14 +50,13 @@ public class PropManager : MonoBehaviour
     /// <returns>创建出的道具卡实例</returns>
     public static GameObject CreateProp(PropCreator prop)
     {
-        //TODO:记得把测试用预制体换了
-        var propObject = R.Test.TestPropCard_GameObject();
+        var propObject = R.Card.PropCard_GameObject();
         var propState = propObject.GetComponent<PropState>();
 
         propState.InitByPropCreator(prop);
         propState.Model.OnCreate?.Invoke(propObject);
         PropCards.Add(propObject);
-        
+
         return propObject;
     }
 

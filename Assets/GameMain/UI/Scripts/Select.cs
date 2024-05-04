@@ -1,48 +1,50 @@
 using System.Collections;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 public class Select : MonoBehaviour, IPointerClickHandler
 {
-    private bool isFlipped;
-    private Transform front;
-    private Transform back;
-    private TMP_Text ActionText;
+    [SerializeField] private Transform CardFront;
+    [SerializeField] private Transform CardBack;
+    [SerializeField] private TMP_Text ActionText;
+    
+    private bool _isFlipped;
 
     private void Start()
     {
-        //»ñÈ¡ĞèÒªÏÔÊ¾ÔÚĞĞ¶¯¿¨ÉÏµÄÎÄ×Ö
+        //è·å–éœ€è¦æ˜¾ç¤ºåœ¨è¡ŒåŠ¨å¡ä¸Šçš„æ–‡å­—
+        var gameActions = ManagerVariant.GameActions();
         if (transform.name == "LeftAction")
         {
-            ActionText.text = ManagerVariant.CurrentGameEvent().Model.GameActions[0].Name;
+            ActionText.text = gameActions[0].name;
         }
         else if (transform.name == "RightAction")
         {
-            ActionText.text = ManagerVariant.CurrentGameEvent().Model.GameActions[1].Name;
+            ActionText.text = gameActions[1].name;
         }
-
-        front = transform.GetChild(0);
-        back = transform.GetChild(1);
     }
-
+    
     public void OnPointerClick(PointerEventData eventData)
     {
-        transform.GetComponentInParent<ActionSelect>().Click(transform.gameObject);
+        // Click(transform.gameObject);
     }
 
     public void OnCardFlip()
     {
-        RectTransform rect = GetComponent<RectTransform>();
-        StartCoroutine(FlipCard(rect, isFlipped));
-        isFlipped = !isFlipped;
+        var rect = GetComponent<RectTransform>();
+        StartCoroutine(FlipCard(rect, _isFlipped));
+        _isFlipped = !_isFlipped;
     }
-    IEnumerator FlipCard(RectTransform rect, bool isFlipped)
+
+    private IEnumerator FlipCard(RectTransform rect, bool isFlipped)
     {
         float duration = 1.0f;
         float t = 0;
-        Quaternion startRotation = rect.rotation;
-        Quaternion endRotation = startRotation * Quaternion.Euler(0, 180, 0);
+        var startRotation = rect.rotation;
+        var endRotation = startRotation * Quaternion.Euler(0, 180, 0);
 
         while (t < duration)
         {
@@ -53,17 +55,14 @@ public class Select : MonoBehaviour, IPointerClickHandler
             yield return null;
         }
 
-        front.gameObject.SetActive(true);
-        back.gameObject.SetActive(false);
+        CardFront.gameObject.SetActive(true);
+        CardBack.gameObject.SetActive(false);
     }
 
     public void FlipBack()
     {
-
-            front.gameObject.SetActive(false);
-            back.gameObject.SetActive(true);
-            isFlipped = true;
-
+        CardFront.gameObject.SetActive(false);
+        CardBack.gameObject.SetActive(true);
+        _isFlipped = true;
     }
-
 }

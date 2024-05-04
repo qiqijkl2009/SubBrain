@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using JKFrame;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,13 +15,14 @@ public class GameManager : MonoBehaviour
     {
         InitSystem();
     }
-
-    private void FixedUpdate()
-    {
-    }
-
+    
     private void InitSystem()
     {
         CardSystem.Init();
     }
-} 
+
+    private void OnApplicationQuit()
+    {
+        EventSystem.EventTrigger("SaveData");
+    }
+}

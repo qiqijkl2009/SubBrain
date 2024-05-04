@@ -25,11 +25,20 @@ public class PropState : MonoBehaviour
     /// </summary>
     public bool IsSelected = false;
 
+    [SerializeField] private GameObject _viewContainer;
+    
 
     public void InitByPropCreator(PropCreator prop)
     {
         Model = prop.Model;
         IsConsumable = prop.IsConsumable;
+
+        SyncUnitComponents();
+    }
+
+    private void SyncUnitComponents()
+    {
+        if (!_viewContainer) _viewContainer = GetComponentInChildren<ViewContainer>().gameObject;
     }
 
 
