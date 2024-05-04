@@ -89,8 +89,7 @@ GameObject:
   - component: {fileID: 2028016252637687151}
   - component: {fileID: 7885622408223292396}
   - component: {fileID: 9038795036170962836}
-  - component: {fileID: 7533765168243953187}
-  - component: {fileID: 4687357403290612613}
+  - component: {fileID: 3386938782999944842}
   m_Layer: 5
   m_Name: ActionCard
   m_TagString: Untagged
@@ -175,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a63c183f8b64d9b8ff86361379d1caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7533765168243953187
+--- !u!114 &3386938782999944842
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,24 +183,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2067732584766903733}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df193430fb340824ebc746ec25e64b5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4687357403290612613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2067732584766903733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6766aabff8f45840a8489c755ba2d3a, type: 3}
+  m_Script: {fileID: 11500000, guid: 628af65c85a04b6aab1fe8454b6b4f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CardFront: {fileID: 116837396268413475}
   CardBack: {fileID: 6126707282463317194}
   ActionText: {fileID: 3544215596793500000}
+  CurrentEventPosition: {x: 0, y: 0, z: 0}
+  LeftPostion: {x: -250, y: -20, z: 0}
+  RightPostion: {x: 250, y: -20, z: 0}
+  HoverMoveValue: {x: 20, y: 0, z: 0}
+  RotationValue: {x: 0, y: 0, z: 10}
 --- !u!1 &2479576296590265312
 GameObject:
   m_ObjectHideFlags: 0

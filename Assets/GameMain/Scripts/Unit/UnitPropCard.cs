@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// <summary>
 /// 单位卡片控件，所有拥有交互操作的卡片都应该添加这个来控制它
 /// </summary>
-public class UnitCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class UnitPropCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private Vector3 _originalPos;
     private Vector3 _offset;
