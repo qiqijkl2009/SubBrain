@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!114 &925410373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1907,6 +1907,7 @@ MonoBehaviour:
   EventTitle: {fileID: 0}
   EventContent: {fileID: 0}
   EventImage: {fileID: 0}
+  ClickCount: 0
 --- !u!114 &2144471452
 MonoBehaviour:
   m_ObjectHideFlags: 0
