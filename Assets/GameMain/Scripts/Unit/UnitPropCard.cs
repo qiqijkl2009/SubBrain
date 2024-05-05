@@ -32,7 +32,7 @@ public class UnitPropCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        transform.GetComponent<Image>().raycastTarget = false;
+        transform.GetComponentInChildren<Image>().raycastTarget = false;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -53,6 +53,9 @@ public class UnitPropCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             //{
 
             //}
+
+            DOTween.Pause(this);
+            ManagerVariant.RemoveProp(gameObject, true);
             Debug.Log("道具卡已被使用");
         }
         else
@@ -60,6 +63,11 @@ public class UnitPropCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
         }
 
-        transform.GetComponent<Image>().raycastTarget = true;
+        transform.GetComponentInChildren<Image>().raycastTarget = true;
+    }
+
+    private void OnDestroy()
+    {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
     }
 }

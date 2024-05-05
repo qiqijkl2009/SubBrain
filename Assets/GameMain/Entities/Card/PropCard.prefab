@@ -53,6 +53,7 @@ MonoBehaviour:
   IsConsumable: 0
   ConsumeTimes: 0
   IsSelected: 0
+  _viewContainer: {fileID: 0}
 --- !u!114 &6064810854843361206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,8 +77,6 @@ GameObject:
   - component: {fileID: 514606759887688392}
   - component: {fileID: 3518986930581866506}
   - component: {fileID: 1290070425161917241}
-  - component: {fileID: 8918514732039443977}
-  - component: {fileID: 4235940870868013338}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -102,7 +101,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 163.333, y: 197.258}
+  m_SizeDelta: {x: 166, y: 214}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3518986930581866506
 CanvasRenderer:
@@ -125,14 +124,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8301887, g: 0.76593435, b: 0.70879316, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 01e4497b833d66442a894d82481a6028, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -142,33 +141,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8918514732039443977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2909341704080531616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20baa165fe0a49b5b572081744e226b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsConsumable: 0
-  ConsumeTimes: 0
-  IsSelected: 0
---- !u!114 &4235940870868013338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2909341704080531616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0345b91ad16546c9a22975000330aa12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6204430442154271158
 GameObject:
   m_ObjectHideFlags: 0
