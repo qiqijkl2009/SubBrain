@@ -20,6 +20,8 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
     [SerializeField] private Vector3 RightPostion;
     [SerializeField] private Vector3 HoverMoveValue = new Vector3(20f, 0, 0);
     [SerializeField] private Vector3 RotationValue = new Vector3(0, 0, 10f);
+    [SerializeField] private float ScaleX;
+    [SerializeField] private float ScaleY;
 
     private bool _isMoving = false;
     private bool _isFlipped;
@@ -28,20 +30,18 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
     private void Start()
     {
         //获取需要显示在行动卡上的文字
-        var gameActions = ManagerVariant.GameActions();
         if (transform.name == "LeftAction")
         {
-            ActionText.text = gameActions[0].name;
+            ActionText.text = ManagerVariant.CurrentGameEvent().Model.GameActions[0].Name;
         }
         else if (transform.name == "RightAction")
         {
-            ActionText.text = gameActions[1].name;
+            ActionText.text = ManagerVariant.CurrentGameEvent().Model.GameActions[1].Name;
         }
 
         CurrentEventPosition = GameObject.Find("CurrentEvent").transform.position;
         LeftPostion += CurrentEventPosition;
         RightPostion += CurrentEventPosition;
-        Debug.Log(transform.position);
         transform.position = CurrentEventPosition;
 
         BackToPosition();
@@ -54,7 +54,17 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Click(transform.gameObject);
+        //Click(transform.gameObject);
+        GameObject clone = Instantiate(gameObject);
+        clone.transform.SetParent(transform.parent);
+        clone.transform.position = transform.position;
+        clone.transform.rotation = transform.rotation;
+        clone.GetComponent<UnitActionCard>().Click(clone);
+
+        transform.DOScaleY(1f, 2f).OnComplete(() =>
+        {
+            transform.GetComponent<ActionState>().TakeAction();
+        });
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -90,12 +100,12 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
             actionObject.transform.DORotate(new Vector3(0, 180, 0), 1f);
         });
 
-        actionObject.transform.DOScaleX(1.75f, 2f);
-        actionObject.transform.DOScaleY(1.1f, 2f).OnComplete(() =>
+        actionObject.transform.DOScaleX(ScaleX, 2f);
+        actionObject.transform.DOScaleY(ScaleY, 2f).OnComplete(() =>
         {
             actionObject.transform.SetAsFirstSibling();
             _isMoving = false;
-            transform.GetComponent<ActionState>().TakeAction();
+            Destroy(this);
         });
     }
 

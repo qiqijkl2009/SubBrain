@@ -17,33 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 4e706e95f15c3d247ac42677fe55d8da
   m_SerializeEntries:
-  - m_GUID: 8e9bb18e761b5d548972bc72dd610742
-    m_Address: Event03
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 486d6a85e41feea4c89929d264a1a2e2
-    m_Address: Event02
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fb4062d3d5e6a2c46b0ffa495b432a9d
-    m_Address: Event01
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a01b730108ece2e409de8ca109de4f8b
-    m_Address: Event04
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b2e2e5730b56c6d409fdb860bd8b9bd7
-    m_Address: Event05
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 721dd6e0275057c4f8b5f511ab23b153
-    m_Address: Event06
+  - m_GUID: a38794fdd76564048ad54738446ef68b
+    m_Address: WakeUp
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

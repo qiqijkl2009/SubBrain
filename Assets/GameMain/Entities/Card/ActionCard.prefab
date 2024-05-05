@@ -190,10 +190,12 @@ MonoBehaviour:
   CardBack: {fileID: 6126707282463317194}
   ActionText: {fileID: 3544215596793500000}
   CurrentEventPosition: {x: 0, y: 0, z: 0}
-  LeftPostion: {x: -250, y: -20, z: 0}
-  RightPostion: {x: 250, y: -20, z: 0}
+  LeftPostion: {x: -500, y: -20, z: 0}
+  RightPostion: {x: 500, y: -20, z: 0}
   HoverMoveValue: {x: 20, y: 0, z: 0}
   RotationValue: {x: 0, y: 0, z: 10}
+  ScaleX: 2.013072
+  ScaleY: 1.0031298
 --- !u!1 &2479576296590265312
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +493,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

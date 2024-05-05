@@ -76,6 +76,11 @@ public class ManagerVariant
         return GameCardManager.ChangeGameScene(gameScene);
     }
 
+    public static void SetCurrentEvent(GameEventObject gameEvent)
+    {
+        GameCardManager.SetCurrentEvent(gameEvent);
+    }
+
     #endregion
     
     #region Buff相关

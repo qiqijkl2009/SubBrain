@@ -28,13 +28,11 @@ public class RoundManager : MonoBehaviour
     {
         //事件进入流程
         var gameEvents = ManagerVariant.GameEvents();
-        var currentGameEvent = ManagerVariant.CurrentGameEvent();
-
         var toEnter = gameEvents.Where(e => e.WaitRounds == 0).ToList();
 
         if (toEnter.Count > 0)
         {
-            currentGameEvent = toEnter[0];
+            ManagerVariant.SetCurrentEvent(toEnter[0]);
         }
         else
         {
@@ -47,6 +45,7 @@ public class RoundManager : MonoBehaviour
             eventObject.WaitRounds--;
         }
 
+        var currentGameEvent = ManagerVariant.CurrentGameEvent();
         currentGameEvent.Model.OnEnter?.Invoke(currentGameEvent);
         foreach (var action in currentGameEvent.Model.GameActions)
         {
@@ -54,6 +53,7 @@ public class RoundManager : MonoBehaviour
 
             //传递给UI，事件or接口调用，把这些行动传过去
         }
+        JKFrame.EventSystem.EventTrigger("NewGameEventCreated");
     }
 
     /// <summary>

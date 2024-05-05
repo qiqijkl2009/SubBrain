@@ -36,7 +36,7 @@ public struct GameActionModel
     /// <summary>
     /// 行动的UI表现信息
     /// </summary>
-    public GameEventUIInfo UIInfo;
+    public GameActionUIInfo UIInfo;
 
     /// <summary>
     /// 行动的对应事件判定方法
@@ -45,7 +45,7 @@ public struct GameActionModel
 
     public object[] GameActionArgs;
 
-    public GameActionModel(string id, string name, GameEventUIInfo uiInfo,
+    public GameActionModel(string id, string name, GameActionUIInfo uiInfo,
         string gameAction, object[] gameActionArgs)
     {
         Id = id;

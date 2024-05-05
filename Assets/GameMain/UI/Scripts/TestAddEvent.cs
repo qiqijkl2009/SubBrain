@@ -14,7 +14,7 @@ public class TestAddEvent : MonoBehaviour
 
     private void OnTestButtonClicked()
     {
-        ManagerVariant.CreateGameEvent(DataTable.GameEvent.Data["Test"]);
+        ManagerVariant.CreateGameEvent(DataTable.GameEvent.Data["WakeUp"]);
         ManagerVariant.RoundStart();
     }
 }
