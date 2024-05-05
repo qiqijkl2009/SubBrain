@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// <para>行动的创建信息，专门有个系统会处理这个创建信息，然后创建出行动卡的GameObject</para>
+/// <para>行动卡的创建信息，专门有个系统会处理这个创建信息，然后创建出行动卡的GameObject</para>
 /// <para>所有脚本中，需要创建一个行动卡，也应该传递这个结构作为创建行动卡的参数</para>
 /// </summary>
 public class GameActionCreator

@@ -1,11 +1,26 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// 游戏中运行的事件实例
+/// </summary>
 public class GameEventObject
 {
+    /// <summary>
+    /// 事件的model
+    /// </summary>
     public GameEventModel Model;
+    /// <summary>
+    /// 事件的延迟回合数
+    /// </summary>
     public int WaitRounds;
+    /// <summary>
+    /// 是否在事件移除时再添加一次同样的事件
+    /// </summary>
     public bool IsRepeat;
+    /// <summary>
+    /// 是否只允许有且只有一个相同模板的事件存在
+    /// </summary>
     public bool IsOnly;
 
     public GameEventObject(GameEventModel model, int waitRounds = 0, bool isRepeat = false, bool isOnly = false)
@@ -17,19 +32,45 @@ public class GameEventObject
     }
 }
 
+/// <summary>
+/// 事件的模板数据
+/// </summary>
 public struct GameEventModel
 {
+    /// <summary>
+    /// 事件的id
+    /// </summary>
     public string Id;
+    /// <summary>
+    /// 事件的名称
+    /// </summary>
     public string Name;
+    /// <summary>
+    /// 事件的tags
+    /// </summary>
     public string[] Tags;
+    /// <summary>
+    /// 事件附带的行动
+    /// </summary>
     public GameActionModel[] GameActions;
-
+    /// <summary>
+    /// 事件的UI表现信息
+    /// </summary>
     public GameEventUIInfo UIInfo;
 
+    /// <summary>
+    /// 游戏事件在被添加时触发的事件
+    /// </summary>
     public GameEventOnCreate OnCreate;
     public object[] OnCreateArgs;
+    /// <summary>
+    /// 游戏事件在进入时触发的事件
+    /// </summary>
     public GameEventOnEnter OnEnter;
     public object[] OnEnterArgs;
+    /// <summary>
+    /// 游戏事件在被移除时触发的事件
+    /// </summary>
     public GameEventOnLeave OnLeave;
     public object[] OnLeaveArgs;
 

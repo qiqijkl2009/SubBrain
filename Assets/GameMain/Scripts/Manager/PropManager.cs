@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PropManager : MonoBehaviour
@@ -23,12 +24,19 @@ public class PropManager : MonoBehaviour
         {
             var propState = prop.GetComponent<PropState>();
             if (!propState) continue;
+            if (propState.ConsumeTimes < propState.Model.MaxConsumeTimes) continue;
 
-            if (propState.ConsumeTimes >= propState.Model.MaxConsumeTimes)
+            propState.Model.OnRemove?.Invoke(prop);
+            var buffs = propState.Model.Buffs;
+            if (buffs != null)
             {
-                propState.Model.OnRemove?.Invoke(prop);
-                toRemove.Add(prop);
+                foreach (var buff in buffs)
+                {
+                    ManagerVariant.AddBuff(buff.Opposite());
+                }
             }
+                
+            toRemove.Add(prop);
         }
 
         if (toRemove.Count <= 0) return;
@@ -50,12 +58,21 @@ public class PropManager : MonoBehaviour
     /// <returns>创建出的道具卡实例</returns>
     public static GameObject CreateProp(PropCreator prop)
     {
-        var propObject = R.Card.PropCard_GameObject();
+        var propObject = R.Card.PropCard_GameObject();  
         var propState = propObject.GetComponent<PropState>();
 
         propState.InitByPropCreator(prop);
         propState.Model.OnCreate?.Invoke(propObject);
         PropCards.Add(propObject);
+
+        var buffs = propState.Model.Buffs;
+        if (buffs != null)
+        {
+            foreach (var buff in buffs)
+            {
+                ManagerVariant.AddBuff(buff);
+            }
+        }
 
         return propObject;
     }
@@ -77,7 +94,7 @@ public class PropManager : MonoBehaviour
         {
             propState.Model.OnRemove?.Invoke(prop);
             propState.Model.OnDestroy?.Invoke(prop);
-            //PropCards.Remove(prop);
+            PropCards.Remove(prop);
             Destroy(prop);
         }
     }

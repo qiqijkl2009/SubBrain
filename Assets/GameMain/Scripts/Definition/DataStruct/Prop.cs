@@ -2,8 +2,8 @@
 using UnityEngine;
 
 /// <summary>
-/// <para>道具的创建信息，专门有个系统会处理这个创建信息，然后创建出道具的GameObject</para>
-/// <para>所有脚本中，需要创建一个道具，也应该传递这个结构作为创建道具的参数</para>
+/// <para>道具卡的创建信息，专门有个系统会处理这个创建信息，然后创建出道具卡的GameObject</para>
+/// <para>所有脚本中，需要创建一个道具卡，也应该传递这个结构作为创建道具卡的参数</para>
 /// </summary>
 public class PropCreator
 {
@@ -56,7 +56,7 @@ public struct PropModel
     public PropUIInfo UIInfo;
 
     /// <summary>
-    /// 道具在被选中时获得的buff，取消选择时移除buff，作为使用效果的buff不应该在这里
+    /// 持有道具获得的buff，道具消耗时移除buff，作为使用效果的buff不应该在这里
     /// </summary>
     public AddBuffInfo[] Buffs;
 

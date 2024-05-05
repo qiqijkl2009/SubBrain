@@ -10,6 +10,7 @@ namespace DesignerScripts
         {
             { "Test", e => new GameEventObject(DataTable.GameEvent.Data["Test"]) },
             { "GetThatEvent", GetThatEvent },
+            { "GetEventByBuff", GetEventByBuff },
         };
 
 

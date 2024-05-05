@@ -26,6 +26,7 @@ namespace DesignerScripts
             { "Test", prop => { Debug.Log("道具摧毁方法测试"); } },
         };
 
+        
         private static void ChangeEvent(GameObject prop)
         {
             var state = prop.GetComponent<PropState>();
