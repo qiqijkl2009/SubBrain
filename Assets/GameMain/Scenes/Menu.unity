@@ -2202,7 +2202,7 @@ MonoBehaviour:
   ExitBtn: {fileID: 1454050894}
   TeamPanel: {fileID: 754316899}
   CloseAbout: {fileID: 756149360}
-  FadingMask: {fileID: 667971306}
+  FadingMask: {fileID: 667971307}
 --- !u!114 &1990330844
 MonoBehaviour:
   m_ObjectHideFlags: 0
