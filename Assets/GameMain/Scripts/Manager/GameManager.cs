@@ -13,12 +13,31 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (SaveSystem.GetSaveItem(0) == null) SaveSystem.CreateSaveItem();
         InitSystem();
     }
-    
+
     private void InitSystem()
     {
         CardSystem.Init();
+    }
+
+
+    /// <summary>
+    /// 开始游戏并初始化第一个回合
+    /// </summary>
+    public static void StartGame()
+    {
+        // ManagerVariant.ChangeGameScene(new GameSceneCreator(DataTable.GameScene.Data["Test"]));
+        ManagerVariant.CreateGameEvent(DataTable.GameEvent.Data["WakeUp"]);
+        ManagerVariant.RoundStart();
+    }
+
+    /// <summary>
+    /// 结束游戏并进行结算
+    /// </summary>
+    public static void GameOver()
+    {
     }
 
     private void OnApplicationQuit()

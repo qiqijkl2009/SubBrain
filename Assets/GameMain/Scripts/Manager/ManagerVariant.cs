@@ -3,6 +3,26 @@ using UnityEngine;
 
 public class ManagerVariant
 {
+    #region 游戏进程相关
+
+    /// <summary>
+    /// 开始游戏并初始化第一个回合
+    /// </summary>
+    public void StartGame()
+    {
+        GameManager.StartGame();
+    }
+    
+    /// <summary>
+    /// 结束游戏并进行结算
+    /// </summary>
+    public void GameOver()
+    {
+        GameManager.GameOver();
+    }
+
+    #endregion
+    
     #region 游戏卡牌相关
 
     /// <summary>
@@ -28,7 +48,7 @@ public class ManagerVariant
     {
         return GameCardManager.GameActions;
     }
-    
+
     /// <summary>
     /// 获得当前生效的游戏场景卡
     /// </summary>
@@ -38,9 +58,34 @@ public class ManagerVariant
     }
 
     /// <summary>
+    /// 设置当前的GameEvent
+    /// </summary>
+    /// <param name="gameEvent">GameEvent实例</param>
+    public static void SetCurrentGameEvent(GameEventObject gameEvent)
+    {
+        GameCardManager.SetCurrentGameEvent(gameEvent);
+    }
+
+    /// <summary>
+    /// 事件进入流程
+    /// </summary>
+    public static void EnterGameEvent()
+    {
+        GameCardManager.EnterGameEvent();
+    }
+
+    /// <summary>
+    /// 离开当前进行的GameEvent
+    /// </summary>
+    public static void LeaveGameEvent()
+    {
+        GameCardManager.LeaveGameEvent();
+    }
+
+    /// <summary>
     /// 添加一个GameEvent至列表
     /// </summary>
-    /// <param name="model">游戏事件模板</param>
+    /// <param name="model">GameEvent模板</param>
     /// <param name="waitRounds">等待回合数</param>
     /// <param name="isRepeat">是否循环</param>
     /// <param name="isOnly">是否唯一</param>
@@ -52,7 +97,7 @@ public class ManagerVariant
     /// <summary>
     /// 添加一个GameEvent至列表
     /// </summary>
-    /// <param name="gameEvent">游戏事件实例</param>
+    /// <param name="gameEvent">GameEvent实例</param>
     public static void CreateGameEvent(GameEventObject gameEvent)
     {
         GameCardManager.CreateGameEvent(gameEvent);
@@ -61,28 +106,25 @@ public class ManagerVariant
     /// <summary>
     /// 添加一个GameAction
     /// </summary>
-    /// <param name="gameAction">游戏行动信息</param>
+    /// <param name="gameAction">GameAction信息</param>
+    /// <returns>GameAction卡</returns>
     public static GameObject CreateGameAction(GameActionCreator gameAction)
     {
         return GameCardManager.CreateGameAction(gameAction);
     }
-    
+
     /// <summary>
     /// 改变目前的GameScene
     /// </summary>
-    /// <param name="gameScene">游戏场景信息</param>
+    /// <param name="gameScene">GameScene信息</param>
+    /// <returns>新的GameScene卡</returns>
     public static GameObject ChangeGameScene(GameSceneCreator gameScene)
     {
         return GameCardManager.ChangeGameScene(gameScene);
     }
-
-    public static void SetCurrentEvent(GameEventObject gameEvent)
-    {
-        GameCardManager.SetCurrentEvent(gameEvent);
-    }
-
-    #endregion
     
+    #endregion
+
     #region Buff相关
 
     /// <summary>
@@ -91,6 +133,15 @@ public class ManagerVariant
     public static List<BuffObject> Buffs()
     {
         return BuffManager.Buffs;
+    }
+
+    /// <summary>
+    /// Buff结算更新流程
+    /// </summary>
+    /// <param name="roundCount">经过的回合数</param>
+    public static void BuffUpdate(int roundCount)
+    {
+        BuffManager.BuffUpdate(roundCount);
     }
 
     /// <summary>
@@ -118,6 +169,14 @@ public class ManagerVariant
     #region 道具相关
 
     /// <summary>
+    /// 获取当前持有的道具卡
+    /// </summary>
+    public static List<GameObject> PropCards()
+    {
+        return PropManager.PropCards;
+    }
+
+    /// <summary>
     /// 创建一张道具卡
     /// </summary>
     /// <param name="prop">要创建的道具卡信息</param>
@@ -142,21 +201,13 @@ public class ManagerVariant
     #region 回合相关
 
     /// <summary>
-    /// 初始化第一个回合
-    /// </summary>
-    public static void InitFirstRound()
-    {
-        RoundManager.InitFirstRound();
-    }
-    
-    /// <summary>
     /// 触发回合开始流程
     /// </summary>
     public static void RoundStart()
     {
         RoundManager.RoundStart();
     }
-    
+
     /// <summary>
     /// 触发回合结束流程
     /// </summary>
@@ -164,6 +215,27 @@ public class ManagerVariant
     public static void RoundOver(int roundCount = 1)
     {
         RoundManager.RoundOver();
+    }
+
+    #endregion
+
+    #region 属性相关
+
+    /// <summary>
+    /// 当前角色的资源类属性
+    /// </summary>
+    public static CharacterResource Resource()
+    {
+        return StatsManager.Resource;
+    }
+
+    ///<summary>
+    ///改变角色的资源类属性，
+    ///<param name="value">要改变的量，负数为减少</param>
+    ///</summary>
+    public static void ModResource(CharacterResource value)
+    {
+        StatsManager.ModResource(value);
     }
 
     #endregion

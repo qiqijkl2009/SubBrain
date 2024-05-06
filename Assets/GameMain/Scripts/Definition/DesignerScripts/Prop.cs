@@ -26,14 +26,13 @@ namespace DesignerScripts
             { "Test", prop => { Debug.Log("道具摧毁方法测试"); } },
         };
 
-        
+
         private static void ChangeEvent(GameObject prop)
         {
             var state = prop.GetComponent<PropState>();
             if (!state) return;
 
             object[] args = state.Model.OnConsumeArgs;
-            var currentGameEvent = ManagerVariant.CurrentGameEvent();
 
             var gameEventObjects = args.Length > 0 ? (GameEventObject[])args[0] : null;
             string[] gameEventConditions = args.Length > 1 ? (string[])args[1] : null;
@@ -42,9 +41,9 @@ namespace DesignerScripts
 
             for (int i = 0; i < gameEventConditions.Length; i++)
             {
-                if (currentGameEvent.Model.Id == gameEventConditions[i])
+                if (ManagerVariant.CurrentGameEvent().Model.Id == gameEventConditions[i])
                 {
-                    currentGameEvent = gameEventObjects[i];
+                    ManagerVariant.SetCurrentGameEvent(gameEventObjects[i]);
                 }
             }
         }

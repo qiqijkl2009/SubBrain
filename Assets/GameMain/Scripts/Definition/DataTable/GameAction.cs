@@ -7,27 +7,27 @@ namespace DataTable
         public static Dictionary<string, GameActionModel> Data = new()
         {
             {
-                "Test", new GameActionModel("Test", "测试", new GameActionUIInfo(),
+                "Test", new GameActionModel("Test", "测试", CharacterResource.None, new GameActionUIInfo(),
                     "Test", null)
             },
             {
                 "努力回忆",
-                new GameActionModel("努力回忆", "努力回忆", new GameActionUIInfo(),
+                new GameActionModel("努力回忆", "努力回忆", CharacterResource.None, new GameActionUIInfo(),
                     "GetThatEvent", new object[] { "Headache" })
             },
             {
                 "放弃思考",
-                new GameActionModel("放弃思考", "放弃思考", new GameActionUIInfo(),
+                new GameActionModel("放弃思考", "放弃思考", CharacterResource.None, new GameActionUIInfo(),
                     "GetThatEvent", new object[] { "Headache" })
             },
             {
                 "观察左边",
-                new GameActionModel("观察左边", "观察左边", new GameActionUIInfo(),
+                new GameActionModel("观察左边", "观察左边", CharacterResource.None, new GameActionUIInfo(),
                     "GetThatEvent", new object[] { "GetPhoto" })
             },
             {
                 "观察右边",
-                new GameActionModel("观察右边", "观察右边", new GameActionUIInfo(),
+                new GameActionModel("观察右边", "观察右边", CharacterResource.None, new GameActionUIInfo(),
                     "GetThatEvent", new object[] { "GetPressCard" })
             },
             //{

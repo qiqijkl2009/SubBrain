@@ -8,25 +8,25 @@ namespace DesignerScripts
     {
         public static readonly Dictionary<string, GameActionToEvent> ActionToEvent = new()
         {
-            { "Test", e => new GameEventObject(DataTable.GameEvent.Data["Test"]) },
+            { "Test", (_, _, _, _) => new GameEventObject(DataTable.GameEvent.Data["Test"]) },
             { "GetThatEvent", GetThatEvent },
             { "GetEventByBuff", GetEventByBuff },
         };
 
 
-        private static GameEventObject GetThatEvent(GameObject gameAction)
+        private static GameEventObject GetThatEvent(GameObject gameAction, int waitRounds, bool isRepeat, bool isOnly)
         {
             var state = gameAction.GetComponent<ActionState>();
             if (!state) return null;
 
             object[] args = state.Model.GameActionArgs;
 
-            var gameEvent = args.Length > 0 ? (GameEventObject)args[0] : null;
+            string gameEventId = args.Length > 0 ? (string)args[0] : null;
 
-            return gameEvent;
+            return gameEventId != null ? new GameEventObject(DataTable.GameEvent.Data[gameEventId], waitRounds, isRepeat, isOnly) : null;
         }
 
-        private static GameEventObject GetEventByBuff(GameObject gameAction)
+        private static GameEventObject GetEventByBuff(GameObject gameAction, int waitRounds, bool isRepeat, bool isOnly)
         {
             var state = gameAction.GetComponent<ActionState>();
             if (!state) return null;
@@ -34,16 +34,16 @@ namespace DesignerScripts
             object[] args = state.Model.GameActionArgs;
             var buffs = ManagerVariant.Buffs();
 
-            var gameEvents = args.Length > 0 ? (GameEventObject[])args[0] : null;
+            string[] gameEventIds = args.Length > 0 ? (string[])args[0] : null;
             string[] buffConditions = args.Length > 1 ? (string[])args[1] : null;
 
-            if (gameEvents == null || buffConditions == null) return null;
+            if (gameEventIds == null || buffConditions == null) return null;
 
             for (int i = 0; i < buffConditions.Length; i++)
             {
                 if (buffs.FirstOrDefault(buff => buff.Model.Id == buffConditions[i]) != null)
                 {
-                    return gameEvents[i];
+                    return new GameEventObject(DataTable.GameEvent.Data[gameEventIds[i]], waitRounds, isRepeat, isOnly);
                 }
             }
 

@@ -22,21 +22,20 @@ public class ShowEvent : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-
     }
 
     public void RefreshEvent()
     {
-        transform.DOScale(1f, 2f).OnComplete(() => 
+        transform.DOScale(1f, 0f).OnComplete(() =>
         {
             var currentGameEvent = ManagerVariant.CurrentGameEvent();
             var uiInfo = currentGameEvent.Model.UIInfo;
 
             EventTitle.text = uiInfo.Title;
             EventContent.text = uiInfo.Content;
-            GoToStart(); //»Øµ½ÎÄ×ÖµÚÒ»Ò³
+            GoToStart(); //å›žåˆ°æ–‡å­—ç¬¬ä¸€é¡µ
 
-            ResSystem.UnloadAsset(_eventImageSprite);
+            if (_eventImageSprite) ResSystem.UnloadAsset(_eventImageSprite);
             _eventImageSprite = ResSystem.LoadAsset<Sprite>(uiInfo.TextureId);
             EventImage.sprite = _eventImageSprite;
         });
@@ -44,11 +43,11 @@ public class ShowEvent : MonoBehaviour, IPointerClickHandler
 
     private void OnDestroy()
     {
-        ResSystem.UnloadAsset(_eventImageSprite);
+        if (_eventImageSprite) ResSystem.UnloadAsset(_eventImageSprite);
         JKFrame.EventSystem.RemoveEventListener("NewGameEventCreated", RefreshEvent);
     }
 
-    public void OnPointerClick(PointerEventData eventData) //µã»÷ÏÔÊ¾ÏÂÒ»Ò³ÎÄ×Ö
+    public void OnPointerClick(PointerEventData eventData) //ç‚¹å‡»æ˜¾ç¤ºä¸‹ä¸€é¡µæ–‡å­—
     {
         if (ClickCount < EventContent.textInfo.pageCount - 1)
         {
@@ -61,7 +60,7 @@ public class ShowEvent : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    void GoToStart() //»Øµ½ÎÄ×ÖµÚÒ»Ò³
+    void GoToStart() //å›žåˆ°æ–‡å­—ç¬¬ä¸€é¡µ
     {
         ClickCount = 0;
         EventContent.pageToDisplay = 1;

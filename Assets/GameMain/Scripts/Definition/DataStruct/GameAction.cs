@@ -34,6 +34,11 @@ public struct GameActionModel
     public string Name;
 
     /// <summary>
+    /// 行动对角色资源的改变值
+    /// </summary>
+    public CharacterResource ModResource;
+
+    /// <summary>
     /// 行动的UI表现信息
     /// </summary>
     public GameActionUIInfo UIInfo;
@@ -45,11 +50,12 @@ public struct GameActionModel
 
     public object[] GameActionArgs;
 
-    public GameActionModel(string id, string name, GameActionUIInfo uiInfo,
+    public GameActionModel(string id, string name, CharacterResource modResource, GameActionUIInfo uiInfo,
         string gameAction, object[] gameActionArgs)
     {
         Id = id;
         Name = name;
+        ModResource = modResource;
         UIInfo = uiInfo;
 
         GameAction = string.IsNullOrEmpty(gameAction) ? null : DesignerScripts.GameAction.ActionToEvent[gameAction];
@@ -86,4 +92,4 @@ public struct GameActionUIInfo
     }
 }
 
-public delegate GameEventObject GameActionToEvent(GameObject action);
+public delegate GameEventObject GameActionToEvent(GameObject action, int waitRounds, bool isRepeat, bool isOnly);

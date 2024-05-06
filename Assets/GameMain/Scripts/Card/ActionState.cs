@@ -45,15 +45,16 @@ public class ActionState : MonoBehaviour
     {
         if (GameActionOverride is not null)
         {
-            var gameEvent = GameActionOverride.Invoke(gameObject);
+            var gameEvent = GameActionOverride.Invoke(gameObject, 0, false, false);
             ManagerVariant.CreateGameEvent(gameEvent);
         }
         else
         {
-            var gameEvent = Model.GameAction.Invoke(gameObject);
+            var gameEvent = Model.GameAction.Invoke(gameObject, 0, false, false);
             ManagerVariant.CreateGameEvent(gameEvent);
         }
 
+        ManagerVariant.ModResource(Model.ModResource);
         //TODO:播放动画完销毁
         ManagerVariant.RoundOver();
     }

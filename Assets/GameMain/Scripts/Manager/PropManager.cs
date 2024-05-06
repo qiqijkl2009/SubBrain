@@ -13,6 +13,9 @@ public class PropManager : MonoBehaviour
 
     private readonly List<GameObject> _propCards = new();
 
+    /// <summary>
+    /// 当前持有的道具卡
+    /// </summary>
     public static List<GameObject> PropCards => _instance._propCards;
 
 
@@ -94,6 +97,15 @@ public class PropManager : MonoBehaviour
         {
             propState.Model.OnRemove?.Invoke(prop);
             propState.Model.OnDestroy?.Invoke(prop);
+            var buffs = propState.Model.Buffs;
+            if (buffs != null)
+            {
+                foreach (var buff in buffs)
+                {
+                    ManagerVariant.AddBuff(buff.Opposite());
+                }
+            }
+            
             PropCards.Remove(prop);
             Destroy(prop);
         }

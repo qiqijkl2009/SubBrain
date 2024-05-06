@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JKFrame;
 using UnityEngine;
 
 public class GameCardManager : MonoBehaviour
@@ -13,7 +14,7 @@ public class GameCardManager : MonoBehaviour
     }
 
     private readonly List<GameEventObject> _gameEvents = new();
-    private readonly GameObject[] _gameActions = new GameObject[2];
+    private readonly GameObject[] _gameActions = { null, null };
 
     private GameEventObject _currentGameEvent = null;
     private GameObject _gameScene = null;
@@ -34,7 +35,7 @@ public class GameCardManager : MonoBehaviour
     public static GameEventObject CurrentGameEvent
     {
         get => _instance._currentGameEvent;
-        set => _instance._currentGameEvent = value;
+        private set => _instance._currentGameEvent = value;
     }
 
     /// <summary>
@@ -43,13 +44,74 @@ public class GameCardManager : MonoBehaviour
     public static GameObject GameScene
     {
         get => _instance._gameScene;
-        set => _instance._gameScene = value;
+        private set => _instance._gameScene = value;
+    }
+
+    /// <summary>
+    /// 事件进入流程
+    /// </summary>
+    public static void EnterGameEvent()
+    {
+        var toEnter = GameEvents.Where(e => e.WaitRounds == 0).ToList();
+
+        if (toEnter.Count > 0)
+        {
+            SetCurrentGameEvent(toEnter[0]);
+        }
+        else
+        {
+            //让玩家自由行动
+            return;
+        }
+
+        foreach (var eventObject in GameEvents.Where(e => e.WaitRounds > 0))
+        {
+            eventObject.WaitRounds--;
+        }
+
+        CurrentGameEvent.Model.OnEnter?.Invoke(CurrentGameEvent);
+        foreach (var action in CurrentGameEvent.Model.GameActions)
+        {
+            var actionCard = ManagerVariant.CreateGameAction(new GameActionCreator(action));
+        }
+    }
+
+    /// <summary>
+    /// 事件退出流程
+    /// </summary>
+    public static void LeaveGameEvent()
+    {
+        CurrentGameEvent.Model.OnLeave?.Invoke(CurrentGameEvent);
+        GameEvents.Remove(CurrentGameEvent);
+
+        if (CurrentGameEvent.IsRepeat)
+        {
+            CreateGameEvent(CurrentGameEvent.Model);
+        }
+
+        if (GameActions[0]) Destroy(GameActions[0]);
+        if (GameActions[1]) Destroy(GameActions[1]);
+
+        CurrentGameEvent = null;
+        GameActions[0] = null;
+        GameActions[1] = null;
+    }
+
+    /// <summary>
+    /// 设置当前的GameEvent
+    /// </summary>
+    /// <param name="gameEvent">GameEvent实例</param>
+    public static void SetCurrentGameEvent(GameEventObject gameEvent)
+    {
+        CurrentGameEvent = gameEvent;
+        //传递给UI，事件or接口调用，把这些行动传过去
+        EventSystem.EventTrigger("NewGameEventCreated");
     }
 
     /// <summary>
     /// 添加一个GameEvent至列表
     /// </summary>
-    /// <param name="model">游戏事件模板</param>
+    /// <param name="model">GameEvent模板</param>
     /// <param name="waitRounds">等待回合数</param>
     /// <param name="isRepeat">是否循环</param>
     /// <param name="isOnly">是否唯一</param>
@@ -62,7 +124,7 @@ public class GameCardManager : MonoBehaviour
     /// <summary>
     /// 添加一个GameEvent至列表
     /// </summary>
-    /// <param name="gameEvent">游戏事件实例</param>
+    /// <param name="gameEvent">GameEvent实例</param>
     public static void CreateGameEvent(GameEventObject gameEvent)
     {
         if (gameEvent.IsOnly && GameEvents.Any(e => e.Model.Id == gameEvent.Model.Id)) return;
@@ -75,14 +137,14 @@ public class GameCardManager : MonoBehaviour
     /// <summary>
     /// 添加一个GameAction
     /// </summary>
-    /// <param name="action">游戏行动信息</param>
-    /// <returns>游戏行动卡</returns>
-    public static GameObject CreateGameAction(GameActionCreator action)
+    /// <param name="gameAction">GameAction信息</param>
+    /// <returns>GameAction卡</returns>
+    public static GameObject CreateGameAction(GameActionCreator gameAction)
     {
         var actionObject = R.Card.ActionCard_GameObject();
         var actionState = actionObject.GetComponent<ActionState>();
 
-        actionState.InitByGameActionCreator(action);
+        actionState.InitByGameActionCreator(gameAction);
 
         if (GameActions[0] is null)
         {
@@ -101,9 +163,9 @@ public class GameCardManager : MonoBehaviour
     /// <summary>
     /// 改变目前的GameScene
     /// </summary>
-    /// <param name="scene">游戏场景信息</param>
-    /// <returns>新的游戏场景卡</returns>
-    public static GameObject ChangeGameScene(GameSceneCreator scene)
+    /// <param name="gameScene">GameScene信息</param>
+    /// <returns>新的GameScene卡</returns>
+    public static GameObject ChangeGameScene(GameSceneCreator gameScene)
     {
         if (GameScene)
         {
@@ -122,7 +184,7 @@ public class GameCardManager : MonoBehaviour
         var sceneObject = R.Card.ActionCard_GameObject();
         var sceneState = sceneObject.GetComponent<SceneState>();
 
-        sceneState.InitByGameSceneCreator(scene);
+        sceneState.InitByGameSceneCreator(gameScene);
         sceneState.Model.OnCreate?.Invoke(GameScene);
 
         foreach (var buff in sceneState.Model.Buffs)
@@ -133,10 +195,5 @@ public class GameCardManager : MonoBehaviour
         GameScene = sceneObject;
 
         return sceneObject;
-    }
-
-    public static void SetCurrentEvent(GameEventObject gameEvent)
-    {
-        CurrentGameEvent = gameEvent;
     }
 }

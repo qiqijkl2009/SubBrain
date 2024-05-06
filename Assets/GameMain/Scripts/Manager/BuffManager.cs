@@ -13,8 +13,52 @@ public class BuffManager : MonoBehaviour
 
     private readonly List<BuffObject> _buffs = new();
 
+    /// <summary>
+    /// 当前的Buff列表
+    /// </summary>
     public static List<BuffObject> Buffs => _instance._buffs;
 
+
+    /// <summary>
+    /// Buff结算更新流程
+    /// </summary>
+    /// <param name="roundCount">经过的回合数</param>
+    public static void BuffUpdate(int roundCount)
+    {
+        var toRemove = new List<BuffObject>();
+
+        foreach (var buff in Buffs)
+        {
+            if (!buff.Permanent) buff.Duration -= roundCount;
+            buff.TimeElapsed += roundCount;
+
+            if (buff.Model is { TickTime: > 0, OnTick: not null })
+            {
+                if (buff.TimeElapsed % buff.Model.TickTime == 0)
+                {
+                    buff.Model.OnTick.Invoke(buff);
+                    buff.Ticked += 1;
+                }
+            }
+
+            //只要duration <= 0，不管是否是permanent都移除掉
+            if (buff.Duration <= 0 || buff.Stack <= 0)
+            {
+                buff.Model.OnRemove?.Invoke(buff);
+                toRemove.Add(buff);
+            }
+        }
+
+        if (toRemove.Count > 0)
+        {
+            foreach (var buff in toRemove)
+            {
+                Buffs.Remove(buff);
+            }
+        }
+
+        toRemove = null;
+    }
 
     /// <summary>
     /// 为角色添加buff，删除buff也是走这个的，只不过删除的流程不在这里处理
@@ -35,7 +79,7 @@ public class BuffManager : MonoBehaviour
             ? MergeSameBuff(buff, existBuffs[0], out modStack) //存在id相同且来源相同的buff
             : CreateNewBuff(buff); //不存在id相同且来源相同的buff
 
-        if (existBuffs[0].Stack > 0)
+        if (toAddBuff.Stack > 0)
         {
             buff.BuffModel.OnOccur?.Invoke(toAddBuff, modStack);
         }
@@ -85,8 +129,21 @@ public class BuffManager : MonoBehaviour
             buff.Permanent,
             buff.BuffArgs
         );
-        Buffs.Add(newBuff);
-        Buffs.Sort((a, b) => b.Model.Priority.CompareTo(a.Model.Priority));
+
+        if (buff.AddStack >= buff.BuffModel.MaxStack)
+        {
+            newBuff.Stack = buff.BuffModel.MaxStack;
+        }
+        else if (buff.AddStack < 0)
+        {
+            newBuff.Stack = 0;
+        }
+
+        if (newBuff.Stack > 0)
+        {
+            Buffs.Add(newBuff);
+            Buffs.Sort((a, b) => b.Model.Priority.CompareTo(a.Model.Priority));
+        }
 
         return newBuff;
     }

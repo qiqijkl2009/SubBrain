@@ -3,6 +3,8 @@
 
 public class ManagerRoot : MonoBehaviour
 {
+    [SerializeField] private bool IsSingleton;
+    
     private ManagerRoot()
     {
     }
@@ -12,15 +14,19 @@ public class ManagerRoot : MonoBehaviour
 
     private void Awake()
     {
-        if (_instance != null && _instance != this) 
+        if (IsSingleton)
         {
-            Destroy(gameObject);
-            return;
+            if (_instance != null && _instance != this) 
+            {
+                Destroy(gameObject);
+                return;
+            }
+        
+            DontDestroyOnLoad(gameObject);
         }
         
         _instance = this; 
         RootTransform = transform;
-        DontDestroyOnLoad(gameObject);
         Init();
     }
 
@@ -31,5 +37,6 @@ public class ManagerRoot : MonoBehaviour
         PropManager.Init();
         BuffManager.Init();
         RoundManager.Init();
+        StatsManager.Init();
     }
 }

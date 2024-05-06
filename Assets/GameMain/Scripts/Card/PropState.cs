@@ -25,7 +25,7 @@ public class PropState : MonoBehaviour
     /// </summary>
     public bool IsSelected = false;
 
-    [SerializeField] private GameObject _viewContainer;
+    private GameObject _viewContainer;
     
 
     public void InitByPropCreator(PropCreator prop)
