@@ -12,7 +12,7 @@ namespace DataTable
                     {
                         GameAction.Data["努力回忆"], GameAction.Data["放弃思考"]
                     },
-                    new GameEventUIInfo("WakeUp", "醒来", "你在医院醒来，头很痛，你似乎丢失了一段记忆"),
+                    new GameEventUIInfo("WakeUp", "醒来", "你在医院醒来，头很痛，你似乎丢失了一段记忆"), null,
                     null, null,
                     null, null,
                     null, null)
@@ -23,10 +23,10 @@ namespace DataTable
                     {
 
                     },
-                    new GameEventUIInfo("Headache", "头痛", "你头痛欲裂，无法思考任何任何事情。你完全记不起自己是谁，又为何在此处"),
+                    new GameEventUIInfo("WakeUp", "头痛", "你头痛欲裂，无法思考任何任何事情。你完全记不起自己是谁，又为何在此处"), null,
                     null, null,
-                    null, null,
-                    null, null)
+                    "EndGame", null,
+                    null , null)
             },
             //{
             //    "Observation",

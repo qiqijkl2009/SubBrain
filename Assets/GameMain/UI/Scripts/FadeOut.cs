@@ -7,11 +7,9 @@ using UnityEngine.UI;
 
 public class FadeOut : MonoBehaviour
 {
-    Image FadingMask;
     // Start is called before the first frame update
     void Start()
     {
-        FadingMask = GetComponent<Image>();
 
     }
 
@@ -23,6 +21,8 @@ public class FadeOut : MonoBehaviour
 
     public void FadingOut()
     {
-
+        gameObject.SetActive(true);
+        GetComponent<Image>().color = Color.clear;
+        GetComponent<Image>().DOColor(Color.black, 5f);
     }
 }

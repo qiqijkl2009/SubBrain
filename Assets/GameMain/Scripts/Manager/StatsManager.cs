@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class StatsManager
+public class StatsManager: MonoBehaviour
 {
     private static StatsManager _instance;
 

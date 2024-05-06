@@ -31,5 +31,19 @@ namespace R
         {
             return ResSystem.InstantiateGameObject("PropCard", parent, keyName,autoRelease);
         }
+    } 
+    public static class UIWindow
+    {
+ 
+        public static GameObject FadeInMask { get => ResSystem.LoadAsset<GameObject>("FadeInMask"); }  
+        public static GameObject FadeInMask_GameObject(Transform parent = null,string keyName=null,bool autoRelease = true)
+        {
+            return ResSystem.InstantiateGameObject("FadeInMask", parent, keyName,autoRelease);
+        } 
+        public static GameObject FadeOutMask { get => ResSystem.LoadAsset<GameObject>("FadeOutMask"); }  
+        public static GameObject FadeOutMask_GameObject(Transform parent = null,string keyName=null,bool autoRelease = true)
+        {
+            return ResSystem.InstantiateGameObject("FadeOutMask", parent, keyName,autoRelease);
+        }
     }
 }

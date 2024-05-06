@@ -16,6 +16,15 @@ namespace DataTable
                     "Test", null,
                     "Test", null)
             },
+            {
+                "Pill",
+                new PropModel("Pill", "药", new string[] { "吃药" }, 1,
+                    new PropUIInfo("Pill", "药", null), null,
+                    null, null,
+                    null, null,
+                    null, null,
+                    null, null)
+            },
         };
     }
 }

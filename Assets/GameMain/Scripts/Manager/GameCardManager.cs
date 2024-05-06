@@ -69,10 +69,20 @@ public class GameCardManager : MonoBehaviour
             eventObject.WaitRounds--;
         }
 
+        if (CurrentGameEvent.Model.AudioId != null)
+        {
+            var audioSource = Camera.main.GetComponent<AudioSource>();
+            audioSource.clip = ResSystem.LoadAsset<AudioClip>(CurrentGameEvent.Model.AudioId);
+            audioSource.Play();
+        }
+
         CurrentGameEvent.Model.OnEnter?.Invoke(CurrentGameEvent);
         foreach (var action in CurrentGameEvent.Model.GameActions)
         {
-            var actionCard = ManagerVariant.CreateGameAction(new GameActionCreator(action));
+            if (!string.IsNullOrEmpty(action.Id))
+            {
+                var actionCard = CreateGameAction(new GameActionCreator(action));
+            }
         }
     }
 

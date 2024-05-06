@@ -23,9 +23,10 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
     [SerializeField] private float ScaleX;
     [SerializeField] private float ScaleY;
 
+    [SerializeField] private Transform ThisAction;
+    [SerializeField] private Transform OtherAction;
+
     private bool _isMoving = false;
-    private bool _isFlipped;
-    private Vector3 _originPosition;
 
     private void Start()
     {
@@ -33,10 +34,14 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
         if (transform.name == "LeftAction")
         {
             ActionText.text = ManagerVariant.CurrentGameEvent().Model.GameActions[0].Name;
+            ThisAction = transform;
+            OtherAction = GameObject.Find("RightAction").transform;
         }
         else if (transform.name == "RightAction")
         {
             ActionText.text = ManagerVariant.CurrentGameEvent().Model.GameActions[1].Name;
+            ThisAction = transform;
+            OtherAction = GameObject.Find("LeftAction").transform;
         }
 
         CurrentEventPosition = GameObject.Find("CurrentEvent").transform.position;
@@ -54,8 +59,14 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (_isMoving)
+        {
+            return;
+        }
+
         //Click(transform.gameObject);
         GameObject clone = Instantiate(gameObject);
+        gameObject.SetActive(false);
         clone.transform.SetParent(transform.parent);
         clone.transform.position = transform.position;
         clone.transform.rotation = transform.rotation;
@@ -65,10 +76,19 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
         {
             transform.GetComponent<ActionState>().TakeAction();
         });
+
+        if (OtherAction != null)
+        {
+            OtherAction.GetComponent<UnitActionCard>().enabled = false;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (_isMoving)
+        {
+            return;
+        }
         HoverMove(eventData, HoverMoveValue);
     }
 
@@ -105,6 +125,7 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
         {
             actionObject.transform.SetAsFirstSibling();
             _isMoving = false;
+            transform.DOKill();
             Destroy(this);
         });
     }

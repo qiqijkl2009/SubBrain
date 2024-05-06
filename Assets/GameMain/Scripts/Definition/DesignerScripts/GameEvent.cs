@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using JKFrame;
+using DG.Tweening;
+using UnityEngine.UI;
 
 namespace DesignerScripts
 {
@@ -14,11 +18,13 @@ namespace DesignerScripts
         {
             { "Test", @event => { Debug.Log("事件进入方法测试"); } },
             { "GetProps", GetProps },
+            { "EndGame", EndGame },
         };
 
         public static readonly Dictionary<string, GameEventOnLeave> OnLeaveFunc = new()
         {
             { "Test", @event => { Debug.Log("事件退出方法测试"); } },
+ 
         };
 
 
@@ -36,6 +42,29 @@ namespace DesignerScripts
             {
                 ManagerVariant.CreateProp(prop);
             }
+        }
+
+        private static void EndGame(GameEventObject gameEvent)
+        {
+            Debug.Log("进入结局");
+            if (gameEvent == null) return;
+
+
+            //Transform fadingMask = R.UIWindow.FadeOutMask_GameObject().transform;
+            //Transform canvas = GameObject.Find("UICanvas").transform;
+            //fadingMask.SetParent(canvas);
+            Transform fadingMask = GameObject.Find("EndGameFade").transform;
+            fadingMask.GetComponent<EndMenu>().StartFading();
+
+            var currentCard = GameObject.Find("CurrentEvent");
+            currentCard.transform.parent.GetComponentInChildren<UnitActionCard>().gameObject.SetActive(false);
+            Vector3 originalPos = currentCard.transform.position;
+            currentCard.transform.SetParent(fadingMask, false);
+            currentCard.transform.SetAsLastSibling();
+            currentCard.transform.DOScale(1.2f, 5f).OnComplete(() =>
+            {
+                fadingMask.GetComponentInChildren<Button>().gameObject.SetActive(true);
+            });
         }
     }
 }

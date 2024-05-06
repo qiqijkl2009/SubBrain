@@ -55,7 +55,8 @@ public class ActionState : MonoBehaviour
         }
 
         ManagerVariant.ModResource(Model.ModResource);
-        //TODO:播放动画完销毁
+        
+        transform.DOKill();
         ManagerVariant.RoundOver();
     }
 }

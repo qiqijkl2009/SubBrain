@@ -1,4 +1,6 @@
 ﻿using DG.Tweening;
+using JKFrame;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,6 +10,8 @@ using UnityEngine.UI;
 /// </summary>
 public class UnitPropCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    [SerializeField] private Image PropIcon;
+    [SerializeField] private TMP_Text PropName;
     private Vector3 _originalPos;
     private Vector3 _offset;
     private bool _canUse;
@@ -16,6 +20,9 @@ public class UnitPropCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         _originalPos = transform.position;
         _canUse = false;
+        var propInfo = transform.GetComponent<PropState>();
+        PropIcon.sprite = ResSystem.LoadAsset<Sprite>(propInfo.Model.UIInfo.TextureId);
+        PropName.text = propInfo.Model.Name;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

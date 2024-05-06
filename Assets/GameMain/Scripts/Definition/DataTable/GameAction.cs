@@ -7,12 +7,12 @@ namespace DataTable
         public static Dictionary<string, GameActionModel> Data = new()
         {
             {
-                "Test", new GameActionModel("Test", "测试", CharacterResource.None, new GameActionUIInfo(),
+                "Test", new GameActionModel("Test", "测试", new CharacterResource(1), new GameActionUIInfo(),
                     "Test", null)
             },
             {
                 "努力回忆",
-                new GameActionModel("努力回忆", "努力回忆", CharacterResource.None, new GameActionUIInfo(),
+                new GameActionModel("努力回忆", "努力回忆", new CharacterResource(1), new GameActionUIInfo(),
                     "GetThatEvent", new object[] { "Headache" })
             },
             {

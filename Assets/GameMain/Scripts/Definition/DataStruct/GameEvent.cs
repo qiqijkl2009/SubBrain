@@ -58,6 +58,8 @@ public struct GameEventModel
     /// </summary>
     public GameEventUIInfo UIInfo;
 
+    public string AudioId;
+
     /// <summary>
     /// 游戏事件在被添加时触发的事件
     /// </summary>
@@ -74,7 +76,7 @@ public struct GameEventModel
     public GameEventOnLeave OnLeave;
     public object[] OnLeaveArgs;
 
-    public GameEventModel(string id, string name, string[] tags, GameActionModel[] gameActions, GameEventUIInfo uiInfo,
+    public GameEventModel(string id, string name, string[] tags, GameActionModel[] gameActions, GameEventUIInfo uiInfo, string audioId,
         string onCreate, object[] onCreateArgs,
         string onEnter, object[] onEnterArgs,
         string onLeave, object[] onLeaveArgs)
@@ -84,6 +86,7 @@ public struct GameEventModel
         Tags = tags;
         GameActions = gameActions;
         UIInfo = uiInfo;
+        AudioId = audioId;
         GameActions = new GameActionModel[2];
         if (gameActions != null)
         {
