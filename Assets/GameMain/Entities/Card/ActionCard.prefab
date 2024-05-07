@@ -196,6 +196,8 @@ MonoBehaviour:
   RotationValue: {x: 0, y: 0, z: 10}
   ScaleX: 2.013072
   ScaleY: 1.0031298
+  ThisAction: {fileID: 0}
+  OtherAction: {fileID: 0}
 --- !u!1 &2479576296590265312
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,7 +387,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 876daabfd0784f840b30ad5e3b87e501, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 695254010151b4048887bd454f7edda9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
