@@ -319,6 +319,12 @@ namespace DataTable
                     null, null)
             },
             {
+                "退出房间",
+                new GameActionModel("退出房间", "退出房间", CharacterResource.None, CharacterResource.None, new GameActionUIInfo(),
+                    "GetThatEvent", new object[] { "GetOutOfTheRoom" },
+                    null, null)
+            },
+            {
                 "自我催眠",
                 new GameActionModel("自我催眠", "自我催眠", CharacterResource.None, CharacterResource.None, new GameActionUIInfo(),
                     "GetThatEvent", new object[] { "FoundByNurse" },
@@ -364,6 +370,12 @@ namespace DataTable
                 "与丈夫回家",
                 new GameActionModel("与丈夫回家", "与丈夫回家", CharacterResource.None, CharacterResource.None, new GameActionUIInfo(),
                     "GetThatEvent", new object[] { "GetPhotoPiece" },
+                    null, null)
+            },
+            {
+                "盯着照片看",
+                new GameActionModel("盯着照片看", "盯着照片看", CharacterResource.None, CharacterResource.None, new GameActionUIInfo(),
+                    "GetThatEvent", new object[] { "End5" },
                     null, null)
             },
             {

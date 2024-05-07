@@ -241,7 +241,7 @@ namespace DataTable
                 "TakePill1",
                 new GameEventModel("TakePill1", "吃药1", null, new GameActionModel[]
                     {
-                        GameAction.Data["睡觉"]
+                        GameAction.Data["睡觉"], GameAction.Data["搜索房间2"]
                     },
                     new GameEventUIInfo("TakePill1", "吃药", "看见你吞咽的动作后，护士对你说：“您手术非常成功，医生预计您再进行3次集体治疗就可以做出院测试了，祝您早日康复。”\n说完护士关上了门"), null,
                     null, null,
@@ -516,9 +516,20 @@ namespace DataTable
                 "PatientInHappiness",
                 new GameEventModel("PatientInHappiness", "幸福的病人", null, new GameActionModel[]
                     {
-                        GameAction.Data["打招呼"]
+                        GameAction.Data["打招呼"], GameAction.Data["退出房间"]
                     },
                     new GameEventUIInfo("PatientInHappiness", "幸福的病人", "里面干净且空旷，墙壁很白，虽然是个病房，但丝毫没有使用过的痕迹，仿佛是昨天才装修好。\n病床上躺着一位病人，全身被绷带绑着，只有脸部露了出来。\n病人一直在微笑，看上去沉浸在幸福中。"), null,
+                    null, null,
+                    null, null,
+                    null, null)
+            },
+            {
+                "GetOutOfTheRoom",
+                new GameEventModel("GetOutOfTheRoom", "幸福的病人", null, new GameActionModel[]
+                    {
+                        GameAction.Data["被带回病房"]
+                    },
+                    new GameEventUIInfo("GetOutOfTheRoom", "幸福的病人", "你回到走廊，突然有护士经过，对你说：“布兰妮女士，你怎么在这呀，快回到自己的床位。”"), null,
                     null, null,
                     null, null,
                     null, null)
@@ -604,7 +615,7 @@ namespace DataTable
                 "GetPhotoPiece",
                 new GameEventModel("GetPhotoPiece", "找到照片碎片", null, new GameActionModel[]
                     {
-
+                        GameAction.Data["盯着照片看"]
                     },
                     new GameEventUIInfo("GetPhotoPiece", "找到照片碎片", "有一天...\n你在打扫房间的时候，偶然间在床的夹缝里，发现了被撕碎的照片碎片。\n碎片上是一个小女孩。"), null,
                     null, null,
@@ -937,6 +948,17 @@ namespace DataTable
 
                     },
                     new GameEventUIInfo("End4", "结局", "你盯着照片里两个女人神似的脸，不由得陷入了长久的沉默，没有疑惑也没有恐惧，只是沉默。"), null,
+                    null, null,
+                    "EndGame", null,
+                    null, null)
+            },
+            {
+                "End5",
+                new GameEventModel("End5", "结局5", null, new GameActionModel[]
+                    {
+
+                    },
+                    new GameEventUIInfo("End5", "结局", "你盯着照片里小女孩的脸，不由得陷入了长久的沉默。你想起自己已经很长时间没有照过镜子，但你没有疑惑也没有恐惧，只是沉默。"), null,
                     null, null,
                     "EndGame", null,
                     null, null)

@@ -472,6 +472,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c3376b1660bbf1c45b149686992f12d7
+    m_Address: GetOutOfTheRoom
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 66f6772ae792b954ea3f5d523c96fb67, type: 2}
   m_SchemaSet:
