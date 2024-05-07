@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using JKFrame;
 using UnityEngine.UI;
 
 namespace DesignerScripts
@@ -19,7 +20,6 @@ namespace DesignerScripts
 
         public static readonly Dictionary<string, GameEventOnLeave> OnLeaveFunc = new()
         {
- 
         };
 
 
@@ -32,7 +32,7 @@ namespace DesignerScripts
             var props = args.Length > 0 ? (PropCreator[])args[0] : null;
 
             if (props == null) return;
-            
+
             foreach (var prop in props)
             {
                 ManagerVariant.CreateProp(prop);
@@ -41,25 +41,16 @@ namespace DesignerScripts
 
         private static void EndGame(GameEventObject gameEvent)
         {
-            Debug.Log("进入结局");
             if (gameEvent == null) return;
 
+            var gameActions = ManagerVariant.GameActions();
+            if (gameActions[0]) Object.Destroy(gameActions[0]);
+            if (gameActions[1]) Object.Destroy(gameActions[1]);
 
-            //Transform fadingMask = R.UIWindow.FadeOutMask_GameObject().transform;
-            //Transform canvas = GameObject.Find("UICanvas").transform;
-            //fadingMask.SetParent(canvas);
-            Transform fadingMask = GameObject.Find("EndGameFade").transform;
-            fadingMask.GetComponent<EndMenu>().StartFading();
-
-            var currentCard = GameObject.Find("CurrentEvent");
-            currentCard.transform.parent.GetComponentInChildren<UnitActionCard>().gameObject.SetActive(false);
-            Vector3 originalPos = currentCard.transform.position;
-            currentCard.transform.SetParent(fadingMask, false);
-            currentCard.transform.SetAsLastSibling();
-            currentCard.transform.DOScale(1.2f, 5f).OnComplete(() =>
-            {
-                fadingMask.GetComponentInChildren<Button>().gameObject.SetActive(true);
-            });
+            var gameOverWindow = UISystem.Show<GameOverWindow>();
+            var eventCard = GameObject.Find("CurrentEvent");
+            eventCard.transform.SetParent(gameOverWindow.transform, false);
+            eventCard.transform.DOScale(1.2f, 5f);
         }
     }
 }

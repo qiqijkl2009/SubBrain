@@ -17,16 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 39ee615130439214ca07e57ff92076fc
   m_SerializeEntries:
-  - m_GUID: 8a6ee2cf24626a74397f50ca398b2b99
-    m_Address: FadeInMask
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: adb2c21c7b2d47f489f1825f7bb3f84d
-    m_Address: FadeOutMask
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bb800104ff77b334e90f63f47622e153
     m_Address: MainMenuWindow
     m_ReadOnly: 0
@@ -39,6 +29,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 54741f17d2d4fd04da7f8b418bd234e2
     m_Address: FadeWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 033aa30fffab5464480b20a6d3f26661
+    m_Address: GameOverWindow
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

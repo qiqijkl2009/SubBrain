@@ -19,6 +19,7 @@ public class MainMenuWindow : UI_WindowBase
 
     private void GoToGameScene()
     {
+        AudioSystem.PlayOneShot(AudioExtension.RandomUIClick());
         var fadeWindow = UISystem.Show<FadeWindow>();
         fadeWindow.FadeOut(2f, () =>
         {
@@ -30,11 +31,13 @@ public class MainMenuWindow : UI_WindowBase
 
     private void OpenAboutUsWindow()
     {
+        AudioSystem.PlayOneShot(AudioExtension.RandomUIClick());
         UISystem.Show<AboutUsWindow>();
     }
 
     private void QuitGame()
     {
+        AudioSystem.PlayOneShot(AudioExtension.RandomUIClick());
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
