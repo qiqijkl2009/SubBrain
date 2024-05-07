@@ -20,7 +20,6 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
     [SerializeField] private float ScaleX;
     [SerializeField] private float ScaleY;
 
-    [SerializeField] private Transform ThisAction;
     [SerializeField] private Transform OtherAction;
 
     private bool _isMoving = false;
@@ -31,14 +30,18 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
         if (transform.name == "LeftAction")
         {
             ActionText.text = ManagerVariant.CurrentGameEvent().Model.GameActions[0].Name;
-            ThisAction = transform;
-            OtherAction = GameObject.Find("RightAction").transform;
+            if (GameObject.Find("RightAction") != null)
+            {
+                OtherAction = GameObject.Find("RightAction").transform;
+            }
         }
         else if (transform.name == "RightAction")
         {
             ActionText.text = ManagerVariant.CurrentGameEvent().Model.GameActions[1].Name;
-            ThisAction = transform;
-            OtherAction = GameObject.Find("LeftAction").transform;
+            if (GameObject.Find("LeftAction") != null)
+            {
+                OtherAction = GameObject.Find("LeftAction").transform;
+            }
         }
 
         CurrentEventPosition = GameObject.Find("CurrentEvent").transform.position;
@@ -72,6 +75,8 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
         transform.DOScaleY(1f, 2f).OnComplete(() =>
         {
             transform.GetComponent<ActionState>().TakeAction();
+            clone.transform.DOKill();
+            Destroy(clone, 0.5f);
         });
 
         if (OtherAction != null)
@@ -102,6 +107,7 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
         }
 
         _isMoving = true;
+        GameManager.IsActionCardMoving = true;
 
         actionObject.transform.SetAsLastSibling();
 
@@ -122,6 +128,7 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
         {
             actionObject.transform.SetAsFirstSibling();
             _isMoving = false;
+            GameManager.IsActionCardMoving = false;
             transform.DOKill();
             Destroy(this);
         });
@@ -157,6 +164,7 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
         }
 
         _isMoving = true;
+        GameManager.IsActionCardMoving = true;
 
         transform.DOScale(1f, 1f);
         var gameActions = ManagerVariant.GameActions();
@@ -166,6 +174,7 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
             transform.DOMove(LeftPostion, 3f).OnComplete(() =>
             {
                 _isMoving = false;
+                GameManager.IsActionCardMoving = false;
             });
             transform.DORotate(RotationValue, 5f);
         }
@@ -175,6 +184,7 @@ public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnter
             transform.DOMove(RightPostion, 3f).OnComplete(() =>
             {
                 _isMoving = false;
+                GameManager.IsActionCardMoving = false;
             });
             transform.DORotate(-RotationValue, 5f);
         }

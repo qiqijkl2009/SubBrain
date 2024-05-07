@@ -8,13 +8,13 @@ namespace DataTable
         {
             {
                 "Test", new BuffModel("Test", "测试", 0, 1, null, 1,
-                    "Test", null,
-                    "Test", null,
-                    "Test", null,
-                    "Test", null)
+                    null, null,
+                    null, null,
+                    null, null,
+                    null, null)
             },
             {
-                " ExplorePoint", new BuffModel("ExplorePoint", "探索点", 0, 1, null, 0,
+                "ExplorePoint", new BuffModel("ExplorePoint", "探索点", 0, 1, null, 0,
                     "", null,
                     "", null,
                     "", null,

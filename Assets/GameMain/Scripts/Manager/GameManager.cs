@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
+    public static bool IsActionCardMoving;
 
     public static void Init()
     {
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartGame();
+        IsActionCardMoving = false;
     }
 
     /// <summary>

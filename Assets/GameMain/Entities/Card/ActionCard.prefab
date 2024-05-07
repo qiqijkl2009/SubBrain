@@ -196,7 +196,6 @@ MonoBehaviour:
   RotationValue: {x: 0, y: 0, z: 10}
   ScaleX: 2.013072
   ScaleY: 1.0031298
-  ThisAction: {fileID: 0}
   OtherAction: {fileID: 0}
 --- !u!1 &2479576296590265312
 GameObject:
@@ -387,7 +386,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 695254010151b4048887bd454f7edda9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f0084f1d895f90c418f08cc9d44cf4d8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -431,8 +430,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 83.685, y: 466.5701}
+  m_AnchoredPosition: {x: 0.000015259, y: 0}
+  m_SizeDelta: {x: 67.8343, y: 466.5701}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7531154510957669868
 CanvasRenderer:
@@ -489,7 +488,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.7
+  m_fontSize: 35.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

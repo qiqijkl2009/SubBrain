@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using JKFrame;
+﻿using JKFrame;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,6 +11,9 @@ public class UnitPropCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 {
     [SerializeField] private Image PropIcon;
     [SerializeField] private TMP_Text PropName;
+    [SerializeField] private Sprite MouseIn;
+    [SerializeField] private Sprite MouseOut;
+    private Transform[] ActionCards;
     private Vector3 _originalPos;
     private Vector3 _offset;
     private bool _canUse;
@@ -27,50 +29,58 @@ public class UnitPropCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.DOScale(1.1f, 1f);
-        transform.DORotate(new Vector3(0, 0, Random.Range(-2f, 2f)), 1f);
+        transform.GetComponentInChildren<Image>().sprite = MouseIn;
+        transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
+        //transform.DORotate(new Vector3(0, 0, Random.Range(-2f, 2f)), 1f);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.DOScale(1f, 1f);
-        transform.DORotate(new Vector3(0, 0, 0), 1f);
+        if (! transform.GetComponentInChildren<CanvasGroup>().blocksRaycasts)
+        {
+            return;
+        }
+        transform.GetComponentInChildren<Image>().sprite = MouseOut;
+        transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        //transform.DORotate(new Vector3(0, 0, 0), 1f);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        transform.GetComponentInChildren<Image>().raycastTarget = false;
+        if (GameManager.IsActionCardMoving)
+        {
+            return;
+        }
+        transform.GetComponentInChildren<CanvasGroup>().blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (GameManager.IsActionCardMoving)
+        {
+            return;
+        }
         transform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         GameObject EndObject = eventData.pointerCurrentRaycast.gameObject;
-        Debug.Log(EndObject.transform.parent);
+        Debug.Log(EndObject.transform.name);
+        transform.GetComponentInChildren<Image>().sprite = MouseOut;
 
         //判断道具是否放在了事件卡上使用
         if (EndObject.transform.parent.tag == "EventCardArea")
         {
-            //判断是否能在该事件中使用这个道具，不确定是否应该在这里进行判断
-            //if (true)
-            //{
-
-            //}
-
-            DOTween.Pause(this);
-            ManagerVariant.RemoveProp(gameObject, true);
-            Debug.Log("道具卡已被使用");
+            GetComponent<PropState>().ConsumeProp();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
         }
         else
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
         }
 
-        transform.GetComponentInChildren<Image>().raycastTarget = true;
+        transform.GetComponentInChildren<CanvasGroup>().blocksRaycasts = true;
     }
 
     private void OnDestroy()

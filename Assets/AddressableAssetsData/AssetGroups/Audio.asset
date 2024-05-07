@@ -27,23 +27,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d2878b0cae575704b9096c737687dd91
-    m_Address: ui_01
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 21efd585f0353004b825e909d02d8e05
-    m_Address: ui_02
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c8f5b38ec8746d746bfdde435e0cbc62
-    m_Address: ui_03
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 49f19e8f4a5258648a83b66ffdb25cd3
-    m_Address: ui_select_card_01
+  - m_GUID: 24e69774138987a40a46a9dd7e4f4cd1
+    m_Address: ui_select_card_03
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -52,8 +37,78 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 24e69774138987a40a46a9dd7e4f4cd1
-    m_Address: ui_select_card_03
+  - m_GUID: 49f19e8f4a5258648a83b66ffdb25cd3
+    m_Address: ui_select_card_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8f5b38ec8746d746bfdde435e0cbc62
+    m_Address: ui_03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 21efd585f0353004b825e909d02d8e05
+    m_Address: ui_02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d2878b0cae575704b9096c737687dd91
+    m_Address: ui_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b20f0cca0a232184cbe87dbded7aa05e
+    m_Address: ConcealAmnesia1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bffd0549c3c54ec45958af55ca0c8be9
+    m_Address: FileRoomLocked
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ddb446541c6fa04e80803600d357bc0
+    m_Address: Headache
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2b96c3e74a7c33c4b82515a57af7d917
+    m_Address: HeardOfMissing198
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4a51254bfd3491428310babaf4889e7
+    m_Address: HintFromR
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 08b25f42355c5154498b43fe2d2aafaa
+    m_Address: ObserveCloset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0adccc0ea493184aa23eedb22b0c07c
+    m_Address: ObserveToilet
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 18cfed4b9d2f0574a820ba8125a54bde
+    m_Address: PressFlushButton
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 150d9389decf9fc4195a06ee739e8492
+    m_Address: RecordTheScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91ed171dfb5a7cb46b1b60fb57181093
+    m_Address: ShoutInCorridor
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 56c8c61fa4c61a947aac899f14c2c418
+    m_Address: WakeUp
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -35,7 +35,9 @@ namespace DesignerScripts
 
             foreach (var prop in props)
             {
-                ManagerVariant.CreateProp(prop);
+                Transform propParent = GameObject.Find("PropCards").transform;
+                var propCard = ManagerVariant.CreateProp(prop);
+                propCard.transform.SetParent(propParent);
             }
         }
 
