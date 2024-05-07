@@ -1,7 +1,6 @@
 ﻿using DG.Tweening;
 using JKFrame;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 [UIWindowData(typeof(MainMenuWindow), true, GameConstant.UIWindow.MAIN_MENU_WINDOW, 0)]
@@ -11,13 +10,8 @@ public class MainMenuWindow : UI_WindowBase
     [SerializeField] private Button _aboutUsButton;
     [SerializeField] private Button _exitButton;
 
-    [SerializeField] private Image _fadingMask;
-
     public override void Init()
     {
-        _fadingMask.gameObject.SetActive(false);
-        _fadingMask.color = Color.clear;
-
         _startButton.onClick.AddListener(GoToGameScene);
         _aboutUsButton.onClick.AddListener(OpenAboutUsWindow);
         _exitButton.onClick.AddListener(QuitGame);
@@ -25,8 +19,13 @@ public class MainMenuWindow : UI_WindowBase
 
     private void GoToGameScene()
     {
-        _fadingMask.gameObject.SetActive(true);
-        _fadingMask.DOColor(Color.black, 2f).OnComplete(() => { SceneSystem.LoadScene(GameConstant.Scene.GAME); });
+        var fadeWindow = UISystem.Show<FadeWindow>();
+        fadeWindow.FadeOut(2f, () =>
+        {
+            SceneSystem.LoadScene(GameConstant.Scene.GAME);
+            UISystem.Close<MainMenuWindow>();
+            fadeWindow.FadeIn(2f, UISystem.Close<FadeWindow>);
+        });
     }
 
     private void OpenAboutUsWindow()

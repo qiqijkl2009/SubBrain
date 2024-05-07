@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections;
-using DG.Tweening;
+﻿using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 /// <summary>
 /// 行动卡控件，所有拥有交互操作的行动卡都应该添加这个来控制它

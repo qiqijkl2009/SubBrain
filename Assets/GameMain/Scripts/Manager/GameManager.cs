@@ -13,21 +13,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (SaveSystem.GetSaveItem(0) == null) SaveSystem.CreateSaveItem();
-        InitSystem();
-        InitScene();
-    }
-
-    private static void InitSystem()
-    {
-        CardSystem.Init();
-    }
-
-    private static void InitScene()
-    {
-        SceneSystem.LoadScene(GameConstant.Scene.MAIN_MENU);
-        UISystem.Show<MainMenuWindow>();
-        AudioSystem.PlayBGAudio(R.Audio.MainMenu);
+        StartGame();
     }
 
     /// <summary>
@@ -35,6 +21,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public static void StartGame()
     {
+        AudioSystem.PlayBGAudio(R.Audio.InGame);
+        
         // ManagerVariant.ChangeGameScene(new GameSceneCreator(DataTable.GameScene.Data["Test"]));
         ManagerVariant.CreateGameEvent(DataTable.GameEvent.Data["WakeUp"]);
         ManagerVariant.RoundStart();

@@ -1,6 +1,4 @@
-﻿using System;
-using DG.Tweening;
-using TMPro;
+﻿using DG.Tweening;
 using UnityEngine;
 
 public class ActionState : MonoBehaviour

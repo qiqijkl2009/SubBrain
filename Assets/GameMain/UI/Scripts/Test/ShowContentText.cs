@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,11 +11,11 @@ public class ShowContentText : MonoBehaviour, IPointerClickHandler
     {
         //ContentText.text = GameEventManager.CurrentGameEvent.Model.UIInfo.Content;
 
-        //²âÊÔĞ§¹ûÓÃ
-        DescriptionContent.text = "ÎÒÂıÂıµØÕö¿ªÁËË«ÑÛ,Í·Í´ÓûÁÑ¡£»·¹ËËÄÖÜ,·¢ÏÖ×Ô¼ºÌÉÔÚÒ»ÕÅ³Â¾ÉµÄ²¡´²ÉÏ¡£ÊÖÅöµ½ÁËÒ»±¾ÆÆ¾ÉµÄ±Ê¼Ç±¾ºÍÒ»Ö§¸Ö±Ê¡£ÎÒ·­¿ª±Ê¼Ç±¾,·¢ÏÖÉÏÃæ¼ÇÔØ×ÅÒ»ÏµÁĞµ÷²éµÄ±Ê¼Ç,¶øÎÒµÄÃû×Ö±»Ğ´ÔÚ×î¶¥¶Ë¡ª¡ª°¬ÀöÉ¯¡£";
+        //æµ‹è¯•æ•ˆæœç”¨
+        DescriptionContent.text = "æˆ‘æ…¢æ…¢åœ°çå¼€äº†åŒçœ¼,å¤´ç—›æ¬²è£‚ã€‚ç¯é¡¾å››å‘¨,å‘ç°è‡ªå·±èººåœ¨ä¸€å¼ é™ˆæ—§çš„ç—…åºŠä¸Šã€‚æ‰‹ç¢°åˆ°äº†ä¸€æœ¬ç ´æ—§çš„ç¬”è®°æœ¬å’Œä¸€æ”¯é’¢ç¬”ã€‚æˆ‘ç¿»å¼€ç¬”è®°æœ¬,å‘ç°ä¸Šé¢è®°è½½ç€ä¸€ç³»åˆ—è°ƒæŸ¥çš„ç¬”è®°,è€Œæˆ‘çš„åå­—è¢«å†™åœ¨æœ€é¡¶ç«¯â€”â€”è‰¾ä¸½èã€‚";
     }
 
-    //ÇĞ»»ÊÂ¼şÊ±Í¨Öª
+    //åˆ‡æ¢äº‹ä»¶æ—¶é€šçŸ¥
     void RefreshContent()
     {
         ClickCount = 0;
