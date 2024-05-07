@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class StatsManager: MonoBehaviour
+public class StatsManager : MonoBehaviour
 {
     private static StatsManager _instance;
 
@@ -27,5 +27,6 @@ public class StatsManager: MonoBehaviour
     public static void ModResource(CharacterResource value)
     {
         Resource += value;
+        Resource.ExplorePoint = Mathf.Max(0, Resource.ExplorePoint);
     }
 }

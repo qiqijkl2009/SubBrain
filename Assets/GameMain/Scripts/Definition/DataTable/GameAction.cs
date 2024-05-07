@@ -7,28 +7,28 @@ namespace DataTable
         public static Dictionary<string, GameActionModel> Data = new()
         {
             {
-                "Test", new GameActionModel("Test", "测试", new CharacterResource(1), new GameActionUIInfo(),
-                    "Test", null)
-            },
-            {
                 "努力回忆",
-                new GameActionModel("努力回忆", "努力回忆", new CharacterResource(1), new GameActionUIInfo(),
-                    "GetThatEvent", new object[] { "Headache" })
+                new GameActionModel("努力回忆", "努力回忆", new CharacterResource(1), CharacterResource.None, new GameActionUIInfo(),
+                    "GetThatEvent", new object[] { "Headache" },
+                    null, null)
             },
             {
                 "放弃思考",
-                new GameActionModel("放弃思考", "放弃思考", CharacterResource.None, new GameActionUIInfo(),
-                    "GetThatEvent", new object[] { "Headache" })
+                new GameActionModel("放弃思考", "放弃思考", CharacterResource.None, CharacterResource.None, new GameActionUIInfo(),
+                    "GetThatEvent", new object[] { "Headache" },
+                    null, null)
             },
             {
                 "观察左边",
-                new GameActionModel("观察左边", "观察左边", CharacterResource.None, new GameActionUIInfo(),
-                    "GetThatEvent", new object[] { "GetPhoto" })
+                new GameActionModel("观察左边", "观察左边", CharacterResource.None, CharacterResource.None, new GameActionUIInfo(),
+                    "GetThatEvent", new object[] { "GetPhoto" },
+                    null, null)
             },
             {
                 "观察右边",
-                new GameActionModel("观察右边", "观察右边", CharacterResource.None, new GameActionUIInfo(),
-                    "GetThatEvent", new object[] { "GetPressCard" })
+                new GameActionModel("观察右边", "观察右边", CharacterResource.None, CharacterResource.None, new GameActionUIInfo(),
+                    "GetThatEvent", new object[] { "GetPressCard" },
+                    null, null)
             },
             //{
             //    "静观其变",

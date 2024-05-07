@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using JKFrame;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -20,7 +21,6 @@ public class EndMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void StartFading()
@@ -35,9 +35,6 @@ public class EndMenu : MonoBehaviour
         FadingMask2.gameObject.SetActive(true);
         FadingMask2.transform.SetAsLastSibling();
         FadingMask2.color = Color.clear;
-        FadingMask2.DOColor(Color.black, 3f).OnComplete(() => 
-        { 
-        SceneManager.LoadScene("Menu");
-        });
+        FadingMask2.DOColor(Color.black, 3f).OnComplete(() => { SceneSystem.LoadScene(GameConstant.Scene.MAIN_MENU); });
     }
 }

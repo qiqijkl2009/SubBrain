@@ -20,13 +20,8 @@ public class PropState : MonoBehaviour
     /// </summary>
     public int ConsumeTimes = 0;
 
-    /// <summary>
-    /// 当前是否为待使用状态
-    /// </summary>
-    public bool IsSelected = false;
-
     private GameObject _viewContainer;
-    
+
 
     public void InitByPropCreator(PropCreator prop)
     {
@@ -45,9 +40,14 @@ public class PropState : MonoBehaviour
     /// <summary>
     /// 使用这个道具卡
     /// </summary>
-    public void ConsumeProp()
+    public bool ConsumeProp()
     {
-        Model.OnConsume?.Invoke(gameObject);
-        if (IsConsumable) ConsumeTimes++;
+        bool isConsume = false;
+        if (Model.OnConsume == null) return false;
+
+        isConsume = Model.OnConsume.Invoke(gameObject);
+        if (IsConsumable && isConsume) ConsumeTimes++;
+        
+        return isConsume;
     }
 }

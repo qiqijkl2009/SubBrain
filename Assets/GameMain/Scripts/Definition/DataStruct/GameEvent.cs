@@ -10,14 +10,17 @@ public class GameEventObject
     /// 事件的model
     /// </summary>
     public GameEventModel Model;
+
     /// <summary>
     /// 事件的延迟回合数
     /// </summary>
     public int WaitRounds;
+
     /// <summary>
     /// 是否在事件移除时再添加一次同样的事件
     /// </summary>
     public bool IsRepeat;
+
     /// <summary>
     /// 是否只允许有且只有一个相同模板的事件存在
     /// </summary>
@@ -41,39 +44,51 @@ public struct GameEventModel
     /// 事件的id
     /// </summary>
     public string Id;
+
     /// <summary>
     /// 事件的名称
     /// </summary>
     public string Name;
+
     /// <summary>
     /// 事件的tags
     /// </summary>
     public string[] Tags;
+
     /// <summary>
     /// 事件附带的行动
     /// </summary>
     public GameActionModel[] GameActions;
+
     /// <summary>
     /// 事件的UI表现信息
     /// </summary>
     public GameEventUIInfo UIInfo;
 
+    /// <summary>
+    /// 事件的对应音效Id
+    /// </summary>
     public string AudioId;
 
     /// <summary>
     /// 游戏事件在被添加时触发的事件
     /// </summary>
     public GameEventOnCreate OnCreate;
+
     public object[] OnCreateArgs;
+
     /// <summary>
     /// 游戏事件在进入时触发的事件
     /// </summary>
     public GameEventOnEnter OnEnter;
+
     public object[] OnEnterArgs;
+
     /// <summary>
     /// 游戏事件在被移除时触发的事件
     /// </summary>
     public GameEventOnLeave OnLeave;
+
     public object[] OnLeaveArgs;
 
     public GameEventModel(string id, string name, string[] tags, GameActionModel[] gameActions, GameEventUIInfo uiInfo, string audioId,

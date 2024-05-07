@@ -56,7 +56,7 @@ public class GameCardManager : MonoBehaviour
 
         if (toEnter.Count > 0)
         {
-            SetCurrentGameEvent(toEnter[0]);
+            CurrentGameEvent = toEnter[0];
         }
         else
         {
@@ -69,21 +69,26 @@ public class GameCardManager : MonoBehaviour
             eventObject.WaitRounds--;
         }
 
+        EnterCurrentEvent();
+    }
+
+    private static void EnterCurrentEvent()
+    {
         if (CurrentGameEvent.Model.AudioId != null)
         {
-            var audioSource = Camera.main.GetComponent<AudioSource>();
-            audioSource.clip = ResSystem.LoadAsset<AudioClip>(CurrentGameEvent.Model.AudioId);
-            audioSource.Play();
+            AudioSystem.PlayOneShot(ResSystem.LoadAsset<AudioClip>(CurrentGameEvent.Model.AudioId), null, true);
         }
 
         CurrentGameEvent.Model.OnEnter?.Invoke(CurrentGameEvent);
         foreach (var action in CurrentGameEvent.Model.GameActions)
         {
-            if (!string.IsNullOrEmpty(action.Id))
+            if (!string.IsNullOrEmpty(action.Id) && ManagerVariant.Resource().Enough(action.Requirement))
             {
                 var actionCard = CreateGameAction(new GameActionCreator(action));
             }
         }
+        //传递给UI，事件or接口调用，把这些行动传过去
+        EventSystem.EventTrigger("NewGameEventCreated");
     }
 
     /// <summary>
@@ -113,9 +118,9 @@ public class GameCardManager : MonoBehaviour
     /// <param name="gameEvent">GameEvent实例</param>
     public static void SetCurrentGameEvent(GameEventObject gameEvent)
     {
+        LeaveGameEvent();
         CurrentGameEvent = gameEvent;
-        //传递给UI，事件or接口调用，把这些行动传过去
-        EventSystem.EventTrigger("NewGameEventCreated");
+        EnterCurrentEvent();
     }
 
     /// <summary>

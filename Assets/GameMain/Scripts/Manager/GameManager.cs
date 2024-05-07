@@ -15,13 +15,20 @@ public class GameManager : MonoBehaviour
     {
         if (SaveSystem.GetSaveItem(0) == null) SaveSystem.CreateSaveItem();
         InitSystem();
+        InitScene();
     }
 
-    private void InitSystem()
+    private static void InitSystem()
     {
         CardSystem.Init();
     }
 
+    private static void InitScene()
+    {
+        SceneSystem.LoadScene(GameConstant.Scene.MAIN_MENU);
+        UISystem.Show<MainMenuWindow>();
+        AudioSystem.PlayBGAudio(R.Audio.MainMenu);
+    }
 
     /// <summary>
     /// 开始游戏并初始化第一个回合

@@ -50,7 +50,7 @@ public class ActionState : MonoBehaviour
         }
         else
         {
-            var gameEvent = Model.GameAction.Invoke(gameObject, 0, false, false);
+            var gameEvent = Model.ToEvent.Invoke(gameObject, 0, false, false);
             ManagerVariant.CreateGameEvent(gameEvent);
         }
 

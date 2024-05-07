@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// <para>行动卡的创建信息，专门有个系统会处理这个创建信息，然后创建出行动卡的GameObject</para>
@@ -39,6 +40,11 @@ public struct GameActionModel
     public CharacterResource ModResource;
 
     /// <summary>
+    /// 行动对角色资源的需求值
+    /// </summary>
+    public CharacterResource Requirement;
+
+    /// <summary>
     /// 行动的UI表现信息
     /// </summary>
     public GameActionUIInfo UIInfo;
@@ -46,20 +52,31 @@ public struct GameActionModel
     /// <summary>
     /// 行动的对应事件判定方法
     /// </summary>
-    public GameActionToEvent GameAction;
+    public GameActionToEvent ToEvent;
 
-    public object[] GameActionArgs;
+    public object[] ToEventArgs;
 
-    public GameActionModel(string id, string name, CharacterResource modResource, GameActionUIInfo uiInfo,
-        string gameAction, object[] gameActionArgs)
+    /// <summary>
+    /// 行动的额外效果
+    /// </summary>
+    public GameActionExtra Extra;
+
+    public object[] ExtraArgs;
+
+    public GameActionModel(string id, string name, CharacterResource modResource, CharacterResource requirement, GameActionUIInfo uiInfo,
+        string toEvent, object[] toEventArgs,
+        string extra, object[] extraArgs)
     {
         Id = id;
         Name = name;
         ModResource = modResource;
+        Requirement = requirement;
         UIInfo = uiInfo;
 
-        GameAction = string.IsNullOrEmpty(gameAction) ? null : DesignerScripts.GameAction.ActionToEvent[gameAction];
-        GameActionArgs = gameActionArgs ?? Array.Empty<object>();
+        ToEvent = string.IsNullOrEmpty(toEvent) ? null : DesignerScripts.GameAction.ToEvent[toEvent];
+        ToEventArgs = toEventArgs ?? Array.Empty<object>();
+        Extra = string.IsNullOrEmpty(extra) ? null : DesignerScripts.GameAction.Extra[extra];
+        ExtraArgs = extraArgs ?? Array.Empty<object>();
     }
 }
 
@@ -93,3 +110,5 @@ public struct GameActionUIInfo
 }
 
 public delegate GameEventObject GameActionToEvent(GameObject action, int waitRounds, bool isRepeat, bool isOnly);
+
+public delegate void GameActionExtra(GameObject action);

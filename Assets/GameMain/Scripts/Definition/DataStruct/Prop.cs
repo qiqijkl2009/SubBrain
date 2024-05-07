@@ -146,6 +146,6 @@ public delegate void PropOnCreate(GameObject prop);
 
 public delegate void PropOnRemove(GameObject prop);
 
-public delegate void PropOnConsume(GameObject prop);
+public delegate bool PropOnConsume(GameObject prop);
 
 public delegate void PropOnDestroy(GameObject prop);

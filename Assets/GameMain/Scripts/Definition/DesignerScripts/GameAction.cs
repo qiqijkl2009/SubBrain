@@ -6,11 +6,15 @@ namespace DesignerScripts
 {
     public class GameAction
     {
-        public static readonly Dictionary<string, GameActionToEvent> ActionToEvent = new()
+        public static readonly Dictionary<string, GameActionToEvent> ToEvent = new()
         {
-            { "Test", (_, _, _, _) => new GameEventObject(DataTable.GameEvent.Data["Test"]) },
             { "GetThatEvent", GetThatEvent },
             { "GetEventByBuff", GetEventByBuff },
+        };
+        
+        public static readonly Dictionary<string, GameActionExtra> Extra = new()
+        {
+            { "GetProps", GetProps },
         };
 
 
@@ -19,7 +23,7 @@ namespace DesignerScripts
             var state = gameAction.GetComponent<ActionState>();
             if (!state) return null;
 
-            object[] args = state.Model.GameActionArgs;
+            object[] args = state.Model.ToEventArgs;
 
             string gameEventId = args.Length > 0 ? (string)args[0] : null;
 
@@ -31,7 +35,7 @@ namespace DesignerScripts
             var state = gameAction.GetComponent<ActionState>();
             if (!state) return null;
 
-            object[] args = state.Model.GameActionArgs;
+            object[] args = state.Model.ToEventArgs;
             var buffs = ManagerVariant.Buffs();
 
             string[] gameEventIds = args.Length > 0 ? (string[])args[0] : null;
@@ -48,6 +52,23 @@ namespace DesignerScripts
             }
 
             return null;
+        }
+        
+        private static void GetProps(GameObject gameAction)
+        {
+            var state = gameAction.GetComponent<ActionState>();
+            if (!state) return;
+
+            object[] args = state.Model.ExtraArgs;
+
+            var props = args.Length > 0 ? (PropCreator[])args[0] : null;
+
+            if (props == null) return;
+            
+            foreach (var prop in props)
+            {
+                ManagerVariant.CreateProp(prop);
+            }
         }
     }
 }

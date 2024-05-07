@@ -1,4 +1,4 @@
-﻿using JKFrame;
+﻿ using JKFrame;
  using UnityEngine;
 
 namespace R
@@ -8,15 +8,17 @@ namespace R
     {
 
     } 
+    public static class Audio
+    {
+ 
+        public static AudioClip InGame { get => ResSystem.LoadAsset<AudioClip>("InGame"); } 
+        public static AudioClip MainMenu { get => ResSystem.LoadAsset<AudioClip>("MainMenu"); }
+    } 
     public static class Texture
     {
  
         public static Texture2D WakeUp { get => ResSystem.LoadAsset<Texture2D>("WakeUp"); }  
         public static Sprite WakeUp_WakeUp { get => ResSystem.LoadAsset<Sprite>("WakeUp[WakeUp]"); }
-    } 
-    public static class Test
-    {
-
     } 
     public static class Card
     {
@@ -45,5 +47,9 @@ namespace R
         {
             return ResSystem.InstantiateGameObject("FadeOutMask", parent, keyName,autoRelease);
         }
+    } 
+    public static class Test
+    {
+
     }
 }
