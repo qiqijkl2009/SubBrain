@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ActionState : MonoBehaviour
 {
@@ -52,9 +51,9 @@ public class ActionState : MonoBehaviour
             ManagerVariant.CreateGameEvent(gameEvent);
         }
 
+        Model.Extra?.Invoke(gameObject);
+
         ManagerVariant.ModResource(Model.ModResource);
-        
-        transform.DOKill();
         ManagerVariant.RoundOver();
     }
 }

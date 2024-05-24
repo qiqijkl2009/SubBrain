@@ -1,6 +1,5 @@
 ﻿using JKFrame;
  using UnityEngine;
- using UnityEngine.Audio;
 
 namespace R
 {
@@ -14,12 +13,12 @@ namespace R
  
         public static AudioClip InGame { get => ResSystem.LoadAsset<AudioClip>("InGame"); } 
         public static AudioClip MainMenu { get => ResSystem.LoadAsset<AudioClip>("MainMenu"); } 
-        public static AudioClip ui_01 { get => ResSystem.LoadAsset<AudioClip>("ui_01"); } 
-        public static AudioClip ui_02 { get => ResSystem.LoadAsset<AudioClip>("ui_02"); } 
-        public static AudioClip ui_03 { get => ResSystem.LoadAsset<AudioClip>("ui_03"); } 
-        public static AudioClip ui_select_card_01 { get => ResSystem.LoadAsset<AudioClip>("ui_select_card_01"); } 
-        public static AudioClip ui_select_card_02 { get => ResSystem.LoadAsset<AudioClip>("ui_select_card_02"); } 
         public static AudioClip ui_select_card_03 { get => ResSystem.LoadAsset<AudioClip>("ui_select_card_03"); } 
+        public static AudioClip ui_select_card_02 { get => ResSystem.LoadAsset<AudioClip>("ui_select_card_02"); } 
+        public static AudioClip ui_select_card_01 { get => ResSystem.LoadAsset<AudioClip>("ui_select_card_01"); } 
+        public static AudioClip ui_03 { get => ResSystem.LoadAsset<AudioClip>("ui_03"); } 
+        public static AudioClip ui_02 { get => ResSystem.LoadAsset<AudioClip>("ui_02"); } 
+        public static AudioClip ui_01 { get => ResSystem.LoadAsset<AudioClip>("ui_01"); } 
         public static AudioClip ConcealAmnesia1 { get => ResSystem.LoadAsset<AudioClip>("ConcealAmnesia1"); } 
         public static AudioClip FileRoomLocked { get => ResSystem.LoadAsset<AudioClip>("FileRoomLocked"); } 
         public static AudioClip Headache { get => ResSystem.LoadAsset<AudioClip>("Headache"); } 
@@ -30,21 +29,6 @@ namespace R
         public static AudioClip PressFlushButton { get => ResSystem.LoadAsset<AudioClip>("PressFlushButton"); } 
         public static AudioClip RecordTheScene { get => ResSystem.LoadAsset<AudioClip>("RecordTheScene"); } 
         public static AudioClip ShoutInCorridor { get => ResSystem.LoadAsset<AudioClip>("ShoutInCorridor"); } 
-        public static AudioClip SJK_0002A { get => ResSystem.LoadAsset<AudioClip>("SJK_0002A"); } 
-        public static AudioClip SJK_0004A { get => ResSystem.LoadAsset<AudioClip>("SJK_0004A"); } 
-        public static AudioClip SJK_0004B { get => ResSystem.LoadAsset<AudioClip>("SJK_0004B"); } 
-        public static AudioClip SJK_0004C { get => ResSystem.LoadAsset<AudioClip>("SJK_0004C"); } 
-        public static AudioClip SJK_0004E { get => ResSystem.LoadAsset<AudioClip>("SJK_0004E"); } 
-        public static AudioClip SJK_0013 { get => ResSystem.LoadAsset<AudioClip>("SJK_0013"); } 
-        public static AudioClip SJK_0017 { get => ResSystem.LoadAsset<AudioClip>("SJK_0017"); } 
-        public static AudioClip SJK_0018_arrive { get => ResSystem.LoadAsset<AudioClip>("SJK_0018_arrive"); } 
-        public static AudioClip SJK_0018_find { get => ResSystem.LoadAsset<AudioClip>("SJK_0018_find"); } 
-        public static AudioClip SJK_0019 { get => ResSystem.LoadAsset<AudioClip>("SJK_0019"); } 
-        public static AudioClip SJK_0021 { get => ResSystem.LoadAsset<AudioClip>("SJK_0021"); } 
-        public static AudioClip SJK_0022_lockup { get => ResSystem.LoadAsset<AudioClip>("SJK_0022_lockup"); } 
-        public static AudioClip SJK_0022_unlock { get => ResSystem.LoadAsset<AudioClip>("SJK_0022_unlock"); } 
-        public static AudioClip SJK_0030_loop { get => ResSystem.LoadAsset<AudioClip>("SJK_0030_loop"); } 
-        public static AudioClip SJK_0031 { get => ResSystem.LoadAsset<AudioClip>("SJK_0031"); } 
         public static AudioClip WakeUp { get => ResSystem.LoadAsset<AudioClip>("WakeUp"); }
     } 
     public static class Texture
@@ -231,7 +215,15 @@ namespace R
         public static Texture2D GetRecordPen { get => ResSystem.LoadAsset<Texture2D>("GetRecordPen"); }  
         public static Sprite GetRecordPen_GetRecordPen { get => ResSystem.LoadAsset<Sprite>("GetRecordPen[GetRecordPen]"); } 
         public static Texture2D GetPatientRecord { get => ResSystem.LoadAsset<Texture2D>("GetPatientRecord"); }  
-        public static Sprite GetPatientRecord_GetPatientRecord { get => ResSystem.LoadAsset<Sprite>("GetPatientRecord[GetPatientRecord]"); }
+        public static Sprite GetPatientRecord_GetPatientRecord { get => ResSystem.LoadAsset<Sprite>("GetPatientRecord[GetPatientRecord]"); } 
+        public static Texture2D GetOutOfTheRoom { get => ResSystem.LoadAsset<Texture2D>("GetOutOfTheRoom"); }  
+        public static Sprite GetOutOfTheRoom_GetOutOfTheRoom { get => ResSystem.LoadAsset<Sprite>("GetOutOfTheRoom[GetOutOfTheRoom]"); } 
+        public static Texture2D EventPanel { get => ResSystem.LoadAsset<Texture2D>("EventPanel"); }  
+        public static Sprite EventPanel_EventPanel { get => ResSystem.LoadAsset<Sprite>("EventPanel[EventPanel]"); } 
+        public static Texture2D Prop_Background_Unselected { get => ResSystem.LoadAsset<Texture2D>("Prop_Background_Unselected"); }  
+        public static Sprite Prop_Background_Unselected_Prop_Background_Unselected { get => ResSystem.LoadAsset<Sprite>("Prop_Background_Unselected[Prop_Background_Unselected]"); } 
+        public static Texture2D Prop_Background_Selected { get => ResSystem.LoadAsset<Texture2D>("Prop_Background_Selected"); }  
+        public static Sprite Prop_Background_Selected_Prop_Background_Selected { get => ResSystem.LoadAsset<Sprite>("Prop_Background_Selected[Prop_Background_Selected]"); }
     } 
     public static class Card
     {
@@ -247,7 +239,7 @@ namespace R
             return ResSystem.InstantiateGameObject("PropCard", parent, keyName,autoRelease);
         }
     } 
-    public static class UIWindow
+    public static class UI
     {
  
         public static GameObject MainMenuWindow { get => ResSystem.LoadAsset<GameObject>("MainMenuWindow"); }  
@@ -269,6 +261,16 @@ namespace R
         public static GameObject GameOverWindow_GameObject(Transform parent = null,string keyName=null,bool autoRelease = true)
         {
             return ResSystem.InstantiateGameObject("GameOverWindow", parent, keyName,autoRelease);
-        }
+        } 
+        public static Texture2D Image_MainMenu { get => ResSystem.LoadAsset<Texture2D>("Image_MainMenu"); }  
+        public static Sprite Image_MainMenu_Image_MainMenu { get => ResSystem.LoadAsset<Sprite>("Image_MainMenu[Image_MainMenu]"); } 
+        public static Texture2D Image_AboutUs { get => ResSystem.LoadAsset<Texture2D>("Image_AboutUs"); }  
+        public static Sprite Image_AboutUs_Image_AboutUs { get => ResSystem.LoadAsset<Sprite>("Image_AboutUs[Image_AboutUs]"); } 
+        public static Texture2D Button_Cancel { get => ResSystem.LoadAsset<Texture2D>("Button_Cancel"); }  
+        public static Sprite Button_Cancel_Button_Cancel { get => ResSystem.LoadAsset<Sprite>("Button_Cancel[Button_Cancel]"); } 
+        public static Texture2D Button_Background { get => ResSystem.LoadAsset<Texture2D>("Button_Background"); }  
+        public static Sprite Button_Background_Button_Background { get => ResSystem.LoadAsset<Sprite>("Button_Background[Button_Background]"); } 
+        public static Texture2D FrameMask { get => ResSystem.LoadAsset<Texture2D>("FrameMask"); }  
+        public static Sprite FrameMask_FrameMask { get => ResSystem.LoadAsset<Sprite>("FrameMask[FrameMask]"); }
     }
 }

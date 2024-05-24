@@ -17,12 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 0b61396faaf0f45418b55874980ff6c2
   m_SerializeEntries:
-  - m_GUID: 18a928b51f27d0e40bb4529645e80d59
+  - m_GUID: eccda956bd1edc74a8234d4982b61a12
     m_Address: ActionCard
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b25463e94c334704bb00b86b6f45c381
+  - m_GUID: 5f6f41e1a7ec71949a0a18ab875f2f78
     m_Address: PropCard
     m_ReadOnly: 0
     m_SerializedLabels: []

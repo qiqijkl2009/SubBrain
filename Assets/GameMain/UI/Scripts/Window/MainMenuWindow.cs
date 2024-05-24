@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using JKFrame;
+﻿using JKFrame;
 using UnityEngine;
 using UnityEngine.UI;
 

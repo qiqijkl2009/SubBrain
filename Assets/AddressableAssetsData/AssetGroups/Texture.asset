@@ -113,12 +113,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ac6f7c14927262042b06693ad7d76162
-    m_Address: ConcealAmnesia1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1d74a785c58b3a74792231934073bfc2
-    m_Address: ConcealAmnesia2
+    m_Address: ConcealAmnesia
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -288,7 +283,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 00c6f2616f2d6e0488786a1977ab1ed5
-    m_Address: LisentToNeighbour
+    m_Address: ListenToNeighbour
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -328,7 +323,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7722ea40b68eb8642acf64f1739d99d9
-    m_Address: ObserveCloset
+    m_Address: ObserveLocker
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -393,7 +388,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d953ea894c00d1e459fbe079a6673b70
-    m_Address: RefusePill
+    m_Address: RefuseTakePills
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -423,12 +418,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 78cfc0029a071c64f901eb9056a2aab8
-    m_Address: TakePill1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3f53a93b77525a342b647196dcdf0ca4
-    m_Address: TakePill2
+    m_Address: AfterTakePills
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -468,12 +458,27 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0c568cb125f5b0840b3420fd89da923b
-    m_Address: GetPatientRecord
+    m_Address: GetPatientBook
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c3376b1660bbf1c45b149686992f12d7
     m_Address: GetOutOfTheRoom
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 876daabfd0784f840b30ad5e3b87e501
+    m_Address: EventPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 01e4497b833d66442a894d82481a6028
+    m_Address: Prop_Background_Unselected
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: afc8a20ba25fcad4a829d0d4a05a84d4
+    m_Address: Prop_Background_Selected
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

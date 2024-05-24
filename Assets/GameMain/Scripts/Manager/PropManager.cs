@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
+using JKFrame;
 using UnityEngine;
 
 public class PropManager : MonoBehaviour
@@ -37,7 +39,7 @@ public class PropManager : MonoBehaviour
                     ManagerVariant.AddBuff(buff.Opposite());
                 }
             }
-                
+
             toRemove.Add(prop);
         }
 
@@ -46,6 +48,7 @@ public class PropManager : MonoBehaviour
         foreach (var prop in toRemove)
         {
             _propCards.Remove(prop);
+            prop.transform.DOKill();
             Destroy(prop);
         }
 
@@ -60,7 +63,7 @@ public class PropManager : MonoBehaviour
     /// <returns>创建出的道具卡实例</returns>
     public static GameObject CreateProp(PropCreator prop)
     {
-        var propObject = R.Card.PropCard_GameObject();  
+        var propObject = R.Card.PropCard_GameObject();
         var propState = propObject.GetComponent<PropState>();
 
         propState.InitByPropCreator(prop);
@@ -76,6 +79,7 @@ public class PropManager : MonoBehaviour
             }
         }
 
+        EventSystem.EventTrigger(GameConstant.ScriptEvent.CREATE_NEW_PROP);
         return propObject;
     }
 
@@ -104,8 +108,9 @@ public class PropManager : MonoBehaviour
                     ManagerVariant.AddBuff(buff.Opposite());
                 }
             }
-            
+
             PropCards.Remove(prop);
+            prop.transform.DOKill();
             Destroy(prop);
         }
     }

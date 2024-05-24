@@ -2,7 +2,6 @@
 using UnityEngine;
 using DG.Tweening;
 using JKFrame;
-using UnityEngine.UI;
 
 namespace DesignerScripts
 {
@@ -35,9 +34,7 @@ namespace DesignerScripts
 
             foreach (var prop in props)
             {
-                Transform propParent = GameObject.Find("PropCards").transform;
-                var propCard = ManagerVariant.CreateProp(prop);
-                propCard.transform.SetParent(propParent);
+                ManagerVariant.CreateProp(prop);
             }
         }
 
@@ -49,10 +46,7 @@ namespace DesignerScripts
             if (gameActions[0]) Object.Destroy(gameActions[0]);
             if (gameActions[1]) Object.Destroy(gameActions[1]);
 
-            var gameOverWindow = UISystem.Show<GameOverWindow>();
-            var eventCard = GameObject.Find("CurrentEvent");
-            eventCard.transform.SetParent(gameOverWindow.transform, false);
-            eventCard.transform.DOScale(1.2f, 5f);
+            EventSystem.EventTrigger(GameConstant.ScriptEvent.END_GAME);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,203 +9,135 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class UnitActionCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Transform CardFront;
-    [SerializeField] private Transform CardBack;
-    [SerializeField] private TMP_Text ActionText;
+    private const float INIT_ANI_DURATION = 1.2f;
+    private const float ACTION_MOVE_ANI_DURATION = 1.2f;
 
-    [SerializeField] private Vector3 CurrentEventPosition;
-    [SerializeField] private Vector3 LeftPostion;
-    [SerializeField] private Vector3 RightPostion;
-    [SerializeField] private Vector3 HoverMoveValue = new Vector3(20f, 0, 0);
-    [SerializeField] private Vector3 RotationValue = new Vector3(0, 0, 10f);
-    [SerializeField] private float ScaleX;
-    [SerializeField] private float ScaleY;
+    [SerializeField] private SpriteRenderer _background;
+    [SerializeField] private TMP_Text _actionTitle;
 
-    [SerializeField] private Transform OtherAction;
-
-    private bool _isMoving = false;
+    private bool _isFrozen;
+    private Sprite _eventPanelSprite;
 
     private void Start()
     {
-        //获取需要显示在行动卡上的文字
-        if (transform.name == "LeftAction")
-        {
-            ActionText.text = ManagerVariant.CurrentGameEvent().Model.GameActions[0].Name;
-            if (GameObject.Find("RightAction") != null)
-            {
-                OtherAction = GameObject.Find("RightAction").transform;
-            }
-        }
-        else if (transform.name == "RightAction")
-        {
-            ActionText.text = ManagerVariant.CurrentGameEvent().Model.GameActions[1].Name;
-            if (GameObject.Find("LeftAction") != null)
-            {
-                OtherAction = GameObject.Find("LeftAction").transform;
-            }
-        }
+        JKFrame.EventSystem.AddEventListener(GameConstant.ScriptEvent.FREEZE_ANI, FreezeAnimation);
+        JKFrame.EventSystem.AddEventListener(GameConstant.ScriptEvent.UNFREEZE_ANI, UnfreezeAnimation);
+        _eventPanelSprite = R.Texture.EventPanel_EventPanel;
 
-        CurrentEventPosition = GameObject.Find("CurrentEvent").transform.position;
-        LeftPostion += CurrentEventPosition;
-        RightPostion += CurrentEventPosition;
-        transform.position = CurrentEventPosition;
-
-        BackToPosition();
+        SetView();
     }
 
-    private void FixedUpdate()
+    private void OnDestroy()
     {
-        
+        JKFrame.EventSystem.RemoveEventListener(GameConstant.ScriptEvent.FREEZE_ANI, FreezeAnimation);
+        JKFrame.EventSystem.RemoveEventListener(GameConstant.ScriptEvent.UNFREEZE_ANI, UnfreezeAnimation);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (_isMoving)
-        {
-            return;
-        }
+        if (_isFrozen) return;
 
-        //Click(transform.gameObject);
-        GameObject clone = Instantiate(gameObject);
-        gameObject.SetActive(false);
-        clone.transform.SetParent(transform.parent);
-        clone.transform.position = transform.position;
-        clone.transform.rotation = transform.rotation;
-        clone.GetComponent<UnitActionCard>().Click(clone);
+        JKFrame.EventSystem.EventTrigger(GameConstant.ScriptEvent.FREEZE_ANI);
 
-        transform.DOScaleY(1f, 2f).OnComplete(() =>
+        var gameActions = ManagerVariant.GameActions();
+        var otherAction = gameObject == gameActions[0]
+            ? gameActions[1]
+            : gameActions[0];
+
+        if (otherAction) otherAction.GetComponent<UnitActionCard>().ReturnToOrigin();
+
+        var eventPanelPosition = FindObjectOfType<EventPanel>().transform.position;
+        var target = new Vector3(eventPanelPosition.x, eventPanelPosition.y, -5);
+
+        transform.DOKill();
+        transform.DOMove(target, ACTION_MOVE_ANI_DURATION);
+        transform.DORotate(new Vector3(0, 90, 0), 0.5f).OnComplete(() =>
         {
-            transform.GetComponent<ActionState>().TakeAction();
-            clone.transform.DOKill();
-            Destroy(clone, 0.5f);
+            transform.DORotate(Vector3.zero, 1f);
+            _background.sprite = _eventPanelSprite;
+
+            DOTween.To(() => _background.size, x => _background.size = x, new Vector2(_eventPanelSprite.bounds.size.x, _eventPanelSprite.bounds.size.y), 1f)
+                .OnComplete(() =>
+                {
+                    GetComponent<ActionState>().TakeAction();
+                    JKFrame.EventSystem.EventTrigger(GameConstant.ScriptEvent.UNFREEZE_ANI);
+                });
         });
-
-        if (OtherAction != null)
-        {
-            OtherAction.GetComponent<UnitActionCard>().enabled = false;
-        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (_isMoving)
-        {
-            return;
-        }
-        HoverMove(eventData, HoverMoveValue);
+        if (_isFrozen) return;
+
+        var gameActions = ManagerVariant.GameActions();
+        var target = gameObject == gameActions[0]
+            ? new Vector3(-0.2f, 0)
+            : new Vector3(0.2f, 0);
+
+        transform.DOKill();
+        transform.DOLocalMove(target, 0.5f);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        HoverMove(eventData, Vector3.zero);
+        if (_isFrozen) return;
+
+        transform.DOKill();
+        transform.DOLocalMove(Vector3.zero, 0.5f);
     }
 
-    public void Click(GameObject actionObject)
+    /// <summary>
+    /// 让卡牌回归轴心点
+    /// </summary>
+    public void ReturnToPivot()
     {
-        if (_isMoving)
-        {
-            return;
-        }
+        _isFrozen = true;
 
-        _isMoving = true;
-        GameManager.IsActionCardMoving = true;
+        JKFrame.EventSystem.EventTrigger(GameConstant.ScriptEvent.FREEZE_ANI);
 
-        actionObject.transform.SetAsLastSibling();
-
-        //Records.TakeAction("Take " + actionObject.name);
-        actionObject.GetComponentInChildren<TMP_Text>().text = "";
-
-        actionObject.transform.DOMove(CurrentEventPosition, 2f);
-        //actionObject.transform.DORotate(new Vector3(0, 0, 0), 1f);
-
-        actionObject.transform.DORotate(new Vector3(0, 90, 0), 1f).OnComplete(() =>
-        {
-            Flip();
-            actionObject.transform.DORotate(new Vector3(0, 180, 0), 1f);
-        });
-
-        actionObject.transform.DOScaleX(ScaleX, 2f);
-        actionObject.transform.DOScaleY(ScaleY, 2f).OnComplete(() =>
-        {
-            actionObject.transform.SetAsFirstSibling();
-            _isMoving = false;
-            GameManager.IsActionCardMoving = false;
-            transform.DOKill();
-            Destroy(this);
-        });
+        transform.DOKill();
+        transform.DOLocalMove(Vector3.zero, INIT_ANI_DURATION).OnComplete(() => JKFrame.EventSystem.EventTrigger(GameConstant.ScriptEvent.UNFREEZE_ANI));
+        transform.DOLocalRotate(Vector3.zero, INIT_ANI_DURATION);
     }
 
-    public void HoverMove(PointerEventData eventData, Vector3 moveValue)
+    /// <summary>
+    /// 让卡牌回归原点
+    /// </summary>
+    private void ReturnToOrigin()
     {
-        if (_isMoving)
-        {
-            return;
-        }
+        _isFrozen = true;
 
-        GameObject actionObject = eventData.pointerEnter.transform.GetComponentInParent<UnitActionCard>().gameObject;
+        var eventPanelPosition = FindObjectOfType<EventPanel>().transform.position;
+        var target = new Vector3(eventPanelPosition.x, eventPanelPosition.y, 1);
 
-        Vector3 Move = new Vector3();
-
-        if (actionObject.name == "LeftAction")
-        {
-            Move = -moveValue + LeftPostion;
-        }
-        else if (actionObject.name == "RightAction")
-        {
-            Move = moveValue + RightPostion;
-        }
-        transform.DOMove(Move, 0.5f);
+        transform.DOKill();
+        transform.DOMove(target, ACTION_MOVE_ANI_DURATION);
+        transform.DORotate(Vector3.zero, ACTION_MOVE_ANI_DURATION);
     }
 
-    public void BackToPosition()
+    /// <summary>
+    /// 设置卡面UI
+    /// </summary>
+    private void SetView()
     {
-        if (_isMoving)
-        {
-            return;
-        }
+        var uiInfo = GetComponent<ActionState>().Model.UIInfo;
 
-        _isMoving = true;
-        GameManager.IsActionCardMoving = true;
-
-        transform.DOScale(1f, 1f);
-        var gameActions = ManagerVariant.GameActions();
-
-        if (gameActions[0] == gameObject) //左行动
-        {
-            transform.DOMove(LeftPostion, 3f).OnComplete(() =>
-            {
-                _isMoving = false;
-                GameManager.IsActionCardMoving = false;
-            });
-            transform.DORotate(RotationValue, 5f);
-        }
-
-        if (gameActions[1] == gameObject) //右行动
-        {
-            transform.DOMove(RightPostion, 3f).OnComplete(() =>
-            {
-                _isMoving = false;
-                GameManager.IsActionCardMoving = false;
-            });
-            transform.DORotate(-RotationValue, 5f);
-        }
-
-        FlipBack();
+        _actionTitle.text = uiInfo.Title;
     }
 
-    public void Flip()
+    /// <summary>
+    /// 设置动画锁定
+    /// </summary>
+    private void FreezeAnimation()
     {
-        CardFront.gameObject.SetActive(true);
-        CardBack.gameObject.SetActive(false);
-        ActionText.gameObject.SetActive(false);
+        _isFrozen = true;
     }
 
-    public void FlipBack()
+    /// <summary>
+    /// 解除动画锁定
+    /// </summary>
+    private void UnfreezeAnimation()
     {
-        CardFront.gameObject.SetActive(false);
-        CardBack.gameObject.SetActive(true);
-        ActionText.gameObject.SetActive(true);
+        _isFrozen = false;
     }
-
-
 }

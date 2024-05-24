@@ -91,7 +91,9 @@ public struct GameEventModel
 
     public object[] OnLeaveArgs;
 
-    public GameEventModel(string id, string name, string[] tags, GameActionModel[] gameActions, GameEventUIInfo uiInfo, string audioId,
+    public GameEventModel(string id, string name, string[] tags, 
+        GameActionModel[] gameActions, 
+        GameEventUIInfo uiInfo, string audioId,
         string onCreate, object[] onCreateArgs,
         string onEnter, object[] onEnterArgs,
         string onLeave, object[] onLeaveArgs)

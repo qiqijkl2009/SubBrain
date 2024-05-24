@@ -4,341 +4,374 @@ namespace DataTable
 {
     public class GameEvent
     {
-        public static Dictionary<string, GameEventModel> Data = new()
+        public static readonly Dictionary<string, GameEventModel> Data = new()
         {
             {
-                "WakeUp",
-                new GameEventModel("WakeUp", "醒来", null, new GameActionModel[]
+                "WakeUp", new GameEventModel
+                (
+                    "WakeUp", "醒来", null,
+                    new[]
                     {
-                        GameAction.Data["努力回忆"], GameAction.Data["放弃思考"]
+                        GameAction.Data["TryToRecall"],
+                        GameAction.Data["GiveUpThinking"]
                     },
                     new GameEventUIInfo("WakeUp", "醒来", "你在医院醒来，头很痛，你似乎丢失了一段记忆。"), "WakeUp",
                     null, null,
-                    "GetProps", new object[] { new PropCreator[] { new PropCreator(Prop.Data["Pill1"], true) } },
-                    null, null)
+                    "GetProps", new object[] { new PropCreator[] { new(Prop.Data["Pill"]) } },
+                    null, null
+                )
             },
             {
-                "Headache",
-                new GameEventModel("Headache", "头痛", null, new GameActionModel[]
+                "Headache", new GameEventModel
+                (
+                    "Headache", "头痛", null,
+                    new[]
                     {
-                        GameAction.Data["闭上眼睛"]
+                        GameAction.Data["CloseEyes"]
                     },
                     new GameEventUIInfo("Headache", "头痛", "你头痛欲裂，无法思考任何任何事情。你完全记不起自己是谁，又为何在此处"), null,
                     null, null,
                     null, null,
-                    null , null)
+                    null, null
+                )
             },
             {
-                "Observation",
-                new GameEventModel("Observation", "观察", null, new GameActionModel[]
+                "Observation", new GameEventModel
+                (
+                    "Observation", "观察", null,
+                    new[]
                     {
-                        GameAction.Data["观察左边"], GameAction.Data["观察右边"]
+                        GameAction.Data["ObserveLeft"],
+                        GameAction.Data["ObserveRight"]
                     },
                     new GameEventUIInfo("Observation", "观察", "过了一段时间，头痛逐渐缓解但你仍然全身乏力，只能躺着休息一会儿。\n你用眼睛观察周围。"), null,
                     null, null,
                     null, null,
-                    null, null)
+                    null, null
+                )
             },
             {
-                "MemoryFlash",
-                new GameEventModel("MemoryFlash", "记忆闪回", null, new GameActionModel[]
+                "GetPhoto", new GameEventModel
+                (
+                    "GetPhoto", "获得照片", null,
+                    new[]
                     {
-                        GameAction.Data["睁开眼睛"]
-                    },
-                    new GameEventUIInfo("MemoryFlash", "记忆闪回", "你眼前闪过一些画面，似乎是某个治疗场景。\n但头痛超过你的承受阈值，你昏迷过去，直到开门声。"), null,
-                    null, null,
-                    null, null,
-                    null, null)
-            },
-            {
-                "GetPhoto",
-                new GameEventModel("GetPhoto", "获得照片", null, new GameActionModel[]
-                    {
-                        GameAction.Data["从床上下来"]
+                        GameAction.Data["LeaveTheBed"]
                     },
                     new GameEventUIInfo("GetPhoto", "获得照片", "你发现了一对夫妻的合照摆在床头，你发现合照的一角是撕裂的，于是你把里面的照片取了出来，果然这照片并不完整，你想要深入思考却感觉一阵头疼，你只好先把照片折起来放进口袋。"), null,
                     null, null,
-                    "GetProps", new object[] { new PropCreator[] { new PropCreator(Prop.Data["Photo"], true) } },
-                    null, null)
+                    null, null,
+                    null, null
+                )
             },
             {
-                "GetPressCard",
-                new GameEventModel("GetPressCard", "获得记者证", null, new GameActionModel[]
+                "GetPressCard", new GameEventModel
+                (
+                    "GetPressCard", "获得记者证", null,
+                    new[]
                     {
-                        GameAction.Data["从床上下来"]
+                        GameAction.Data["LeaveTheBed"]
                     },
                     new GameEventUIInfo("GetOffBed", "下床", "你在右手边（枕边）发现了一张记者证。虽然很简陋, 但证件上记载了一些信息。\n姓名：布兰妮\n职业：新闻记者\n年龄：37\n所属：WHS电视台新闻部\n职业编号：RY19580328\n有一张看不清五官的模糊女人画像"), null,
                     null, null,
-                    "GetProps", new object[] { new PropCreator[] { new PropCreator(Prop.Data["PressCard"], true) } },
-                    null, null)
+                    null, null,
+                    null, null
+                )
             },
             {
-                "GetOffBed",
-                new GameEventModel("GetOffBed", "下床", null, new GameActionModel[]
+                "GetOffBed", new GameEventModel
+                (
+                    "GetOffBed", "下床", null,
+                    new[]
                     {
-                        GameAction.Data["静观其变"], GameAction.Data["搜索房间1"]
+                        GameAction.Data["WaitAndSee"]
                     },
                     new GameEventUIInfo("GetOffBed", "下床", "你下床了，整个房间很大，房门紧闭似乎上锁了，房间里除了你没有其他人。"), null,
                     null, null,
                     null, null,
-                    null, null)
+                    null, null
+                )
             },
             {
-                "WhichToRummage1",
-                new GameEventModel("WhichToRummage1", "在房间内翻找", null, new GameActionModel[]
+                "MemoryFlash", new GameEventModel
+                (
+                    "MemoryFlash", "记忆闪回", null,
+                    new[]
                     {
-                        GameAction.Data["翻找床铺1"], GameAction.Data["翻找柜子1"]
+                        GameAction.Data["OpenEyes"]
                     },
-                    new GameEventUIInfo("WhichToRummage", "在房间内翻找", "房间里的东西很少，一眼望去只有枕头下和柜子里收着一些东西。"), null,
+                    new GameEventUIInfo("MemoryFlash", "记忆闪回", "你眼前闪过一些画面，似乎是某个治疗场景。\n但头痛超过你的承受阈值，你昏迷过去，直到开门声。"), null,
                     null, null,
                     null, null,
-                    null, null)
+                    null, null
+                )
             },
             {
-                "WhichToRummage2",
-                new GameEventModel("WhichToRummage2", "在房间内翻找1", null, new GameActionModel[]
+                "NurseEnterRoom_WithoutPill", new GameEventModel
+                (
+                    "NurseEnterRoom_WithoutPill", "护士进入房间", null,
+                    new[]
                     {
-                        GameAction.Data["翻找床铺2"], GameAction.Data["翻找柜子2"]
-                    },
-                    new GameEventUIInfo("WhichToRummage", "在房间内翻找", "房间里的东西很少，一眼望去只有枕头下和柜子里收着一些东西。"), null,
-                    null, null,
-                    null, null,
-                    null, null)
-            },
-            {
-                "WhichToRummage3",
-                new GameEventModel("WhichToRummage3", "在房间内翻找2", null, new GameActionModel[]
-                    {
-                        GameAction.Data["卫生间"], GameAction.Data["储物柜"]
-                    },
-                    new GameEventUIInfo("WhichToRummage", "在房间内翻找", "放眼望去房间内除了床铺，只有卫生间和储物柜。\n你决定查看这两处是否有关于你身份的线索"), null,
-                    null, null,
-                    null, null,
-                    null, null)
-            },
-            {
-                "GetRecordPen1",
-                new GameEventModel("GetRecordPen1", "获得录音笔1", null, new GameActionModel[]
-                    {
-                        GameAction.Data["收起来"]
-                    },
-                    new GameEventUIInfo("GetRecordPen", "获得录音笔", "录音笔已存内容：\n1958年3月28日\n今天是我进入医院调查的第1天，希望能找到证据\n1958年4月4日\n我在集体治疗时，打听到了线索，也许我要找的资料就在那里\n1958年4月11日\n该死！进入那地方需要密码，我得想办法再下一次集体治疗前拿到它\n1958年4月18日\n就差一步！！！没想到那个保险箱密码错误3次后竟然会有警报！\n1958年4月20日\n上次的失误导致医院对我的监管升级了，没时间了！我得尽快拿到它！！！\n1958年4月25日\n今天是进入医院的第29天，医生给我换了一种新的药物，吃下这个药物后的我陷入昏迷，当我清醒过来，我在身上发现几处淤青，但对此我毫无记忆...\n1958年4月29日\n我开始变得极度暴躁，连护士将针筒放在盘子上的声音都让我感到愤怒，事情不对我加速了。\n1958年5月2日\n这可能是我最后一次集体治疗，我得将东西藏在那里..."), null,
-                    null, null,
-                    "GetProps", new object[] { new PropCreator[] { new PropCreator(Prop.Data["RecordPen"], true) } },
-                    null, null)
-            },
-            {
-                "GetPatientRecord1",
-                new GameEventModel("GetPatientRecord1", "获得病历本1", null, new GameActionModel[]
-                    {
-                        GameAction.Data["收起来"]
-                    },
-                    new GameEventUIInfo("GetPatientRecord", "获得病历本", "病历本：\n姓名：布兰妮\n年龄：37\n联系人：乔治   关系：夫妻\n入院原因：家族遗传性精神病\n入院时间：1958年3月28日\n治疗记录：患者沉溺于幻想，无法分清现实和幻想世界，在第一阶段保守无效后，经家属同意采取“西格玛”治疗方案"), null,
-                    null, null,
-                    "GetProps", new object[] { new PropCreator[] { new PropCreator(Prop.Data["PatientBook"], true) } },
-                    null, null)
-            },
-            {
-                "GetRecordPen2",
-                new GameEventModel("GetRecordPen2", "获得录音笔2", null, new GameActionModel[]
-                    {
-                        GameAction.Data["思考"]
-                    },
-                    new GameEventUIInfo("GetRecordPen", "获得录音笔", "录音笔已存内容：\n1958年3月28日\n今天是我进入医院调查的第1天，希望能找到证据\n1958年4月4日\n我在集体治疗时，打听到了线索，也许我要找的资料就在那里\n1958年4月11日\n该死！进入那地方需要密码，我得想办法再下一次集体治疗前拿到它\n1958年4月18日\n就差一步！！！没想到那个保险箱密码错误3次后竟然会有警报！\n1958年4月20日\n上次的失误导致医院对我的监管升级了，没时间了！我得尽快拿到它！！！\n1958年4月25日\n今天是进入医院的第29天，医生给我换了一种新的药物，吃下这个药物后的我陷入昏迷，当我清醒过来，我在身上发现几处淤青，但对此我毫无记忆...\n1958年4月29日\n我开始变得极度暴躁，连护士将针筒放在盘子上的声音都让我感到愤怒，事情不对我加速了。\n1958年5月2日\n这可能是我最后一次集体治疗，我得将东西藏在那里..."), null,
-                    null, null,
-                    "GetProps", new object[] { new PropCreator[] { new PropCreator(Prop.Data["RecordPen"], true) } },
-                    null, null)
-            },
-            {
-                "GetPatientRecord2",
-                new GameEventModel("GetPatientRecord2", "获得病历本1", null, new GameActionModel[]
-                    {
-                        GameAction.Data["思考"]
-                    },
-                    new GameEventUIInfo("GetPatientRecord", "在房间内翻找", "病历本：\n姓名：布兰妮\n年龄：37\n联系人：乔治   关系：夫妻\n入院原因：家族遗传性精神病\n入院时间：1958年3月28日\n治疗记录：患者沉溺于幻想，无法分清现实和幻想世界，在第一阶段保守无效后，经家属同意采取“西格玛”治疗方案"), null,
-                    null, null,
-                    "GetProps", new object[] { new PropCreator[] { new PropCreator(Prop.Data["PatientBook"], true) } },
-                    null, null)
-            },
-            {
-                "NurseEnterRoom1",
-                new GameEventModel("NurseEnterRoom", "护士进入房间", null, new GameActionModel[]
-                    {
-                        GameAction.Data["“头很痛”1"]
-                    },
-                    new GameEventUIInfo("NurseEnterRoom", "护士进入房间", "你看见一位穿着护士服装的女士对你说：\n“布兰妮女士，您现在感觉如何”"), null,
-                    null, null,
-                    null, null,
-                    null, null)
-            },
-            {
-                "NurseEnterRoom2",
-                new GameEventModel("NurseEnterRoom", "护士进入房间", null, new GameActionModel[]
-                    {
-                        GameAction.Data["“你是谁”"], GameAction.Data["“头很痛”2"]
+                        GameAction.Data["ToldWhoAreYou"],
+                        GameAction.Data["ToldHeadache"]
                     },
                     new GameEventUIInfo("NurseEnterRoom", "护士进入房间", "你听到门外传来脚步声，有人正在开门。\n门打开后，你看见一位穿着护士服装的女士对你说：\n“布兰妮女士，您现在感觉如何”"), null,
                     null, null,
                     null, null,
-                    null, null)
+                    null, null
+                )
             },
             {
-                "TalkAboutAmnesia",
-                new GameEventModel("TalkAboutAmnesia", "告知失忆", null, new GameActionModel[]
+                "NurseEnterRoom_WithPill", new GameEventModel
+                (
+                    "NurseEnterRoom_WithPill", "护士进入房间", null,
+                    new[]
                     {
-                        GameAction.Data["吃药"], GameAction.Data["拒绝"]
+                        GameAction.Data["ToldHeadache"]
+                    },
+                    new GameEventUIInfo("NurseEnterRoom", "护士进入房间", "你看见一位穿着护士服装的女士对你说：\n“布兰妮女士，您现在感觉如何”"), null,
+                    null, null,
+                    null, null,
+                    null, null
+                )
+            },
+            {
+                "TalkAboutAmnesia", new GameEventModel
+                (
+                    "TalkAboutAmnesia", "告知失忆", null,
+                    new[]
+                    {
+                        GameAction.Data["TakePills"],
+                        GameAction.Data["RefuseTakePills"]
                     },
                     new GameEventUIInfo("TalkAboutAmnesia", "告知失忆", "你选择告知失忆的事情。\n护士并不奇怪你的问题，她对你说：“我是福音医院的护士，今天是您手术后醒来的第一天，这是您今天需要吃的药。”"), null,
                     null, null,
                     null, null,
-                    null, null)
+                    null, null
+                )
             },
             {
-                "ConcealAmnesia1",
-                new GameEventModel("ConcealAmnesia1", "隐瞒失忆", null, new GameActionModel[]
+                "ConcealAmnesia", new GameEventModel
+                (
+                    "ConcealAmnesia", "隐瞒失忆", null,
+                    new[]
                     {
-                        GameAction.Data["拒绝"], GameAction.Data["假装吃药1"]
+                        GameAction.Data["RefuseTakePills"],
+                        GameAction.Data["PretendToTakePills"]
                     },
-                    new GameEventUIInfo("ConcealAmnesia1", "隐瞒失忆", "你选择隐瞒失忆的事情。\n护士将手中的托盘递给你，她对你说：\n“布兰妮女士，您术后刚恢复意识，头痛的情况很正常，这是您今日份的药物，它会缓解您头痛的情况”"), null,
+                    new GameEventUIInfo("ConcealAmnesia", "隐瞒失忆", "你选择隐瞒失忆的事情。\n护士将手中的托盘递给你，她对你说：\n“布兰妮女士，您术后刚恢复意识，头痛的情况很正常，这是您今日份的药物，它会缓解您头痛的情况”"), null,
                     null, null,
                     null, null,
-                    null, null)
+                    null, null
+                )
             },
             {
-                "ConcealAmnesia2",
-                new GameEventModel("ConcealAmnesia2", "隐瞒失忆", null, new GameActionModel[]
+                "RefuseTakePills", new GameEventModel
+                (
+                    "RefuseTakePills", "拒绝吃药", null,
+                    new[]
                     {
-                        GameAction.Data["吃药"], GameAction.Data["假装吃药2"]
+                        GameAction.Data["TakePills"]
                     },
-                    new GameEventUIInfo("ConcealAmnesia2", "隐瞒失忆", "你选择隐瞒失忆的事情。\n护士将手中的托盘递给你，她对你说：\n“布兰妮女士，您术后刚恢复意识，头痛的情况很正常，这是您今日份的药物，它会缓解您头痛的情况”"), null,
+                    new GameEventUIInfo("RefuseTakePills", "拒绝吃药", "你拒绝吃药，护士情绪并未产生波动，她对你说：“布兰妮女士，这个药物能缓解您手术产生的副作用，是治疗中的关键，请您按照医嘱吃药”"), null,
                     null, null,
                     null, null,
-                    null, null)
+                    null, null
+                )
             },
             {
-                "RefusePill",
-                new GameEventModel("RefusePill", "拒绝吃药", null, new GameActionModel[]
+                "AfterTakePillsFake", new GameEventModel
+                (
+                    "AfterTakePillsFake", "假装吃药后", null,
+                    new[]
                     {
-                        GameAction.Data["吃药"]
+                        GameAction.Data["Sleep"],
+                        GameAction.Data["SearchSurrounding"]
                     },
-                    new GameEventUIInfo("RefusePill", "拒绝吃药", "你拒绝吃药，护士情绪并未产生波动，她对你说：“布兰妮女士，这个药物能缓解您手术产生的副作用，是治疗中的关键，请您按照医嘱吃药”"), null,
+                    new GameEventUIInfo("AfterTakePills", "假装吃药后", "看见你吞咽的动作后，护士对你说：“您手术非常成功，医生预计您再进行3次集体治疗就可以做出院测试了，祝您早日康复。”\n说完护士关上了门"), null,
                     null, null,
                     null, null,
-                    null, null)
+                    null, null
+                )
             },
             {
-                "ComaByPill",
-                new GameEventModel("ComaByPill", "陷入昏迷", null, new GameActionModel[]
+                "BedOrCupboard", new GameEventModel
+                (
+                    "BedOrCupboard", "在房间内翻找", null,
+                    new[]
                     {
-                        GameAction.Data["直接出门"]
+                        GameAction.Data["SearchBed"],
+                        GameAction.Data["SearchCupboard"]
                     },
-                    new GameEventUIInfo("ComaByPill", "陷入昏迷", "药物很快让你陷入昏迷。\n你被隔壁传来的人声惊醒。"), null,
+                    new GameEventUIInfo("WhichToRummage", "在房间内翻找", "房间里的东西很少，一眼望去只有枕头下和柜子里收着一些东西。"), null,
                     null, null,
                     null, null,
-                    null, null)
+                    null, null
+                )
             },
             {
-                "TakePill1",
-                new GameEventModel("TakePill1", "吃药1", null, new GameActionModel[]
+                "GetRecordPen", new GameEventModel
+                (
+                    "GetRecordPen", "获得录音笔", null,
+                    new[]
                     {
-                        GameAction.Data["睡觉"], GameAction.Data["搜索房间2"]
+                        GameAction.Data["TakeItem"]
                     },
-                    new GameEventUIInfo("TakePill1", "吃药", "看见你吞咽的动作后，护士对你说：“您手术非常成功，医生预计您再进行3次集体治疗就可以做出院测试了，祝您早日康复。”\n说完护士关上了门"), null,
+                    new GameEventUIInfo("GetRecordPen", "获得录音笔",
+                        "录音笔已存内容：\n1958年3月28日\n今天是我进入医院调查的第1天，希望能找到证据\n1958年4月4日\n我在集体治疗时，打听到了线索，也许我要找的资料就在那里\n1958年4月11日\n该死！进入那地方需要密码，我得想办法再下一次集体治疗前拿到它\n1958年4月18日\n就差一步！！！没想到那个保险箱密码错误3次后竟然会有警报！\n1958年4月20日\n上次的失误导致医院对我的监管升级了，没时间了！我得尽快拿到它！！！\n1958年4月25日\n今天是进入医院的第29天，医生给我换了一种新的药物，吃下这个药物后的我陷入昏迷，当我清醒过来，我在身上发现几处淤青，但对此我毫无记忆...\n1958年4月29日\n我开始变得极度暴躁，连护士将针筒放在盘子上的声音都让我感到愤怒，事情不对我加速了。\n1958年5月2日\n这可能是我最后一次集体治疗，我得将东西藏在那里..."),
+                    null,
                     null, null,
-                    "GetProps", new object[] { new PropCreator[] { new PropCreator(Prop.Data["Pill2"], true) } },
-                    null, null)
+                    null, null,
+                    null, null
+                )
             },
             {
-                "TakePill2",
-                new GameEventModel("TakePill2", "吃药2", null, new GameActionModel[]
+                "GetPatientBook",
+                new GameEventModel
+                (
+                    "GetPatientBook", "获得病历本", null,
+                    new[]
                     {
-                        GameAction.Data["睡觉"]
+                        GameAction.Data["TakeItem"]
                     },
-                    new GameEventUIInfo("TakePill2", "吃药", "看见你吞咽的动作后，护士对你说：“您手术非常成功，医生预计您再进行3次集体治疗就可以做出院测试了，祝您早日康复。”\n说完护士关上了门"), null,
+                    new GameEventUIInfo("GetPatientBook", "获得病历本", "病历本：\n姓名：布兰妮\n年龄：37\n联系人：乔治   关系：夫妻\n入院原因：家族遗传性精神病\n入院时间：1958年3月28日\n治疗记录：患者沉溺于幻想，无法分清现实和幻想世界，在第一阶段保守无效后，经家属同意采取“西格玛”治疗方案"), null,
                     null, null,
-                    "GetProps", new object[] { new PropCreator[] { new PropCreator(Prop.Data["Pill2"], true) } },
-                    null, null)
+                    null, null,
+                    null, null
+                )
             },
             {
-                "PlanToTakeAction",
-                new GameEventModel("PlanToTakeAction", "准备行动", null, new GameActionModel[]
+                "Dream", new GameEventModel
+                (
+                    "Dream", "梦境", null,
+                    new[]
                     {
-                        GameAction.Data["直接出门"], GameAction.Data["搜索房间3"]
+                        GameAction.Data["GoOut"],
+                        GameAction.Data["SearchTheRoom"]
                     },
-                    new GameEventUIInfo("PlanToTakeAction", "准备行动", "你看见一位穿着护士服装的女士对你说：\n“布兰妮女士，您现在感觉如何？”"), null,
+                    new GameEventUIInfo("Dream", "梦境", "你对目前的一切感到茫然，信息很杂乱，你术后的大脑开始疲倦，陷入沉睡。\n你睡得并不安稳，你似乎在梦中和某人发生争吵。\n“要不是你 * **，布兰妮不会 * **, 我看你也需要治疗！”\n你从恐惧中惊醒。你隐隐约约感觉这家医院有些问题，于是打算开始行动起来。"), null,
                     null, null,
                     null, null,
-                    null, null)
+                    null, null
+                )
             },
             {
-                "Dream",
-                new GameEventModel("Dream", "梦境", null, new GameActionModel[]
+                "PlanToTakeAction", new GameEventModel
+                (
+                    "PlanToTakeAction", "准备行动", null, new[]
                     {
-                        GameAction.Data["直接出门"]
+                        GameAction.Data["GoOut"],
+                        GameAction.Data["SearchTheRoom"]
                     },
-                    new GameEventUIInfo("Dream", "梦境", "你对目前的一切感到茫然，信息很杂乱，你术后的大脑开始疲倦，陷入沉睡。\n你睡得并不安稳，你似乎在梦中和某人发生争吵。\n“要不是你 * **，布兰妮不会 * **, 我看你也需要治疗！”\n你从恐惧中惊醒，你隐隐约约觉得这家医院有某种阴谋，于是你打算开始行动起来。"), null,
+                    new GameEventUIInfo("PlanToTakeAction", "准备行动", "你隐隐约约感觉这家医院有些问题。\n你打算开始行动起来"), null,
                     null, null,
                     null, null,
-                    null, null)
+                    null, null
+                )
             },
             {
-                "ObserveToilet",
-                new GameEventModel("ObserveToilet", "观察卫生间", null, new GameActionModel[]
+                "ToiletOrLocker", new GameEventModel
+                (
+                    "ToiletOrLocker", "在房间内翻找", null,
+                    new[]
                     {
-                        GameAction.Data["查看其他地方"], GameAction.Data["继续翻找"]
+                        GameAction.Data["SearchToilet"],
+                        GameAction.Data["SearchLocker"]
+                    },
+                    new GameEventUIInfo("WhichToRummage", "在房间内翻找", "放眼望去房间内除了床铺，只有卫生间和储物柜。\n你决定查看这两处是否有关于你身份的线索"), null,
+                    null, null,
+                    null, null,
+                    null, null
+                )
+            },
+            {
+                "ObserveToilet", new GameEventModel
+                (
+                    "ObserveToilet", "观察卫生间", null,
+                    new[]
+                    {
+                        GameAction.Data["SearchOtherPlace"],
                     },
                     new GameEventUIInfo("ObserveToilet", "观察卫生间", "你发现厕所安装镜子的地方什么都没有。"), null,
                     null, null,
                     null, null,
-                    null, null)
+                    null, null
+                )
             },
             {
-                "ObserveCloset",
-                new GameEventModel("ObserveCloset", "观察储物柜", null, new GameActionModel[]
+                "ObserveLocker", new GameEventModel
+                (
+                    "ObserveLocker", "观察储物柜", null,
+                    new[]
                     {
-                        GameAction.Data["查看其他地方"], GameAction.Data["继续翻找"]
+                        GameAction.Data["SearchOtherPlace"],
+                        GameAction.Data["KeepSearching"]
                     },
-                    new GameEventUIInfo("ObserveCloset", "观察储物柜", "柜子里除了简单的衣物似乎什么都没有。"), null,
+                    new GameEventUIInfo("ObserveLocker", "观察储物柜", "柜子里除了简单的衣物似乎什么都没有。"), null,
                     null, null,
                     null, null,
-                    null, null)
+                    null, null
+                )
             },
             {
-                "ObserveWall",
-                new GameEventModel("ObserveWall", "观察墙", null, new GameActionModel[]
+                "ObserveWall", new GameEventModel
+                (
+                    "ObserveWall", "观察墙", null,
+                    new[]
                     {
-                        GameAction.Data["不明所以"]
+                        GameAction.Data["FeelConfused"]
                     },
                     new GameEventUIInfo("ObserveWall", "观察墙", "你发现墙上刻了一些日期的印记和模糊无法辨识的字迹，\n“look------mirror”。"), null,
                     null, null,
                     null, null,
-                    null, null)
+                    null, null
+                )
             },
             {
-                "FindPaperPiece",
-                new GameEventModel("FindPaperPiece", "发现纸条", null, new GameActionModel[]
+                "FindPaperPiece", new GameEventModel
+                (
+                    "FindPaperPiece", "发现纸条", null,
+                    new[]
                     {
-                        GameAction.Data["收起纸条"]
+                        GameAction.Data["TakePaperPiece"]
                     },
                     new GameEventUIInfo("FindPaperPiece", "发现纸条", "在柜门底部的夹缝中，你发现了一张纸条，上面有串奇怪的字符。"), null,
                     null, null,
-                     "GetProps", new object[] { new PropCreator[] { new PropCreator(Prop.Data["PaperPiece"], true) } },
-                    null, null)
+                    null,null,
+                    null, null
+                )
             },
             {
-                "LisentToNeighbour",
-                new GameEventModel("LisentToNeighbour", "隔壁的声音", null, new GameActionModel[]
+                "ListenToNeighbour", new GameEventModel
+                (
+                    "ListenToNeighbour", "隔壁的声音", null, 
+                    new[]
                     {
-                        GameAction.Data["直接出门"]
+                        GameAction.Data["GoOut"]
                     },
-                    new GameEventUIInfo("LisentToNeighbour", "隔壁的声音", "你回到房间门口，想仔细倾听隔壁是否有动静。\n隔壁好像传出来一丝人的叫喊声。\n你决定走出房门，想尽快知道隔壁在发生什么。"), null,
+                    new GameEventUIInfo("ListenToNeighbour", "隔壁的声音", "你回到房间门口，想仔细倾听隔壁是否有动静。\n隔壁好像传出来一丝人的叫喊声。\n你决定走出房门，想尽快知道隔壁在发生什么。"), null,
                     null, null,
                     null, null,
-                    null, null)
+                    null, null
+                    )
+            },
+            {
+                "ComaByPill", new GameEventModel
+                (
+                    "ComaByPill", "陷入昏迷", null,
+                    new[]
+                    {
+                        GameAction.Data["GoOut"]
+                    },
+                    new GameEventUIInfo("ComaByPill", "陷入昏迷", "药物很快让你陷入昏迷。\n你被隔壁传来的人声惊醒。"), null,
+                    null, null,
+                    null, null,
+                    null, null
+                )
             },
             {
                 "NoOneInCorridor",
-                new GameEventModel("NoOneInCorridor", "无人走廊", null, new GameActionModel[]
+                new GameEventModel("NoOneInCorridor", "无人走廊", null, new[]
                     {
                         GameAction.Data["大声呼叫"], GameAction.Data["观察走廊"]
                     },
@@ -349,7 +382,7 @@ namespace DataTable
             },
             {
                 "GuardCome",
-                new GameEventModel("GuardCome", "护士警卫赶到", null, new GameActionModel[]
+                new GameEventModel("GuardCome", "护士警卫赶到", null, new[]
                     {
                         GameAction.Data["回头"]
                     },
@@ -360,7 +393,7 @@ namespace DataTable
             },
             {
                 "ObserveNeighbour",
-                new GameEventModel("ObserveNeighbour", "观察隔壁房间", null, new GameActionModel[]
+                new GameEventModel("ObserveNeighbour", "观察隔壁房间", null, new[]
                     {
                         GameAction.Data["开一条缝"], GameAction.Data["不开门"]
                     },
@@ -371,7 +404,7 @@ namespace DataTable
             },
             {
                 "LockInBox",
-                new GameEventModel("LockInBox", "锁在箱子里", null, new GameActionModel[]
+                new GameEventModel("LockInBox", "锁在箱子里", null, new[]
                     {
                         GameAction.Data["回到病房"]
                     },
@@ -382,7 +415,7 @@ namespace DataTable
             },
             {
                 "ShoutInCorridor",
-                new GameEventModel("ShoutInCorridor", "走廊里的警告", null, new GameActionModel[]
+                new GameEventModel("ShoutInCorridor", "走廊里的警告", null, new[]
                     {
                         GameAction.Data["回到病房"]
                     },
@@ -393,7 +426,7 @@ namespace DataTable
             },
             {
                 "RecordTheScene",
-                new GameEventModel("RecordTheScene", "记录现场", null, new GameActionModel[]
+                new GameEventModel("RecordTheScene", "记录现场", null, new[]
                     {
                         GameAction.Data["逃走"], GameAction.Data["回到病房"]
                     },
@@ -404,7 +437,7 @@ namespace DataTable
             },
             {
                 "RunIntoTheHall",
-                new GameEventModel("RunIntoTheHall", "逃进大房间", null, new GameActionModel[]
+                new GameEventModel("RunIntoTheHall", "逃进大房间", null, new[]
                     {
                         GameAction.Data["观察四周"]
                     },
@@ -415,7 +448,7 @@ namespace DataTable
             },
             {
                 "GoBackToOwnRoom",
-                new GameEventModel("GoBackToOwnRoom", "回到自己的病房", null, new GameActionModel[]
+                new GameEventModel("GoBackToOwnRoom", "回到自己的病房", null, new[]
                     {
                         GameAction.Data["逃离"]
                     },
@@ -426,7 +459,7 @@ namespace DataTable
             },
             {
                 "SeeFile",
-                new GameEventModel("SeeFile", "发现文件", null, new GameActionModel[]
+                new GameEventModel("SeeFile", "发现文件", null, new[]
                     {
                         GameAction.Data["捡起来"], GameAction.Data["不捡"]
                     },
@@ -437,18 +470,18 @@ namespace DataTable
             },
             {
                 "GetFile",
-                new GameEventModel("GetFile", "获得文件", null, new GameActionModel[]
+                new GameEventModel("GetFile", "获得文件", null, new[]
                     {
                         GameAction.Data["继续调查"], GameAction.Data["返回房间"]
                     },
                     new GameEventUIInfo("GetFile", "获得文件", "等到脚步声渐渐远去，你整理好刚才发现的文件，发现里面夹了一把钥匙，你收起钥匙，起身准备离开。"), null,
                     null, null,
-                    "GetProps", new object[] { new PropCreator[] { new PropCreator(Prop.Data["Key1"], true) } },
+                    "GetProps", new object[] { new PropCreator[] { new(Prop.Data["Key1"]) } },
                     null, null)
             },
             {
                 "NotGetFile",
-                new GameEventModel("NotGetFile", "没获得文件", null, new GameActionModel[]
+                new GameEventModel("NotGetFile", "没获得文件", null, new[]
                     {
                         GameAction.Data["继续调查"], GameAction.Data["返回房间"]
                     },
@@ -459,18 +492,19 @@ namespace DataTable
             },
             {
                 "HeardOfMissing198",
-                new GameEventModel("HeardOfMissing198", "198号实验体不见", null, new GameActionModel[]
+                new GameEventModel("HeardOfMissing198", "198号实验体不见", null, new[]
                     {
                         GameAction.Data["继续跟踪"], GameAction.Data["调查此处"]
                     },
-                    new GameEventUIInfo("HeardOfMissing198", "198号实验体不见", "你听到有人说:“我们的198号实验体不见了，立马进行全院搜查，这个实验体脑电波异常活跃，是一个非常优质的实验体。还有，今天158号实验体反应异常，我们需要采取西格玛方案。”\n你还想听到更多消息，但突然路过了有着精致房门的房间。\n你在思考是否放弃跟踪，调查此处。"), null,
+                    new GameEventUIInfo("HeardOfMissing198", "198号实验体不见",
+                        "你听到有人说:“我们的198号实验体不见了，立马进行全院搜查，这个实验体脑电波异常活跃，是一个非常优质的实验体。还有，今天158号实验体反应异常，我们需要采取西格玛方案。”\n你还想听到更多消息，但突然路过了有着精致房门的房间。\n你在思考是否放弃跟踪，调查此处。"), null,
                     null, null,
                     null, null,
                     null, null)
             },
             {
                 "FileRoomLocked",
-                new GameEventModel("FileRoomLocked", "档案室", null, new GameActionModel[]
+                new GameEventModel("FileRoomLocked", "档案室", null, new[]
                     {
                         GameAction.Data["尝试开门"]
                     },
@@ -481,7 +515,7 @@ namespace DataTable
             },
             {
                 "LoseTarget",
-                new GameEventModel("LoseTarget", "丢失目标", null, new GameActionModel[]
+                new GameEventModel("LoseTarget", "丢失目标", null, new[]
                     {
                         GameAction.Data["进入那个病房"]
                     },
@@ -492,7 +526,7 @@ namespace DataTable
             },
             {
                 "KeyNotPair",
-                new GameEventModel("KeyNotPair", "钥匙不匹配", null, new GameActionModel[]
+                new GameEventModel("KeyNotPair", "钥匙不匹配", null, new[]
                     {
                         GameAction.Data["往左走"], GameAction.Data["往右走"]
                     },
@@ -503,7 +537,7 @@ namespace DataTable
             },
             {
                 "AnOpenedDoor",
-                new GameEventModel("AnOpenedDoor", "开着的门", null, new GameActionModel[]
+                new GameEventModel("AnOpenedDoor", "开着的门", null, new[]
                     {
                         GameAction.Data["进入那个病房"]
                     },
@@ -514,7 +548,7 @@ namespace DataTable
             },
             {
                 "PatientInHappiness",
-                new GameEventModel("PatientInHappiness", "幸福的病人", null, new GameActionModel[]
+                new GameEventModel("PatientInHappiness", "幸福的病人", null, new[]
                     {
                         GameAction.Data["打招呼"], GameAction.Data["退出房间"]
                     },
@@ -525,7 +559,7 @@ namespace DataTable
             },
             {
                 "GetOutOfTheRoom",
-                new GameEventModel("GetOutOfTheRoom", "幸福的病人", null, new GameActionModel[]
+                new GameEventModel("GetOutOfTheRoom", "幸福的病人", null, new[]
                     {
                         GameAction.Data["被带回病房"]
                     },
@@ -536,18 +570,19 @@ namespace DataTable
             },
             {
                 "HideInToilet",
-                new GameEventModel("HideInToilet", "躲进厕所", null, new GameActionModel[]
+                new GameEventModel("HideInToilet", "躲进厕所", null, new[]
                     {
                         GameAction.Data["自我催眠"], GameAction.Data["去马桶呕吐"]
                     },
-                    new GameEventUIInfo("HideInToilet", "躲进厕所", "你想上前打招呼，身后却传来护士的脚步声，便赶紧躲进了厕所。\n你看见护士环视一圈后对床上的病人说：”先生，你今天的手术很成功哦，我们的西格玛方案还是很有效的，你之前的症状都消失了。”病人并没有回应，还是非常呆滞的笑，“嗯，就是现在反应有些迟钝，但基本已经痊愈......”\n你听到她的自言自语的声音逐渐远去，你感觉一阵眩晕。"), null,
+                    new GameEventUIInfo("HideInToilet", "躲进厕所",
+                        "你想上前打招呼，身后却传来护士的脚步声，便赶紧躲进了厕所。\n你看见护士环视一圈后对床上的病人说：”先生，你今天的手术很成功哦，我们的西格玛方案还是很有效的，你之前的症状都消失了。”病人并没有回应，还是非常呆滞的笑，“嗯，就是现在反应有些迟钝，但基本已经痊愈......”\n你听到她的自言自语的声音逐渐远去，你感觉一阵眩晕。"), null,
                     null, null,
                     null, null,
                     null, null)
             },
             {
                 "FoundByNurse",
-                new GameEventModel("FoundByNurse", "被护士找到", null, new GameActionModel[]
+                new GameEventModel("FoundByNurse", "被护士找到", null, new[]
                     {
                         GameAction.Data["被带回病房"]
                     },
@@ -558,7 +593,7 @@ namespace DataTable
             },
             {
                 "QuestionNurse",
-                new GameEventModel("QuestionNurse", "询问护士", null, new GameActionModel[]
+                new GameEventModel("QuestionNurse", "询问护士", null, new[]
                     {
                         GameAction.Data["吃今天的药"]
                     },
@@ -569,7 +604,7 @@ namespace DataTable
             },
             {
                 "TalkAboutIllness",
-                new GameEventModel("TalkAboutIllness", "了解病情", null, new GameActionModel[]
+                new GameEventModel("TalkAboutIllness", "了解病情", null, new[]
                     {
                         GameAction.Data["询问家人情况"]
                     },
@@ -580,7 +615,7 @@ namespace DataTable
             },
             {
                 "TalkAboutFamily",
-                new GameEventModel("TalkAboutFamily", "家人情况", null, new GameActionModel[]
+                new GameEventModel("TalkAboutFamily", "家人情况", null, new[]
                     {
                         GameAction.Data["配合治疗"]
                     },
@@ -591,7 +626,7 @@ namespace DataTable
             },
             {
                 "LeaveHospital",
-                new GameEventModel("LeaveHospital", "出院", null, new GameActionModel[]
+                new GameEventModel("LeaveHospital", "出院", null, new[]
                     {
                         GameAction.Data["上前拥抱"]
                     },
@@ -602,7 +637,7 @@ namespace DataTable
             },
             {
                 "TalkToHusband",
-                new GameEventModel("TalkToHusband", "与丈夫交谈", null, new GameActionModel[]
+                new GameEventModel("TalkToHusband", "与丈夫交谈", null, new[]
                     {
                         GameAction.Data["与丈夫回家"]
                     },
@@ -613,7 +648,7 @@ namespace DataTable
             },
             {
                 "GetPhotoPiece",
-                new GameEventModel("GetPhotoPiece", "找到照片碎片", null, new GameActionModel[]
+                new GameEventModel("GetPhotoPiece", "找到照片碎片", null, new[]
                     {
                         GameAction.Data["盯着照片看"]
                     },
@@ -624,7 +659,7 @@ namespace DataTable
             },
             {
                 "StickPhotoTogether",
-                new GameEventModel("StickPhotoTogether", "拼合照片", null, new GameActionModel[]
+                new GameEventModel("StickPhotoTogether", "拼合照片", null, new[]
                     {
                         GameAction.Data["找出药物服用"]
                     },
@@ -635,18 +670,18 @@ namespace DataTable
             },
             {
                 "PressFlushButton",
-                new GameEventModel("PressFlushButton", "按下抽水按钮", null, new GameActionModel[]
+                new GameEventModel("PressFlushButton", "按下抽水按钮", null, new[]
                     {
                         GameAction.Data["离开厕所"]
                     },
                     new GameEventUIInfo("PressFlushButton", "按下抽水按钮", "你按下抽水按钮时，听见水箱中有敲击声。\n打开蓄水箱的盖子，你发现了一把钥匙。"), null,
                     null, null,
-                    "GetProps", new object[] { new PropCreator[] { new PropCreator(Prop.Data["Key2"], true) } },
+                    "GetProps", new object[] { new PropCreator[] { new(Prop.Data["Key2"]) } },
                     null, null)
             },
             {
                 "CaughtByGuard",
-                new GameEventModel("CaughtByGuard", "被警卫抓住", null, new GameActionModel[]
+                new GameEventModel("CaughtByGuard", "被警卫抓住", null, new[]
                     {
                         GameAction.Data["配合治疗"]
                     },
@@ -657,20 +692,20 @@ namespace DataTable
             },
             {
                 "Password",
-                new GameEventModel("Password", "密码", null, new GameActionModel[]
+                new GameEventModel("Password", "密码", null, new[]
                     {
                         GameAction.Data["感到不安"]
                     },
                     new GameEventUIInfo("Password", "密码", "你意识到之前发现的纸条上写的内容了，那是一串4位数的密码：“9563”"), null,
                     null, null,
-                    "GetProps", new object[] { new PropCreator[] { new PropCreator(Prop.Data["Password"], true) } },
+                    "GetProps", new object[] { new PropCreator[] { new(Prop.Data["Password"]) } },
                     null, null)
             },
             {
                 "AskToLeave",
-                new GameEventModel("AskToLeave", "要求离开", null, new GameActionModel[]
+                new GameEventModel("AskToLeave", "要求离开", null, new[]
                     {
-                        GameAction.Data["询问家人情况"],GameAction.Data["要求拨打电话"]
+                        GameAction.Data["询问家人情况"], GameAction.Data["要求拨打电话"]
                     },
                     new GameEventUIInfo("AskToLeave", "要求离开", "发生的一切都在刺激你的神经，你不明白为什么独自一人在医院经历这些，希望家人能带你逃离这个地方，你要求医院联系你的家人。"), null,
                     null, null,
@@ -679,7 +714,7 @@ namespace DataTable
             },
             {
                 "FamiliarVoice",
-                new GameEventModel("FamiliarVoice", "熟悉的声音", null, new GameActionModel[]
+                new GameEventModel("FamiliarVoice", "熟悉的声音", null, new[]
                     {
                         GameAction.Data["挂断电话"]
                     },
@@ -690,7 +725,7 @@ namespace DataTable
             },
             {
                 "AwareOfHelpless",
-                new GameEventModel("AwareOfHelpless", "表面配合", null, new GameActionModel[]
+                new GameEventModel("AwareOfHelpless", "表面配合", null, new[]
                     {
                         GameAction.Data["假装配合"]
                     },
@@ -701,7 +736,7 @@ namespace DataTable
             },
             {
                 "PlanToGetInfomation",
-                new GameEventModel("PlanToGetInfomation", "第一次集体治疗", null, new GameActionModel[]
+                new GameEventModel("PlanToGetInfomation", "第一次集体治疗", null, new[]
                     {
                         GameAction.Data["坐在角落"], GameAction.Data["坐在前排"]
                     },
@@ -712,7 +747,7 @@ namespace DataTable
             },
             {
                 "ObservePatientEmotion",
-                new GameEventModel("ObservePatientEmotion", "观察周围病人", null, new GameActionModel[]
+                new GameEventModel("ObservePatientEmotion", "观察周围病人", null, new[]
                     {
                         GameAction.Data["回头看向他"]
                     },
@@ -723,18 +758,19 @@ namespace DataTable
             },
             {
                 "GetMemoryBack",
-                new GameEventModel("GetMemoryBack", "记忆复苏", null, new GameActionModel[]
+                new GameEventModel("GetMemoryBack", "记忆复苏", null, new[]
                     {
                         GameAction.Data["前往密室"]
                     },
-                    new GameEventUIInfo("GetMemoryBack", "记忆复苏", "你看着眼前正在进行的实验，熟悉的场景不断刺激你的大脑。\n你想起来，你并不是布兰妮，那是你母亲的名字，她也是这家医院的病人，是你的父亲将她安排在医院治疗，但在治疗中不幸身亡。\n你确实是名记者，为了调查母亲的死因，你假意顺从父亲的意愿来到医院，藏匿在病房中的纸条是拿到证据的关键密码。"), null,
+                    new GameEventUIInfo("GetMemoryBack", "记忆复苏",
+                        "你看着眼前正在进行的实验，熟悉的场景不断刺激你的大脑。\n你想起来，你并不是布兰妮，那是你母亲的名字，她也是这家医院的病人，是你的父亲将她安排在医院治疗，但在治疗中不幸身亡。\n你确实是名记者，为了调查母亲的死因，你假意顺从父亲的意愿来到医院，藏匿在病房中的纸条是拿到证据的关键密码。"), null,
                     null, null,
                     null, null,
                     null, null)
             },
             {
                 "DontBeAlert",
-                new GameEventModel("DontBeAlert", "不要这么警惕", null, new GameActionModel[]
+                new GameEventModel("DontBeAlert", "不要这么警惕", null, new[]
                     {
                         GameAction.Data["开口询问"]
                     },
@@ -745,7 +781,7 @@ namespace DataTable
             },
             {
                 "ConfuseTalk",
-                new GameEventModel("ConfuseTalk", "疑惑", null, new GameActionModel[]
+                new GameEventModel("ConfuseTalk", "疑惑", null, new[]
                     {
                         GameAction.Data["“我是布兰妮。”"]
                     },
@@ -756,29 +792,31 @@ namespace DataTable
             },
             {
                 "ShowPressCard",
-                new GameEventModel("ShowPressCard", "出示记者证", null, new GameActionModel[]
+                new GameEventModel("ShowPressCard", "出示记者证", null, new[]
                     {
                         GameAction.Data["进一步询问"]
                     },
-                    new GameEventUIInfo("ShowPressCard", "出示记者证", "你给她出示你醒来时发现的记者证，她摇了摇头，开始阐述你们在医院相遇的经历和计划。\n你并不是布兰妮，那是你母亲的名字，她也是这家医院的病人，是你的父亲将她安排在医院治疗，但在治疗中不幸身亡。\n你确实是名记者，为了调查母亲的死因，你假意顺从父亲的意愿来到医院。"), null,
+                    new GameEventUIInfo("ShowPressCard", "出示记者证", "你给她出示你醒来时发现的记者证，她摇了摇头，开始阐述你们在医院相遇的经历和计划。\n你并不是布兰妮，那是你母亲的名字，她也是这家医院的病人，是你的父亲将她安排在医院治疗，但在治疗中不幸身亡。\n你确实是名记者，为了调查母亲的死因，你假意顺从父亲的意愿来到医院。"),
+                    null,
                     null, null,
                     null, null,
                     null, null)
             },
             {
                 "ExplanationFromR",
-                new GameEventModel("ExplanationFromR", "R的解释", null, new GameActionModel[]
+                new GameEventModel("ExplanationFromR", "R的解释", null, new[]
                     {
                         GameAction.Data["“我该怎么做？”"]
                     },
-                    new GameEventUIInfo("ExplanationFromR", "R的解释", "你仍然很疑惑，为什么她选择帮助你。\nR女士叹了口气，解释道：她温柔善良的恋人被家人送到这里治疗“同性”问题，最终不堪折磨选择自杀，她潜伏进来就是为了曝光这家医院名为医疗实际用人体进行各种非人实验。\n所谓的西格玛计划，就是将人开颅去除部分脑额叶，如果侥幸没死在手术中，后续配合药物将人变成听话的“乖孩子”。"), null,
+                    new GameEventUIInfo("ExplanationFromR", "R的解释",
+                        "你仍然很疑惑，为什么她选择帮助你。\nR女士叹了口气，解释道：她温柔善良的恋人被家人送到这里治疗“同性”问题，最终不堪折磨选择自杀，她潜伏进来就是为了曝光这家医院名为医疗实际用人体进行各种非人实验。\n所谓的西格玛计划，就是将人开颅去除部分脑额叶，如果侥幸没死在手术中，后续配合药物将人变成听话的“乖孩子”。"), null,
                     null, null,
                     null, null,
                     null, null)
             },
             {
                 "HintFromR1",
-                new GameEventModel("HintFromR1", "R提供的线索1", null, new GameActionModel[]
+                new GameEventModel("HintFromR1", "R提供的线索1", null, new[]
                     {
                         GameAction.Data["前往密室"]
                     },
@@ -789,7 +827,7 @@ namespace DataTable
             },
             {
                 "HintFromR2",
-                new GameEventModel("HintFromR2", "R提供的线索2", null, new GameActionModel[]
+                new GameEventModel("HintFromR2", "R提供的线索2", null, new[]
                     {
                         GameAction.Data["前往密室"]
                     },
@@ -800,7 +838,7 @@ namespace DataTable
             },
             {
                 "GetIntoSecretRoom",
-                new GameEventModel("GetIntoSecretRoom", "进入密室", null, new GameActionModel[]
+                new GameEventModel("GetIntoSecretRoom", "进入密室", null, new[]
                     {
                         GameAction.Data["尝试把门拉开"]
                     },
@@ -811,7 +849,7 @@ namespace DataTable
             },
             {
                 "NeedPassword",
-                new GameEventModel("NeedPassword", "需要密码", null, new GameActionModel[]
+                new GameEventModel("NeedPassword", "需要密码", null, new[]
                     {
                         GameAction.Data["输入2333"], GameAction.Data["输入8848"]
                     },
@@ -822,18 +860,18 @@ namespace DataTable
             },
             {
                 "OpenBox",
-                new GameEventModel("OpenBox", "打开保险箱", null, new GameActionModel[]
+                new GameEventModel("OpenBox", "打开保险箱", null, new[]
                     {
                         GameAction.Data["离开档案室"]
                     },
                     new GameEventUIInfo("OpenBox", "打开保险箱", "你打开保险箱，里面有各种实验的数据和照片，你在里面看到了你的母亲布兰妮的治疗照片。\n你的头又开始剧烈的疼痛，但你知道只有逃出去，曝光这一切，才能结束掉所有的错误。"), null,
                     null, null,
-                    "GetProps", new object[] { new PropCreator[] { new PropCreator(Prop.Data["ExperimentRecord"], true) } },
+                    "GetProps", new object[] { new PropCreator[] { new(Prop.Data["ExperimentRecord"]) } },
                     null, null)
             },
             {
                 "BestChanceToRun",
-                new GameEventModel("BestChanceToRun", "最佳时机", null, new GameActionModel[]
+                new GameEventModel("BestChanceToRun", "最佳时机", null, new[]
                     {
                         GameAction.Data["逃出医院"]
                     },
@@ -844,7 +882,7 @@ namespace DataTable
             },
             {
                 "AbandonExit",
-                new GameEventModel("AbandonExit", "废弃出口", null, new GameActionModel[]
+                new GameEventModel("AbandonExit", "废弃出口", null, new[]
                     {
                         GameAction.Data["找其他出口"]
                     },
@@ -855,7 +893,7 @@ namespace DataTable
             },
             {
                 "GetOutOfHospital",
-                new GameEventModel("GetOutOfHospital", "逃出医院", null, new GameActionModel[]
+                new GameEventModel("GetOutOfHospital", "逃出医院", null, new[]
                     {
                         GameAction.Data["向他讲述遭遇"]
                     },
@@ -866,18 +904,19 @@ namespace DataTable
             },
             {
                 "EnterPress1",
-                new GameEventModel("EnterPress1", "进入报社", null, new GameActionModel[]
+                new GameEventModel("EnterPress1", "进入报社", null, new[]
                     {
                         GameAction.Data["不知如何反驳"]
                     },
-                    new GameEventUIInfo("EnterPress1", "进入报社", "你像自称是你领导的人讲述了医院发生的一切，领导看着你疯疯癫癫的样子有些震怒地吼道：“艾丽莎，没想到你为了报复医院编了这么离奇的故事，你不能因为你母亲布兰妮在这家医院去世就对它怀恨在心！我看你真的病了，艾丽莎，你看看你现在的样子！你不会真的是从医院跑出来的吧？！”"), null,
+                    new GameEventUIInfo("EnterPress1", "进入报社", "你像自称是你领导的人讲述了医院发生的一切，领导看着你疯疯癫癫的样子有些震怒地吼道：“艾丽莎，没想到你为了报复医院编了这么离奇的故事，你不能因为你母亲布兰妮在这家医院去世就对它怀恨在心！我看你真的病了，艾丽莎，你看看你现在的样子！你不会真的是从医院跑出来的吧？！”"),
+                    null,
                     null, null,
                     null, null,
                     null, null)
             },
             {
                 "GetCaughtToHospital",
-                new GameEventModel("GetCaughtToHospital", "进入报社", null, new GameActionModel[]
+                new GameEventModel("GetCaughtToHospital", "进入报社", null, new[]
                     {
                         GameAction.Data["回到医院"]
                     },
@@ -888,7 +927,7 @@ namespace DataTable
             },
             {
                 "HeadLiner",
-                new GameEventModel("HeadLiner", "头条新闻", null, new GameActionModel[]
+                new GameEventModel("HeadLiner", "头条新闻", null, new[]
                     {
                         GameAction.Data["回家"]
                     },
@@ -899,7 +938,7 @@ namespace DataTable
             },
             {
                 "HateFather",
-                new GameEventModel("HateFather", "无法原谅", null, new GameActionModel[]
+                new GameEventModel("HateFather", "无法原谅", null, new[]
                     {
                         GameAction.Data["回家"]
                     },
@@ -912,7 +951,6 @@ namespace DataTable
                 "End1",
                 new GameEventModel("End1", "结局1", null, new GameActionModel[]
                     {
-
                     },
                     new GameEventUIInfo("End1", "结局", "之后的记忆非常模糊，你觉得自己应该在这个病房一直待着，永远..."), null,
                     null, null,
@@ -923,7 +961,6 @@ namespace DataTable
                 "End2",
                 new GameEventModel("End2", "结局2", null, new GameActionModel[]
                     {
-
                     },
                     new GameEventUIInfo("End2", "结局", "医院发现了你的调查，加强了对你的管控，并认为你需要再次进行西格玛治疗。之后的记忆非常模糊，你觉得自己应该在这个病房一直待着，永远..."), null,
                     null, null,
@@ -934,7 +971,6 @@ namespace DataTable
                 "End3",
                 new GameEventModel("End3", "结局3", null, new GameActionModel[]
                     {
-
                     },
                     new GameEventUIInfo("End3", "结局", "你偷偷回到家中，将在医院藏匿的药丸放入父亲每晚都会喝的酒中，药物和酒精混合下让父亲产生幻觉，在夜晚从阳台坠落身亡。"), null,
                     null, null,
@@ -945,7 +981,6 @@ namespace DataTable
                 "End4",
                 new GameEventModel("End4", "结局4", null, new GameActionModel[]
                     {
-
                     },
                     new GameEventUIInfo("End4", "结局", "你盯着照片里两个女人神似的脸，不由得陷入了长久的沉默，没有疑惑也没有恐惧，只是沉默。"), null,
                     null, null,
@@ -956,9 +991,8 @@ namespace DataTable
                 "End5",
                 new GameEventModel("End5", "结局5", null, new GameActionModel[]
                     {
-
                     },
-                    new GameEventUIInfo("End5", "结局", "你盯着照片里小女孩的脸，不由得陷入了长久的沉默。你想起自己已经很长时间没有照过镜子，但你没有疑惑也没有恐惧，只是沉默。"), null,
+                    new GameEventUIInfo("End4", "结局", "你盯着照片里小女孩的脸，不由得陷入了长久的沉默。你想起自己已经很长时间没有照过镜子，但你没有疑惑也没有恐惧，只是沉默。"), null,
                     null, null,
                     "EndGame", null,
                     null, null)

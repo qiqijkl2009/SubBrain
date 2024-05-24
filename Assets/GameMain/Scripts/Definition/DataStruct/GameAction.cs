@@ -62,7 +62,8 @@ public struct GameActionModel
 
     public object[] ExtraArgs;
 
-    public GameActionModel(string id, string name, CharacterResource modResource, CharacterResource requirement, GameActionUIInfo uiInfo,
+    public GameActionModel(string id, string name, CharacterResource modResource, CharacterResource requirement, 
+        GameActionUIInfo uiInfo,
         string toEvent, object[] toEventArgs,
         string extra, object[] extraArgs)
     {
@@ -85,26 +86,13 @@ public struct GameActionModel
 public struct GameActionUIInfo
 {
     /// <summary>
-    /// 行动的卡面材质资源ID
-    /// </summary>
-    public string TextureId;
-
-    /// <summary>
     /// 行动的名称
     /// </summary>
     public string Title;
-
-    /// <summary>
-    /// 行动的内容
-    /// </summary>
-    public string Content;
-
-
-    public GameActionUIInfo(string textureId, string title, string content)
+    
+    public GameActionUIInfo(string title)
     {
-        TextureId = textureId;
         Title = title;
-        Content = content;
     }
 }
 

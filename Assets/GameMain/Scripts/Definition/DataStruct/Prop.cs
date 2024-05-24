@@ -127,18 +127,11 @@ public struct PropUIInfo
     /// 道具的名称
     /// </summary>
     public string Title;
-
-    /// <summary>
-    /// 道具的描述
-    /// </summary>
-    public string Content;
-
-
-    public PropUIInfo(string textureId, string title, string content)
+    
+    public PropUIInfo(string textureId, string title)
     {
         TextureId = textureId;
         Title = title;
-        Content = content;
     }
 }
 

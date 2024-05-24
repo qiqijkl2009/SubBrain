@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using JKFrame;
 using UnityEngine;
 
@@ -83,11 +84,11 @@ public class GameCardManager : MonoBehaviour
         {
             if (!string.IsNullOrEmpty(action.Id) && ManagerVariant.Resource().Enough(action.Requirement))
             {
-                var actionCard = CreateGameAction(new GameActionCreator(action));
+                CreateGameAction(new GameActionCreator(action));
             }
         }
         //传递给UI，事件or接口调用，把这些行动传过去
-        EventSystem.EventTrigger("NewGameEventCreated");
+        EventSystem.EventTrigger(GameConstant.ScriptEvent.ENTER_NEW_EVENT);
     }
 
     /// <summary>
@@ -103,8 +104,17 @@ public class GameCardManager : MonoBehaviour
             CreateGameEvent(CurrentGameEvent.Model);
         }
 
-        if (GameActions[0]) Destroy(GameActions[0]);
-        if (GameActions[1]) Destroy(GameActions[1]);
+        if (GameActions[0])
+        {
+            GameActions[0].transform.DOKill();
+            DestroyImmediate(GameActions[0]);
+        }
+
+        if (GameActions[1])
+        {
+            GameActions[1].transform.DOKill();
+            DestroyImmediate(GameActions[1]);
+        }
 
         CurrentGameEvent = null;
         GameActions[0] = null;

@@ -4,22 +4,8 @@ namespace DataTable
 {
     public class Buff
     {
-        public static Dictionary<string, BuffModel> Data = new()
+        public static readonly Dictionary<string, BuffModel> Data = new()
         {
-            {
-                "Test", new BuffModel("Test", "测试", 0, 1, null, 1,
-                    null, null,
-                    null, null,
-                    null, null,
-                    null, null)
-            },
-            {
-                "ExplorePoint", new BuffModel("ExplorePoint", "探索点", 0, 1, null, 0,
-                    "", null,
-                    "", null,
-                    "", null,
-                    "", null)
-            },
         };
     }
 }

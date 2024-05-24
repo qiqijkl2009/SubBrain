@@ -4,7 +4,7 @@ namespace DataTable
 {
     public class GameScene
     {
-        public static Dictionary<string, GameSceneModel> Data = new()
+        public static readonly Dictionary<string, GameSceneModel> Data = new()
         {
             {
                 "Test", new GameSceneModel("Test", "测试", GameEvent.Data["Test"], new AddBuffInfo[]

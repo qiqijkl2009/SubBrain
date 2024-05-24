@@ -57,5 +57,5 @@ public class CharacterResource
         );
     }
 
-    public static CharacterResource None = new();
+    public static readonly CharacterResource None = new();
 }

@@ -6,12 +6,7 @@ public class ActionSelect : MonoBehaviour
 
     private GameObject _leftAction;
     private GameObject _rightAction;
-
-
-    private void Start()
-    {
-
-    }
+    
 
     private void FixedUpdate()
     {

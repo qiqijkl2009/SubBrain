@@ -8,8 +8,9 @@ public static class CardSystem
 
     public static void Init()
     {
+        EventSystem.AddEventListener(GameConstant.ScriptEvent.SAVE_GAME_DATA, Save);
+        
         _unlockCards = SaveSystem.LoadObject<List<string>>(SAVE_FILE_NAME) ?? _unlockCards;
-        EventSystem.AddEventListener("SaveData", Save);
     }
 
     public static void UnlockCard(string cardId)

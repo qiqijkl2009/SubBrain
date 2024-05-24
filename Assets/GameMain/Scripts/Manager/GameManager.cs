@@ -1,5 +1,4 @@
-﻿using System;
-using JKFrame;
+﻿using JKFrame;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -25,7 +24,6 @@ public class GameManager : MonoBehaviour
     {
         AudioSystem.PlayBGAudio(R.Audio.InGame);
         
-        // ManagerVariant.ChangeGameScene(new GameSceneCreator(DataTable.GameScene.Data["Test"]));
         ManagerVariant.CreateGameEvent(DataTable.GameEvent.Data["WakeUp"]);
         ManagerVariant.RoundStart();
     }
@@ -35,10 +33,5 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public static void GameOver()
     {
-    }
-
-    private void OnApplicationQuit()
-    {
-        EventSystem.EventTrigger("SaveData");
     }
 }

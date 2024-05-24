@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace DesignerScripts
@@ -26,7 +25,6 @@ namespace DesignerScripts
 
         private static bool ChangeEvent(GameObject prop)
         {
-            Debug.Log("ConsumeEvent");
             var state = prop.GetComponent<PropState>();
             if (!state) return false;
 
@@ -43,7 +41,6 @@ namespace DesignerScripts
 
                 var gameEventObject = new GameEventObject(DataTable.GameEvent.Data[gameEventObjects[i]]);
                 ManagerVariant.SetCurrentGameEvent(gameEventObject);
-                Debug.Log("事件替换");
                 return true;
             }
 
